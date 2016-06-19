@@ -5,8 +5,7 @@ import audio.DummyAudioRenderer;
 import audio.LwjglAudioRenderer;
 import files.LwjglFiles;
 import graphics.LwjglRenderer;
-import input.LwjglKeyboard;
-import input.LwjglMouse;
+import input.*;
 import org.lwjgl.opengl.GL;
 import window.LwjglWindow;
 
@@ -58,9 +57,9 @@ public class LwjglApplication implements Application {
         // Things
         LwjglRenderer renderer = new LwjglRenderer();
         LwjglWindow win = new LwjglWindow(window);
-        LwjglKeyboard keyb = new LwjglKeyboard(window);
-        LwjglMouse mouse = new LwjglMouse(window);
         LwjglFiles files = new LwjglFiles();
+        Keyboard keyb = opts.hasKeyboard ? new LwjglKeyboard(window) : new DummyKeyboard();
+        Mouse mouse = opts.hasMouse ? new LwjglMouse(window) : new DummyMouse();
         AudioRenderer audio = opts.hasAudio ? new LwjglAudioRenderer() : new DummyAudioRenderer();
 
         Cat.renderer = renderer;
@@ -78,8 +77,12 @@ public class LwjglApplication implements Application {
         while (!glfwWindowShouldClose(window)) {
             listener.update();
             renderer.update();
-            keyb.update();
-            mouse.update();
+            if (keyb instanceof LwjglKeyboard) {
+                ((LwjglKeyboard)keyb).update();
+            }
+            if (mouse instanceof LwjglMouse) {
+                ((LwjglMouse)mouse).update();
+            }
             if (audio instanceof LwjglAudioRenderer) {
                 ((LwjglAudioRenderer)audio).update();
             }
@@ -93,9 +96,13 @@ public class LwjglApplication implements Application {
         if (audio instanceof LwjglAudioRenderer) {
             ((LwjglAudioRenderer)audio).free();
         }
-        mouse.free();
+        if (mouse instanceof LwjglMouse) {
+            ((LwjglMouse)mouse).free();
+        }
         renderer.free();
-        keyb.free();
+        if (keyb instanceof LwjglKeyboard) {
+            ((LwjglKeyboard)keyb).free();
+        }
 
         glfwDestroyWindow(window);
         glfwTerminate();

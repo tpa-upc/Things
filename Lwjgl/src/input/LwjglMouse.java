@@ -48,12 +48,12 @@ public class LwjglMouse implements Mouse {
             public void invoke(long window, int button, int action, int i2) {
                 if (action == GLFW_PRESS) {
                     state[button] = 1;
-                    if (listener == null) {
+                    if (listener != null) {
                         listener.onButtonDown(Button.values()[button]);
                     }
                 } else if (action == GLFW_RELEASE) {
                     state[button] = -1;
-                    if (listener == null) {
+                    if (listener != null) {
                         listener.onButtonUp(Button.values()[button]);
                     }
                 }

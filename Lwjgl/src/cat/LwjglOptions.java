@@ -12,4 +12,6 @@ public class LwjglOptions {
     public boolean resizable = false;
     public boolean fullscreen = false;
     public boolean hasAudio = true;
+    public boolean hasKeyboard = true;
+    public boolean hasMouse = true;
 }
