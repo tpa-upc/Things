@@ -1,6 +1,8 @@
 package german;
 
+import assets.AssetManager;
 import assets.MeshAssetLoader;
+import assets.SynchronousAssetManager;
 import assets.TextureAssetLoader;
 import cat.ApplicationListener;
 import cat.Cat;
@@ -48,22 +50,13 @@ public class Project implements ApplicationListener {
         camera.getComponent(Transform.class).position.set(-2, 4, 4);
         camera.getComponent(Transform.class).rotation.lookRotate(-1, 2, 2, 0, 1, 0);
 
-        MeshAssetLoader loader = new MeshAssetLoader();
-        Mesh mesh = null;
-        try {
-            mesh = loader.load("mesh.json", null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        AssetManager manager = new SynchronousAssetManager();
+        manager.loadAsset("mesh.json", Mesh.class);
+        manager.loadAsset("pattern.png", Texture.class);
+        manager.finishLoading();
 
-        TextureAssetLoader texLoad = new TextureAssetLoader();
-        Texture texture = null;
-        try {
-            texture = texLoad.load("pattern.png", null);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+        Mesh mesh = manager.getAsset("mesh.json", Mesh.class);
+        Texture texture = manager.getAsset("pattern.png", Texture.class);
 
         Geometry geo = new Geometry(mesh, texture);
         thing.addComponent(geo);
