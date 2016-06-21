@@ -1,12 +1,14 @@
 package graphics;
 
+import utils.Destroyable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by germangb on 18/06/16.
  */
-public class Framebuffer {
+public class Framebuffer implements Destroyable {
 
     /** Signal renderer */
     private boolean destroy = false;
@@ -62,7 +64,7 @@ public class Framebuffer {
         depth = new Texture(width, height, TextureFormat.DEPTH);
     }
 
-    /** Destroy texture */
+    @Override
     public void destroy () {
         destroy = true;
         depth.destroy();

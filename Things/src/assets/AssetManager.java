@@ -48,4 +48,7 @@ public interface AssetManager {
 
     /** Blocks until all assets have been loaded */
     void finishLoading ();
+
+    /** cleanup */
+    void free ();
 }

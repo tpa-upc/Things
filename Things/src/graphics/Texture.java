@@ -1,11 +1,13 @@
 package graphics;
 
+import utils.Destroyable;
+
 import java.nio.Buffer;
 
 /**
  * Created by germangb on 18/06/16.
  */
-public class Texture {
+public class Texture implements Destroyable {
 
     /** Destroy signal flag */
     private boolean destroy = false;
@@ -65,7 +67,7 @@ public class Texture {
         return ret;
     }
 
-    /** Destroy texture */
+    @Override
     public void destroy () {
         destroy = true;
         data = null;

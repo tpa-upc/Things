@@ -1,5 +1,6 @@
 package assets;
 
+import fonts.BitmapFontInfo;
 import graphics.Mesh;
 import graphics.Texture;
 
@@ -24,6 +25,7 @@ public class SynchronousAssetManager implements AssetManager {
     public SynchronousAssetManager () {
         addLoader(new TextureAssetLoader(), Texture.class);
         addLoader(new MeshAssetLoader(), Mesh.class);
+        addLoader(new BitmapFontInfoAssetLoader(), BitmapFontInfo.class);
     }
 
     private void loadOne () {
@@ -85,5 +87,10 @@ public class SynchronousAssetManager implements AssetManager {
     @Override
     public void finishLoading() {
         while (!update());
+    }
+
+    @Override
+    public void free() {
+
     }
 }

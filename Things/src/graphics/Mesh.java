@@ -1,12 +1,14 @@
 package graphics;
 
+import utils.Destroyable;
+
 import java.nio.Buffer;
 import java.util.*;
 
 /**
  * Created by germangb on 17/06/16.
  */
-public class Mesh {
+public class Mesh implements Destroyable {
 
     /** signal destruction to the renderer */
     private boolean destroy = false;
@@ -131,7 +133,7 @@ public class Mesh {
         return ret;
     }
 
-    /** Destroy mesh assets. CPU & GPU*/
+    @Override
     public void destroy () {
         destroy = true;
         data = null;

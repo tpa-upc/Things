@@ -1,11 +1,13 @@
 package audio;
 
+import utils.Destroyable;
+
 import java.nio.Buffer;
 
 /**
  * Created by germangb on 19/06/16.
  */
-public class Sound {
+public class Sound implements Destroyable {
 
     /** Signal renderer */
     private boolean dirty = true;
@@ -86,7 +88,7 @@ public class Sound {
         return ret;
     }
 
-    /** Destroy texture */
+    @Override
     public void destroy () {
         destroy = true;
         data = null;
