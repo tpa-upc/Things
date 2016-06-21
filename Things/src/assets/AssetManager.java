@@ -29,7 +29,22 @@ public interface AssetManager {
      * @param file asset file path
      * @param type asset type
      */
-    void load (String file, Class<?> type);
+    void loadAsset (String file, Class<?> type);
+
+    /**
+     * Get asset
+     * @param file asset file
+     * @param type asset type
+     * @param <T> type
+     * @return asset, null if not loaded
+     */
+    <T> T getAsset (String file, Class<T> type);
+
+    /**
+     * Update asset loading
+     * @return true if all assets have been loaded
+     */
+    boolean update ();
 
     /** Blocks until all assets have been loaded */
     void finishLoading ();
