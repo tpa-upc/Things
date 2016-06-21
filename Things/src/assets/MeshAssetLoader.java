@@ -10,6 +10,7 @@ import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
 
 /**
  * Created by germangb on 21/06/16.
@@ -82,6 +83,9 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
             mesh.addVertexBuffer(pos);
         }
 
+        IntBuffer data = ByteBuffer.allocateDirect(parsed.data.length<<2).order(ByteOrder.nativeOrder())
+                .asIntBuffer().put(parsed.data);
+        mesh.setData(data.flip());
         mesh.setIndices(0, parsed.data.length);
 
         return mesh;

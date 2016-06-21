@@ -1,5 +1,6 @@
 package german;
 
+import assets.MeshAssetLoader;
 import cat.ApplicationListener;
 import cat.Cat;
 import component.Camera;
@@ -51,43 +52,13 @@ public class Project implements ApplicationListener {
         camera.getComponent(Transform.class).position.set(-2, 4, 4);
         camera.getComponent(Transform.class).rotation.lookRotate(-1, 2, 2, 0, 1, 0);
 
-        Mesh mesh = new Mesh(Usage.STATIC);
-
-        VertexBuffer pos = new VertexBuffer(Attribute.POSITION, Usage.STATIC);
-        pos.setData(ByteBuffer.allocateDirect(90<<2)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer()
-                .put(new float[] {
-                        -1, -1, 1,
-                        1, -1, 1,
-                        0, 1, 0,
-
-                        -1, -1, -1,
-                        1, -1, -1,
-                        0, 1, 0,
-
-                        -1, -1, -1,
-                        -1, -1, 1,
-                        0, 1, 0,
-
-                        1, -1, -1,
-                        1, -1, 1,
-                        0, 1, 0,
-                }).flip());
-
-        mesh.addVertexBuffer(pos);
-
-        mesh.setData(ByteBuffer.allocateDirect(12<<2)
-                .order(ByteOrder.nativeOrder())
-                .asIntBuffer()
-                .put(new int[] {
-                        0, 1, 2,
-                        3, 4, 5,
-                        6, 7, 8,
-                        9, 10, 11
-                }).flip());
-
-        mesh.setIndices(0, 12);
+        MeshAssetLoader loader = new MeshAssetLoader();
+        Mesh mesh = null;
+        try {
+            mesh = loader.load("mesh.json", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         Geometry geo = new Geometry(mesh);
         thing.addComponent(geo);
