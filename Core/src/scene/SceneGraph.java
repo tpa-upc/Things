@@ -1,14 +1,18 @@
 package scene;
 
+import component.Component;
+import manager.Manager;
+import manager.Render;
+
 import java.util.*;
 
 /**
  * Created by germangb on 19/06/16.
  */
-public class Scene {
+public class SceneGraph {
 
     /** Root scene */
-    private Thing root = new Thing(this);
+    private Thing root;
 
     /** Components to init */
     private Queue<Component> init = new LinkedList<>();
@@ -22,45 +26,58 @@ public class Scene {
     /** Subsystems to be initialized */
     private Queue<Manager> initSub = new LinkedList<>();
 
-    /** Scene's renderer */
-    private RenderManager renderer;
-
-    public Scene (RenderManager renderer) {
-        this.renderer = renderer;
+    public SceneGraph() {
+        this.root = new Thing(this);
     }
 
     /** Update thing */
     public void update () {
-        // init components
+        // init subsystems
+        while (!initSub.isEmpty()) {
+            Manager sys = initSub.poll();
+            sys.onInit();
+            systems.put(sys.getClass(), sys);
+        }
+
+        // init component
         while (!init.isEmpty()) {
             init.poll().onInit();
         }
 
-        // free components
+        // free component
         while (!free.isEmpty()) {
             free.poll().onFree();
         }
 
-        // init subsystems
-        while (!initSub.isEmpty()) {
-            Manager sys = initSub.poll();
-            systems.put(sys.getClass(), sys);
-        }
-
-        // update graph
+        // updateTransforms graph
         root.update();
 
-        // update systems
+        // updateTransforms systems
         systems.values()
                 .forEach(s -> s.onUpdate());
     }
 
     /**
-     * Get scene's renderer
-     * @return renderer thing
+     * Add a new manager
+     * @param man manager to be added
      */
-    public RenderManager getRenderManager() {
-        return renderer;
+    public void addManager (Manager man) {
+        man.setSceneGraph(this);
+        initSub.add(man);
+    }
+
+    /**
+     * Get manager
+     * @param type manager type
+     * @param <T> type
+     * @return manager
+     */
+    public <T extends Manager> T getManager (Class<T> type) {
+        Manager man = systems.get(type);
+        if (man == null) {
+            return null;
+        }
+        return (T) man;
     }
 
     /**

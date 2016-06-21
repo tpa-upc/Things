@@ -7,6 +7,7 @@ import files.LwjglFiles;
 import graphics.LwjglRenderer;
 import input.*;
 import org.lwjgl.opengl.GL;
+import time.LwjglTime;
 import window.LwjglWindow;
 
 import static org.lwjgl.glfw.GLFW.*;
@@ -58,10 +59,12 @@ public class LwjglApplication implements Application {
         LwjglRenderer renderer = new LwjglRenderer();
         LwjglWindow win = new LwjglWindow(window);
         LwjglFiles files = new LwjglFiles();
+        LwjglTime time = new LwjglTime();
         Keyboard keyb = opts.hasKeyboard ? new LwjglKeyboard(window) : new DummyKeyboard();
         Mouse mouse = opts.hasMouse ? new LwjglMouse(window) : new DummyMouse();
         AudioRenderer audio = opts.hasAudio ? new LwjglAudioRenderer() : new DummyAudioRenderer();
 
+        Cat.time = time;
         Cat.renderer = renderer;
         Cat.app = this;
         Cat.window = win;
@@ -77,6 +80,7 @@ public class LwjglApplication implements Application {
         while (!glfwWindowShouldClose(window)) {
             listener.update();
             renderer.update();
+            time.update();
             if (keyb instanceof LwjglKeyboard) {
                 ((LwjglKeyboard)keyb).update();
             }

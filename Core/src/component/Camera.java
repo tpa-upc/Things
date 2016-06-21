@@ -1,7 +1,9 @@
-package scene;
+package component;
 
+import manager.Render;
 import math.FrustumIntersection;
 import math.Matrix4f;
+import math.Quaternionf;
 import math.Vector3f;
 
 /**
@@ -30,17 +32,15 @@ public class Camera extends Component {
     /** inverted viewProjection matrix */
     public final Matrix4f invViewProjection = new Matrix4f();
 
-    public Camera(Thing thing) {
-        super(thing);
-    }
+    private static Quaternionf aux = new Quaternionf();
 
     /** Update camera. Compute useful stuff */
-    void update () {
+    public void updateTransforms() {
         // compute view transform
-        Transform trans = thing.getTransform();
+        Transform trans = thing.getComponent(Transform.class);
         Vector3f pos = trans.position;
         view.identity()
-                .rotate(trans.rotation)
+                .rotate(aux.set(trans.rotation))
                 .translate(-pos.x, -pos.y, -pos.z);
 
         // Compute viewprojection
@@ -51,7 +51,7 @@ public class Camera extends Component {
         invProjection.set(projection).invert();
         invViewProjection.set(viewProjection).invert();
 
-        // update culler
+        // updateTransforms culler
         culler.set(viewProjection);
     }
 
@@ -59,8 +59,15 @@ public class Camera extends Component {
     public void onInit() {
         // set as renderer camera
         thing.getScene()
-                .getRenderManager()
+                .getManager(Render.class)
                 .setCamera(this);
+    }
+
+    @Override
+    public void onFree() {
+        thing.getScene()
+                .getManager(Render.class)
+                .setCamera(null);
     }
 
     /**

@@ -57,16 +57,16 @@ public class Vector3d implements Externalizable {
     public double z;
 
     /**
-     * Create a new {@link Vector3d} with all components setIndices to zero.
+     * Create a new {@link Vector3d} with all component setIndices to zero.
      */
     public Vector3d() {
     }
 
     /**
-     * Create a new {@link Vector3d} and initialize all three components with the given value.
+     * Create a new {@link Vector3d} and initialize all three component with the given value.
      *
      * @param d
-     *          the value of all three components
+     *          the value of all three component
      */
     public Vector3d(double d) {
         this(d, d, d);
@@ -101,7 +101,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector3d} with the first two components from the
+     * Create a new {@link Vector3d} with the first two component from the
      * given <code>v</code> and the given <code>z</code>
      *
      * @param v
@@ -128,7 +128,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector3d} with the first two components from the
+     * Create a new {@link Vector3d} with the first two component from the
      * given <code>v</code> and the given <code>z</code>
      *
      * @param v
@@ -207,10 +207,10 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the x, y and z components to match the supplied vector.
+     * Set the x, y and z component to match the supplied vector.
      * 
      * @param v
-     *          the vector to setIndices this vector's components from
+     *          the vector to setIndices this vector's component from
      * @return this
      */
     public Vector3d set(Vector3d v) {
@@ -221,7 +221,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the first two components from the given <code>v</code>
+     * Set the first two component from the given <code>v</code>
      * and the z component from the given <code>z</code>
      *
      * @param v
@@ -238,10 +238,10 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the x, y and z components to match the supplied vector.
+     * Set the x, y and z component to match the supplied vector.
      * 
      * @param v
-     *          the vector to setIndices this vector's components from
+     *          the vector to setIndices this vector's component from
      * @return this
      */
     public Vector3d set(Vector3f v) {
@@ -252,7 +252,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the first two components from the given <code>v</code>
+     * Set the first two component from the given <code>v</code>
      * and the z component from the given <code>z</code>
      *
      * @param v
@@ -269,10 +269,10 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the x, y, and z components to the supplied value.
+     * Set the x, y, and z component to the supplied value.
      *
      * @param d
-     *          the value of all three components
+     *          the value of all three component
      * @return this
      */
     public Vector3d set(double d) {
@@ -280,7 +280,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set the x, y and z components to the supplied values.
+     * Set the x, y and z component to the supplied values.
      * 
      * @param x
      *          the x component
@@ -608,7 +608,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values.
+     * Increment the component of this vector by the given values.
      * 
      * @param x
      *          the x component to add
@@ -626,7 +626,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values and store the result in <code>dest</code>.
+     * Increment the component of this vector by the given values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to add
@@ -1114,7 +1114,7 @@ public class Vector3d implements Externalizable {
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
-     *          will hold the <tt>(x, y, z)</tt> components of the resulting vector
+     *          will hold the <tt>(x, y, z)</tt> component of the resulting vector
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
      */
     public double mulPositionW(Matrix4f mat, Vector3d dest) {
@@ -1148,7 +1148,7 @@ public class Vector3d implements Externalizable {
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
-     *          will hold the <tt>(x, y, z)</tt> components of the resulting vector
+     *          will hold the <tt>(x, y, z)</tt> component of the resulting vector
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
      */
     public double mulPositionW(Matrix4d mat, Vector3d dest) {
@@ -1254,7 +1254,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector3f by the given scalar values and store the result in <code>this</code>.
+     * Multiply the component of this Vector3f by the given scalar values and store the result in <code>this</code>.
      * 
      * @param x
      *          the x component to multiply this vector by
@@ -1272,7 +1272,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
+     * Multiply the component of this Vector3f by the given scalar values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to multiply this vector by
@@ -1352,7 +1352,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Divide the components of this Vector3f by the given scalar values and store the result in <code>this</code>.
+     * Divide the component of this Vector3f by the given scalar values and store the result in <code>this</code>.
      * 
      * @param x
      *          the x component to divide this vector by
@@ -1370,7 +1370,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Divide the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
+     * Divide the component of this Vector3f by the given scalar values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to divide this vector by
@@ -1626,7 +1626,7 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Set all components to zero.
+     * Set all component to zero.
      * 
      * @return this
      */
@@ -1650,10 +1650,10 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *          the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

@@ -21,5 +21,8 @@ public enum Primitive {
     LINE_STRIP,
 
     /** Same as LINE_STRIP but closes the loop */
-    LINE_LOOP
+    LINE_LOOP,
+
+    /** Points */
+    POINTS
 }

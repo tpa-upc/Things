@@ -33,7 +33,7 @@ import java.text.NumberFormat;
  * Represents a 3D rotation of a given radians about an axis represented as an
  * unit 3D vector.
  * <p>
- * This class uses single-precision components.
+ * This class uses single-precision component.
  * 
  * @author Kai Burjack
  */
@@ -480,10 +480,10 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Return a string representation of this {@link AxisAngle4f} by formatting the components with the given {@link NumberFormat}.
+     * Return a string representation of this {@link AxisAngle4f} by formatting the component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *          the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

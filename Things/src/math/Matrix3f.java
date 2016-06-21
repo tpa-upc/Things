@@ -139,7 +139,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Matrix3f} by reading its 9 float components from the given {@link FloatBuffer}
+     * Create a new {@link Matrix3f} by reading its 9 float component from the given {@link FloatBuffer}
      * at the buffer's current position.
      * <p>
      * That FloatBuffer is expected to hold the values in column-major order.
@@ -1157,7 +1157,7 @@ public class Matrix3f implements Externalizable {
      * @see #scale(float, float, float, Matrix3f)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @param dest
      *            will hold the result
      * @return dest
@@ -1177,7 +1177,7 @@ public class Matrix3f implements Externalizable {
      * @see #scale(float, float, float)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @return this
      */
     public Matrix3f scale(float xyz) {
@@ -1362,7 +1362,7 @@ public class Matrix3f implements Externalizable {
     /**
      * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * The resulting matrix can be multiplied against another transformation
      * matrix to obtain an additional rotation.
@@ -2126,7 +2126,7 @@ public class Matrix3f implements Externalizable {
 
     /**
      * Apply rotation to this matrix by rotating the given amount of radians
-     * about the given axis specified as x, y and z components.
+     * about the given axis specified as x, y and z component.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
@@ -2151,7 +2151,7 @@ public class Matrix3f implements Externalizable {
 
     /**
      * Apply rotation to this matrix by rotating the given amount of radians
-     * about the given axis specified as x, y and z components, and store the result in <code>dest</code>.
+     * about the given axis specified as x, y and z component, and store the result in <code>dest</code>.
      * <p>
      * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
@@ -2218,7 +2218,7 @@ public class Matrix3f implements Externalizable {
      * Pre-multiply a rotation to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis and store the result in <code>dest</code>.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -2289,7 +2289,7 @@ public class Matrix3f implements Externalizable {
      * Pre-multiply a rotation to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -2862,7 +2862,7 @@ public class Matrix3f implements Externalizable {
      * @param row
      *          the row index in <tt>[0..2]</tt>
      * @param dest
-     *          will hold the row components
+     *          will hold the row component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <tt>[0..2]</tt>
      */
@@ -2896,7 +2896,7 @@ public class Matrix3f implements Externalizable {
      * @param column
      *          the column index in <tt>[0..2]</tt>
      * @param dest
-     *          will hold the column components
+     *          will hold the column component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <tt>[0..2]</tt>
      */

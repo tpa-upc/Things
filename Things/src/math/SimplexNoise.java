@@ -53,14 +53,14 @@ public class SimplexNoise {
 
     // Kai Burjack:
     // Use a three-component vector here to save memory. (instead of using 4-component 'Grad' class)
-    // And as the original author mentioned on the 'Grad' class, using a class to store the gradient components
+    // And as the original author mentioned on the 'Grad' class, using a class to store the gradient component
     // is indeed faster compared to using a simple int[] array...
     private static final Vector3b[] grad3 = { new Vector3b(1, 1, 0), new Vector3b(-1, 1, 0), new Vector3b(1, -1, 0), new Vector3b(-1, -1, 0),
             new Vector3b(1, 0, 1), new Vector3b(-1, 0, 1), new Vector3b(1, 0, -1), new Vector3b(-1, 0, -1), new Vector3b(0, 1, 1), new Vector3b(0, -1, 1),
             new Vector3b(0, 1, -1), new Vector3b(0, -1, -1) };
 
     // Kai Burjack:
-    // As the original author mentioned on the 'Grad' class, using a class to store the gradient components
+    // As the original author mentioned on the 'Grad' class, using a class to store the gradient component
     // is indeed faster compared to using a simple int[] array...
     private static final Vector4b[] grad4 = { new Vector4b(0, 1, 1, 1), new Vector4b(0, 1, 1, -1), new Vector4b(0, 1, -1, 1), new Vector4b(0, 1, -1, -1),
             new Vector4b(0, -1, 1, 1), new Vector4b(0, -1, 1, -1), new Vector4b(0, -1, -1, 1), new Vector4b(0, -1, -1, -1), new Vector4b(1, 0, 1, 1),

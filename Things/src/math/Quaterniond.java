@@ -69,7 +69,7 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its components to the given values.
+     * Create a new {@link Quaterniond} and initialize its component to the given values.
      * 
      * @param x
      *          the first component of the imaginary part
@@ -88,7 +88,7 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its imaginary components to the given values,
+     * Create a new {@link Quaterniond} and initialize its imaginary component to the given values,
      * and its real part to <tt>1.0</tt>.
      * 
      * @param x
@@ -106,7 +106,7 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its components to the same values as the given {@link Quaterniond}.
+     * Create a new {@link Quaterniond} and initialize its component to the same values as the given {@link Quaterniond}.
      * 
      * @param source
      *          the {@link Quaterniond} to take the component values from
@@ -119,7 +119,7 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Create a new {@link Quaterniond} and initialize its components to the same values as the given {@link Quaternionf}.
+     * Create a new {@link Quaterniond} and initialize its component to the same values as the given {@link Quaternionf}.
      * 
      * @param source
      *          the {@link Quaternionf} to take the component values from
@@ -419,7 +419,7 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Set the x, y and z components of this quaternion to the new values.
+     * Set the x, y and z component of this quaternion to the new values.
      * 
      * @param x
      *          the new value of x
@@ -1002,7 +1002,7 @@ public class Quaterniond implements Externalizable {
      * Transform the given vector by this quaternion.
      * This will apply the rotation described by this quaternion to the given vector.
      * <p>
-     * Only the first three components of the given 4D vector are being used and modified.
+     * Only the first three component of the given 4D vector are being used and modified.
      * 
      * @param vec
      *          the vector to transform
@@ -1016,7 +1016,7 @@ public class Quaterniond implements Externalizable {
      * Transform the given vector by this quaternion and store the result in <code>dest</code>.
      * This will apply the rotation described by this quaternion to the given vector.
      * <p>
-     * Only the first three components of the given 4D vector are being used and setIndices on the destination.
+     * Only the first three component of the given 4D vector are being used and setIndices on the destination.
      * 
      * @param vec
      *          the vector to transform
@@ -1753,10 +1753,10 @@ public class Quaterniond implements Externalizable {
     }
 
     /**
-     * Return a string representation of this quaternion by formatting the components with the given {@link NumberFormat}.
+     * Return a string representation of this quaternion by formatting the component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *          the {@link NumberFormat} used to format the quaternion components with
+     *          the {@link NumberFormat} used to format the quaternion component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

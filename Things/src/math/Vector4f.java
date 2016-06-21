@@ -79,7 +79,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4f} with the first three components from the
+     * Create a new {@link Vector4f} with the first three component from the
      * given <code>v</code> and the given <code>w</code>.
      * 
      * @param v
@@ -95,7 +95,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4f} with the first two components from the
+     * Create a new {@link Vector4f} with the first two component from the
      * given <code>v</code> and the given <code>z</code>, and <code>w</code>.
      * 
      * @param v
@@ -113,10 +113,10 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4f} and initialize all four components with the given value.
+     * Create a new {@link Vector4f} and initialize all four component with the given value.
      *
      * @param d
-     *          the value of all four components
+     *          the value of all four component
      */
     public Vector4f(float d) {
         this(d, d, d, d);
@@ -231,7 +231,7 @@ public class Vector4f implements Externalizable {
     /**
      * Set this {@link Vector4f} to the values of the given <code>v</code>.
      * <p>
-     * Note that due to the given vector <code>v</code> storing the components in double-precision,
+     * Note that due to the given vector <code>v</code> storing the component in double-precision,
      * there is the possibility to lose precision.
      * 
      * @param v
@@ -247,7 +247,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set the first three components of this to the components of
+     * Set the first three component of this to the component of
      * <code>v</code> and the last component to <code>w</code>.
      * 
      * @param v
@@ -265,8 +265,8 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Sets the first two components of this to the components of given <code>v</code>
-     * and last two components to the given <code>z</code>, and <code>w</code>.
+     * Sets the first two component of this to the component of given <code>v</code>
+     * and last two component to the given <code>z</code>, and <code>w</code>.
      *
      * @param v
      *          the {@link Vector2f}
@@ -285,10 +285,10 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set the x, y, z, and w components to the supplied value.
+     * Set the x, y, z, and w component to the supplied value.
      *
      * @param d
-     *          the value of all four components
+     *          the value of all four component
      * @return this
      */
     public Vector4f set(float d) {
@@ -296,7 +296,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set the x, y, z, and w components to the supplied values.
+     * Set the x, y, z, and w component to the supplied values.
      * 
      * @param x
      *          the x component
@@ -581,7 +581,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values.
+     * Increment the component of this vector by the given values.
      * 
      * @param x
      *          the x component to add
@@ -602,7 +602,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values and store the result in <code>dest</code>.
+     * Increment the component of this vector by the given values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to add
@@ -823,7 +823,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Multiply all components of this {@link Vector4f} by the given scalar
+     * Multiply all component of this {@link Vector4f} by the given scalar
      * value.
      * 
      * @param scalar
@@ -839,7 +839,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Multiply all components of this {@link Vector4f} by the given scalar
+     * Multiply all component of this {@link Vector4f} by the given scalar
      * value and store the result in <code>dest</code>.
      * 
      * @param scalar
@@ -857,7 +857,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector4f by the given scalar values and store the result in <code>this</code>.
+     * Multiply the component of this Vector4f by the given scalar values and store the result in <code>this</code>.
      * 
      * @param x
      *          the x component to multiply by
@@ -878,7 +878,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector4f by the given scalar values and store the result in <code>dest</code>.
+     * Multiply the component of this Vector4f by the given scalar values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to multiply by
@@ -901,7 +901,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Divide all components of this {@link Vector4f} by the given scalar
+     * Divide all component of this {@link Vector4f} by the given scalar
      * value.
      * 
      * @param scalar
@@ -917,7 +917,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Divide all components of this {@link Vector4f} by the given scalar
+     * Divide all component of this {@link Vector4f} by the given scalar
      * value and store the result in <code>dest</code>.
      * 
      * @param scalar
@@ -935,7 +935,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Divide the components of this Vector4f by the given scalar values and store the result in <code>this</code>.
+     * Divide the component of this Vector4f by the given scalar values and store the result in <code>this</code>.
      * 
      * @param x
      *          the x component to divide by
@@ -956,7 +956,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Divide the components of this Vector4f by the given scalar values and store the result in <code>dest</code>.
+     * Divide the component of this Vector4f by the given scalar values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to divide by
@@ -1167,7 +1167,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set all components to zero.
+     * Set all component to zero.
      * 
      * @return this
      */
@@ -1220,10 +1220,10 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *          the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {
@@ -1245,7 +1245,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set the components of this vector to be the component-wise minimum of
+     * Set the component of this vector to be the component-wise minimum of
      * this and the other vector.
      *
      * @param v
@@ -1261,7 +1261,7 @@ public class Vector4f implements Externalizable {
     }
 
     /**
-     * Set the components of this vector to be the component-wise maximum of
+     * Set the component of this vector to be the component-wise maximum of
      * this and the other vector.
      *
      * @param v

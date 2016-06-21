@@ -106,6 +106,7 @@ public class LwjglUtils {
             case LINES: return GL_LINES;
             case LINE_LOOP: return GL_LINE_LOOP;
             case LINE_STRIP: return GL_LINE_STRIP;
+            case POINTS: return GL_POINTS;
             default:
                 throw new RuntimeException("This should never be reached");
         }

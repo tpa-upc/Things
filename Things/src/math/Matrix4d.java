@@ -276,7 +276,7 @@ public class Matrix4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Matrix4d} by reading its 16 double components from the given {@link DoubleBuffer}
+     * Create a new {@link Matrix4d} by reading its 16 double component from the given {@link DoubleBuffer}
      * at the buffer's current position.
      * <p>
      * That DoubleBuffer is expected to hold the values in column-major order.
@@ -1270,7 +1270,7 @@ public class Matrix4d implements Externalizable {
      * @param other
      *          the other matrix
      * @param otherFactor
-     *          the factor to multiply each of the other matrix's 4x3 components
+     *          the factor to multiply each of the other matrix's 4x3 component
      * @return this
      */
     public Matrix4d fma4x3(Matrix4d other, double otherFactor) {
@@ -1282,14 +1282,14 @@ public class Matrix4d implements Externalizable {
      * by first multiplying each component of <code>other</code>'s 4x3 submatrix by <code>otherFactor</code>,
      * adding that to <code>this</code> and storing the final result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * <p>
      * The matrices <code>this</code> and <code>other</code> will not be changed.
      * 
      * @param other
      *          the other matrix
      * @param otherFactor
-     *          the factor to multiply each of the other matrix's 4x3 components
+     *          the factor to multiply each of the other matrix's 4x3 component
      * @param dest
      *          will hold the result
      * @return dest
@@ -1449,7 +1449,7 @@ public class Matrix4d implements Externalizable {
      * Component-wise add the upper 4x3 submatrices of <code>this</code> and <code>other</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param other
      *          the other addend
@@ -1492,7 +1492,7 @@ public class Matrix4d implements Externalizable {
      * Component-wise subtract the upper 4x3 submatrices of <code>subtrahend</code> from <code>this</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param subtrahend
      *          the subtrahend
@@ -1535,7 +1535,7 @@ public class Matrix4d implements Externalizable {
      * Component-wise multiply the upper 4x3 submatrices of <code>this</code> by <code>other</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param other
      *          the other matrix
@@ -2425,7 +2425,7 @@ public class Matrix4d implements Externalizable {
     }
 
     /**
-     * Set only the translation components <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(x, y, z)</tt>.
+     * Set only the translation component <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(x, y, z)</tt>.
      * <p>
      * To build a translation matrix instead, use {@link #translation(double, double, double)}.
      * To apply a translation to another matrix, use {@link #translate(double, double, double)}.
@@ -2449,7 +2449,7 @@ public class Matrix4d implements Externalizable {
     }
 
     /**
-     * Set only the translation components <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(xyz.x, xyz.y, xyz.z)</tt>.
+     * Set only the translation component <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(xyz.x, xyz.y, xyz.z)</tt>.
      * <p>
      * To build a translation matrix instead, use {@link #translation(Vector3d)}.
      * To apply a translation to another matrix, use {@link #translate(Vector3d)}.
@@ -2469,10 +2469,10 @@ public class Matrix4d implements Externalizable {
     }
 
     /**
-     * Get only the translation components <tt>(m30, m31, m32)</tt> of this matrix and store them in the given vector <code>xyz</code>.
+     * Get only the translation component <tt>(m30, m31, m32)</tt> of this matrix and store them in the given vector <code>xyz</code>.
      * 
      * @param dest
-     *          will hold the translation components of this matrix
+     *          will hold the translation component of this matrix
      * @return dest
      */
     public Vector3d getTranslation(Vector3d dest) {
@@ -3889,7 +3889,7 @@ public class Matrix4d implements Externalizable {
      * @see #scale(double, double, double, Matrix4d)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @param dest
      *            will hold the result
      * @return dest
@@ -3909,7 +3909,7 @@ public class Matrix4d implements Externalizable {
      * @see #scale(double, double, double)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @return this
      */
     public Matrix4d scale(double xyz) {
@@ -3994,7 +3994,7 @@ public class Matrix4d implements Externalizable {
 
     /**
      * Apply rotation to this matrix by rotating the given amount of radians
-     * about the given axis specified as x, y and z components and store the result in <code>dest</code>.
+     * about the given axis specified as x, y and z component and store the result in <code>dest</code>.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4071,7 +4071,7 @@ public class Matrix4d implements Externalizable {
 
     /**
      * Apply rotation to this matrix by rotating the given amount of radians
-     * about the given axis specified as x, y and z components.
+     * about the given axis specified as x, y and z component.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4107,7 +4107,7 @@ public class Matrix4d implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4187,7 +4187,7 @@ public class Matrix4d implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -6845,7 +6845,7 @@ public class Matrix4d implements Externalizable {
      * @param row
      *          the row index in <tt>[0..3]</tt>
      * @param dest
-     *          will hold the row components
+     *          will hold the row component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <tt>[0..3]</tt>
      */
@@ -6888,7 +6888,7 @@ public class Matrix4d implements Externalizable {
      * @param column
      *          the column index in <tt>[0..3]</tt>
      * @param dest
-     *          will hold the column components
+     *          will hold the column component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <tt>[0..3]</tt>
      */
@@ -10694,7 +10694,7 @@ public class Matrix4d implements Externalizable {
      * transformation was applied to it in order to yield homogeneous clipping space.
      * <p>
      * The frustum plane will be given in the form of a general plane equation:
-     * <tt>a*x + b*y + c*z + d = 0</tt>, where the given {@link Vector4d} components will
+     * <tt>a*x + b*y + c*z + d = 0</tt>, where the given {@link Vector4d} component will
      * hold the <tt>(a, b, c, d)</tt> values of the equation.
      * <p>
      * The plane normal, which is <tt>(a, b, c)</tt>, is directed "inwards" of the frustum.

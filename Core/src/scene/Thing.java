@@ -1,5 +1,8 @@
 package scene;
 
+import component.Component;
+import component.Transform;
+
 import java.util.*;
 
 /**
@@ -7,11 +10,14 @@ import java.util.*;
  */
 public class Thing {
 
-    /** Scene Thing belongs to */
-    private Scene scene;
+    /** SceneGraph Thing belongs to */
+    private SceneGraph scene;
 
     /** Thing's  parent Thing */
     private Thing parent = null;
+
+    /** Thing's transform */
+    private Transform transform;
 
     /** Children Things */
     private List<Thing> children = new ArrayList<>();
@@ -19,22 +25,22 @@ public class Thing {
     /** Components ordered by priority */
     private Map<Class<? extends Component>, Component> components = new LinkedHashMap<>();
 
-    public Thing (Scene scene) {
+    public Thing (SceneGraph scene) {
         this.scene = scene;
-        addComponent(new Transform(this));
+        addComponent(transform = new Transform());
     }
 
-    /** Update components */
+    /** Update component */
     public void update () {
         components.values()
                 .forEach(c -> c.onUpdate());
 
-        // update children
+        // updateTransforms children
         children.forEach(t -> t.update());
     }
 
     /**
-     * Message all components in Thing
+     * Message all component in Thing
      * @param message message
      */
     public void message (Object message) {
@@ -49,6 +55,14 @@ public class Thing {
     public void broadcast (Object message) {
         message(message);
         children.forEach(t -> t.broadcast(message));
+    }
+
+    /**
+     * Get transform component
+     * @return transform component
+     */
+    public Transform getTransform () {
+        return transform;
     }
 
     /**
@@ -76,9 +90,9 @@ public class Thing {
     }
 
     /**
-     * Get all components. Ordered by priority in hashmap.
+     * Get all component. Ordered by priority in hashmap.
      * Don't modify the contents of this HashMap
-     * @return Hashmap with components. Highest priority first
+     * @return Hashmap with component. Highest priority first
      */
     public Map<Class<? extends Component>, Component> getComponents () {
         return components;
@@ -88,16 +102,8 @@ public class Thing {
      * Get scene
      * @return scene
      */
-    public Scene getScene () {
+    public SceneGraph getScene () {
         return scene;
-    }
-
-    /**
-     * Get the transform component. All Things should have it
-     * @return transform component
-     */
-    public Transform getTransform () {
-        return getComponent(Transform.class);
     }
 
     /**
@@ -122,6 +128,7 @@ public class Thing {
      */
     public void addComponent (Component comp) {
         scene.addInit(comp);
+        comp.setThing(this);
         components.put(comp.getClass(), comp);
     }
 

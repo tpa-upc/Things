@@ -51,23 +51,23 @@ public class Vector2f implements Externalizable {
     public float y;
 
     /**
-     * Create a new {@link Vector2f} and initialize its components to zero.
+     * Create a new {@link Vector2f} and initialize its component to zero.
      */
     public Vector2f() {
     }
 
     /**
-     * Create a new {@link Vector2f} and initialize both of its components with the given value.
+     * Create a new {@link Vector2f} and initialize both of its component with the given value.
      *
      * @param d
-     *        the value of both components
+     *        the value of both component
      */
     public Vector2f(float d) {
         this(d, d);
     }
 
     /**
-     * Create a new {@link Vector2f} and initialize its components to the given values.
+     * Create a new {@link Vector2f} and initialize its component to the given values.
      * 
      * @param x
      *        the x component
@@ -80,7 +80,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector2f} and initialize its components to the one of the given vector.
+     * Create a new {@link Vector2f} and initialize its component to the one of the given vector.
      * 
      * @param v
      *        the {@link Vector2f} to copy the values from
@@ -158,10 +158,10 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Set the x and y components to the supplied value.
+     * Set the x and y component to the supplied value.
      *
      * @param d
-     *        the value of both components
+     *        the value of both component
      * @return this
      */
     public Vector2f set(float d) {
@@ -169,7 +169,7 @@ public class Vector2f implements Externalizable {
     }
     
     /**
-     * Set the x and y components to the supplied values.
+     * Set the x and y component to the supplied values.
      * 
      * @param x
      *        the x component
@@ -199,7 +199,7 @@ public class Vector2f implements Externalizable {
     /**
      * Set this {@link Vector2f} to the values of v.
      * <p>
-     * Note that due to the given vector <code>v</code> storing the components in double-precision,
+     * Note that due to the given vector <code>v</code> storing the component in double-precision,
      * there is the possibility to lose precision.
      * 
      * @param v
@@ -540,7 +540,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values.
+     * Increment the component of this vector by the given values.
      * 
      * @param x
      *          the x component to add
@@ -555,7 +555,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values and store the result in <code>dest</code>.
+     * Increment the component of this vector by the given values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to add
@@ -572,7 +572,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Set all components to zero.
+     * Set all component to zero.
      * 
      * @return this
      */
@@ -618,10 +618,10 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this vector by the given scalar.
+     * Multiply the component of this vector by the given scalar.
      * 
      * @param scalar
-     *        the value to multiply this vector's components by
+     *        the value to multiply this vector's component by
      * @return this
      */
     public Vector2f mul(float scalar) {
@@ -631,10 +631,10 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this vector by the given scalar and store the result in <code>dest</code>.
+     * Multiply the component of this vector by the given scalar and store the result in <code>dest</code>.
      * 
      * @param scalar
-     *        the value to multiply this vector's components by
+     *        the value to multiply this vector's component by
      * @param dest
      *        will hold the result
      * @return dest
@@ -646,7 +646,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector2f by the given scalar values and store the result in <code>this</code>.
+     * Multiply the component of this Vector2f by the given scalar values and store the result in <code>this</code>.
      * 
      * @param x
      *          the x component to multiply this vector by
@@ -661,7 +661,7 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Multiply the components of this Vector2f by the given scalar values and store the result in <code>dest</code>.
+     * Multiply the component of this Vector2f by the given scalar values and store the result in <code>dest</code>.
      * 
      * @param x
      *          the x component to multiply this vector by
@@ -779,10 +779,10 @@ public class Vector2f implements Externalizable {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *        the {@link NumberFormat} used to format the vector components with
+     *        the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

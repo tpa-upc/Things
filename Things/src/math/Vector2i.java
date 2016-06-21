@@ -51,17 +51,17 @@ public class Vector2i implements Externalizable {
     public int y;
 
     /**
-     * Create a new {@link Vector2i} and initialize its components to zero.
+     * Create a new {@link Vector2i} and initialize its component to zero.
      */
     public Vector2i() {
     }
 
     /**
-     * Create a new {@link Vector2i} and initialize both of its components with
+     * Create a new {@link Vector2i} and initialize both of its component with
      * the given value.
      *
      * @param s
-     *          the value of both components
+     *          the value of both component
      */
     public Vector2i(int s) {
         this.x = s;
@@ -69,7 +69,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector2i} and initialize its components to the given values.
+     * Create a new {@link Vector2i} and initialize its component to the given values.
      *
      * @param x
      *          the x component
@@ -82,7 +82,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector2i} and initialize its components to the one of
+     * Create a new {@link Vector2i} and initialize its component to the one of
      * the given vector.
      *
      * @param v
@@ -168,10 +168,10 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Set the x and y components to the supplied value.
+     * Set the x and y component to the supplied value.
      *
      * @param s
-     *          scalar value of both components
+     *          scalar value of both component
      * @return this
      */
     public Vector2i set(int s) {
@@ -181,7 +181,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Set the x and y components to the supplied values.
+     * Set the x and y component to the supplied values.
      *
      * @param x
      *          the x component
@@ -211,7 +211,7 @@ public class Vector2i implements Externalizable {
     /**
      * Set this {@link Vector2i} to the values of v.
      * <p>
-     * Note that due to the given vector <code>v</code> storing the components
+     * Note that due to the given vector <code>v</code> storing the component
      * in double-precision, there is the possibility to lose precision.
      *
      * @param v
@@ -407,7 +407,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Decrement the components of this vector by the given values.
+     * Decrement the component of this vector by the given values.
      *
      * @param x
      *          the x component to subtract
@@ -422,7 +422,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Decrement the components of this vector by the given values and store the
+     * Decrement the component of this vector by the given values and store the
      * result in <code>dest</code>.
      *
      * @param x
@@ -540,7 +540,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values.
+     * Increment the component of this vector by the given values.
      *
      * @param x
      *          the x component to add
@@ -555,7 +555,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Increment the components of this vector by the given values and store the
+     * Increment the component of this vector by the given values and store the
      * result in <code>dest</code>.
      *
      * @param x
@@ -573,7 +573,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Multiply all components of this {@link Vector2i} by the given scalar
+     * Multiply all component of this {@link Vector2i} by the given scalar
      * value.
      * 
      * @param scalar
@@ -587,7 +587,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Multiply all components of this {@link Vector2i} by the given scalar
+     * Multiply all component of this {@link Vector2i} by the given scalar
      * value and store the result in <code>dest</code>.
      * 
      * @param scalar
@@ -632,7 +632,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Multiply the components of this vector by the given values.
+     * Multiply the component of this vector by the given values.
      *
      * @param x
      *          the x component to multiply
@@ -647,7 +647,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Multiply the components of this vector by the given values and store the
+     * Multiply the component of this vector by the given values and store the
      * result in <code>dest</code>.
      *
      * @param x
@@ -665,7 +665,7 @@ public class Vector2i implements Externalizable {
     }
 
     /**
-     * Set all components to zero.
+     * Set all component to zero.
      *
      * @return this
      */
@@ -748,10 +748,10 @@ public class Vector2i implements Externalizable {
 
     /**
      * Return a string representation of this vector by formatting the vector
-     * components with the given {@link NumberFormat}.
+     * component with the given {@link NumberFormat}.
      *
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *          the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

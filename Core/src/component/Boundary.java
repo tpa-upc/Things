@@ -1,4 +1,4 @@
-package scene;
+package component;
 
 import graphics.Attribute;
 import graphics.VertexBuffer;
@@ -23,18 +23,13 @@ public class Boundary extends Component {
     /** frustum culling enabling flag */
     private boolean ignoreCulling = false;
 
-    public Boundary(Thing thing) {
-        super(thing);
-    }
-
     /**
      * Recompute AABB.
      * Only works if there is a Geometry Component attache to the Thing.
      */
     public void compute () {
         Geometry geo = thing.getComponent(Geometry.class);
-        Decal dec = thing.getComponent(Decal.class);
-        Transform trans = thing.getTransform();
+        Transform trans = thing.getComponent(Transform.class);
 
         min.set(Float.MAX_VALUE);
         max.set(Float.MIN_VALUE);
@@ -47,11 +42,6 @@ public class Boundary extends Component {
                 AABB(data, min, max);
             } catch (Exception e) {
             }
-        }
-
-        // test decal
-        if (dec != null) {
-            AABB(trans, min, max);
         }
 
         min.add(trans.position);
@@ -72,14 +62,6 @@ public class Boundary extends Component {
         // test culling
         FrustumIntersection culler = camera.getFrustumCuller();
         return culler.testAab(min, max);
-    }
-
-    private static void AABB (Transform trans, Vector3f min, Vector3f max) {
-        float scale = trans.scale.maxComponent();
-        float sf = (float) Math.sqrt(2);
-
-        min.min(aux.set(-scale * sf));
-        max.max(aux.set(scale * sf));
     }
 
     private static void AABB (FloatBuffer position, Vector3f min, Vector3f max) {

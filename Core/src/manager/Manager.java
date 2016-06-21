@@ -1,14 +1,20 @@
-package scene;
+package manager;
+
+import scene.SceneGraph;
 
 /**
  * Created by germangb on 19/06/16.
  */
 public abstract class Manager {
 
-    /** Scene reference */
-    protected Scene scene;
+    /** SceneGraph reference */
+    protected SceneGraph scene;
 
-    public Manager(Scene scene) {
+    /**
+     * Set scene graph
+     * @param scene scene graph ref
+     */
+    public void setSceneGraph (SceneGraph scene) {
         this.scene = scene;
     }
 

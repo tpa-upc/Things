@@ -1,4 +1,4 @@
-package scene;
+package component;
 
 import math.Matrix4f;
 import math.Quaternionf;
@@ -20,10 +20,6 @@ public class Transform extends Component {
 
     /** Transformation (scale + rotation + translation) */
     public final Matrix4f model = new Matrix4f();
-
-    public Transform(Thing thing) {
-        super(thing);
-    }
 
     @Override
     public void onUpdate() {

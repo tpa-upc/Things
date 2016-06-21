@@ -1,4 +1,6 @@
-package scene;
+package component;
+
+import scene.Thing;
 
 /**
  * Created by germangb on 19/06/16.
@@ -8,7 +10,11 @@ public abstract class Component {
     /** The thing this component is attached to */
     protected Thing thing;
 
-    public Component (Thing thing) {
+    /**
+     * Set thing
+     * @param thing thing
+     */
+    public void setThing (Thing thing) {
         this.thing = thing;
     }
 
@@ -24,7 +30,7 @@ public abstract class Component {
     public void onInit () {
     }
 
-    /** Called to update component */
+    /** Called to updateTransforms component */
     public void onUpdate () {
     }
 

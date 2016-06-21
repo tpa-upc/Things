@@ -151,7 +151,7 @@ public class Intersectiond {
     /**
      * Test whether the plane with the general plane equation <i>a*x + b*y + c*z + d = 0</i> intersects the sphere with center
      * <tt>(centerX, centerY, centerZ)</tt> and <code>radius</code>, and store the center of the circle of
-     * intersection in the <tt>(x, y, z)</tt> components of the supplied vector and the radius of that circle in the w component.
+     * intersection in the <tt>(x, y, z)</tt> component of the supplied vector and the radius of that circle in the w component.
      * <p>
      * Reference: <a href="http://math.stackexchange.com/questions/943383/determine-circle-of-intersection-of-plane-and-sphere">http://math.stackexchange.com</a>
      *
@@ -172,7 +172,7 @@ public class Intersectiond {
      * @param radius
      *          the radius of the sphere
      * @param intersectionCenterAndRadius
-     *          will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> components and the radius in the w component
+     *          will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> component and the radius in the w component
      * @return <code>true</code> iff the plane intersects the sphere; <code>false</code> otherwise
      */
     public static boolean intersectPlaneSphere(
@@ -334,7 +334,7 @@ public class Intersectiond {
     /**
      * Test whether the one sphere with center <tt>(aX, aY, aZ)</tt> and square radius <code>radiusSquaredA</code> intersects the other
      * sphere with center <tt>(bX, bY, bZ)</tt> and square radius <code>radiusSquaredB</code>, and store the center of the circle of
-     * intersection in the <tt>(x, y, z)</tt> components of the supplied vector and the radius of that circle in the w component.
+     * intersection in the <tt>(x, y, z)</tt> component of the supplied vector and the radius of that circle in the w component.
      * <p>
      * The normal vector of the circle of intersection can simply be obtained by subtracting the center of either sphere from the other.
      * <p>
@@ -357,7 +357,7 @@ public class Intersectiond {
      * @param radiusSquaredB
      *              the square of the second sphere's radius
      * @param centerAndRadiusOfIntersectionCircle
-     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> components and the radius in the w component
+     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> component and the radius in the w component
      * @return <code>true</code> iff both spheres intersect; <code>false</code> otherwise
      */
     public static boolean intersectSphereSphere(
@@ -381,7 +381,7 @@ public class Intersectiond {
     /**
      * Test whether the one sphere with center <code>centerA</code> and square radius <code>radiusSquaredA</code> intersects the other
      * sphere with center <code>centerB</code> and square radius <code>radiusSquaredB</code>, and store the center of the circle of
-     * intersection in the <tt>(x, y, z)</tt> components of the supplied vector and the radius of that circle in the w component.
+     * intersection in the <tt>(x, y, z)</tt> component of the supplied vector and the radius of that circle in the w component.
      * <p>
      * The normal vector of the circle of intersection can simply be obtained by subtracting the center of either sphere from the other.
      * <p>
@@ -396,7 +396,7 @@ public class Intersectiond {
      * @param radiusSquaredB
      *              the square of the second sphere's radius
      * @param centerAndRadiusOfIntersectionCircle
-     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> components and the radius in the w component
+     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> component and the radius in the w component
      * @return <code>true</code> iff both spheres intersect; <code>false</code> otherwise
      */
     public static boolean intersectSphereSphere(Vector3d centerA, double radiusSquaredA, Vector3d centerB, double radiusSquaredB, Vector4d centerAndRadiusOfIntersectionCircle) {
@@ -896,7 +896,7 @@ public class Intersectiond {
      * @param maxT
      *              the maximum intersection time
      * @param pointAndTime
-     *              iff the moving sphere and the triangle intersect, this will hold the point of intersection in the <tt>(x, y, z)</tt> components
+     *              iff the moving sphere and the triangle intersect, this will hold the point of intersection in the <tt>(x, y, z)</tt> component
      *              and the time of intersection in the <tt>w</tt> component
      * @return {@link #POINT_ON_TRIANGLE_FACE} if the intersection point lies on the triangle's face,
      *         or {@link #POINT_ON_TRIANGLE_VERTEX} if the intersection point is a vertex,
@@ -2403,7 +2403,7 @@ public class Intersectiond {
     /**
      * Test whether the line with the general line equation <i>a*x + b*y + c = 0</i> intersects the circle with center
      * <tt>(centerX, centerY)</tt> and <code>radius</code>, and store the center of the line segment of
-     * intersection in the <tt>(x, y)</tt> components of the supplied vector and the half-length of that line segment in the z component.
+     * intersection in the <tt>(x, y)</tt> component of the supplied vector and the half-length of that line segment in the z component.
      * <p>
      * Reference: <a href="http://math.stackexchange.com/questions/943383/determine-circle-of-intersection-of-plane-and-sphere">http://math.stackexchange.com</a>
      *
@@ -2420,7 +2420,7 @@ public class Intersectiond {
      * @param radius
      *          the radius of the circle
      * @param intersectionCenterAndHL
-     *          will hold the center of the line segment of intersection in the <tt>(x, y)</tt> components and the half-length in the z component
+     *          will hold the center of the line segment of intersection in the <tt>(x, y)</tt> component and the half-length in the z component
      * @return <code>true</code> iff the line intersects the circle; <code>false</code> otherwise
      */
     public static boolean intersectLineCircle(double a, double b, double c, double centerX, double centerY, double radius, Vector3d intersectionCenterAndHL) {
@@ -2438,7 +2438,7 @@ public class Intersectiond {
     /**
      * Test whether the line defined by the two points <tt>(x0, y0)</tt> and <tt>(x1, y1)</tt> intersects the circle with center
      * <tt>(centerX, centerY)</tt> and <code>radius</code>, and store the center of the line segment of
-     * intersection in the <tt>(x, y)</tt> components of the supplied vector and the half-length of that line segment in the z component.
+     * intersection in the <tt>(x, y)</tt> component of the supplied vector and the half-length of that line segment in the z component.
      * <p>
      * Reference: <a href="http://math.stackexchange.com/questions/943383/determine-circle-of-intersection-of-plane-and-sphere">http://math.stackexchange.com</a>
      *
@@ -2457,7 +2457,7 @@ public class Intersectiond {
      * @param radius
      *          the radius of the circle
      * @param intersectionCenterAndHL
-     *          will hold the center of the line segment of intersection in the <tt>(x, y)</tt> components and the half-length in the z component
+     *          will hold the center of the line segment of intersection in the <tt>(x, y)</tt> component and the half-length in the z component
      * @return <code>true</code> iff the line intersects the circle; <code>false</code> otherwise
      */
     public static boolean intersectLineCircle(double x0, double y0, double x1, double y1, double centerX, double centerY, double radius, Vector3d intersectionCenterAndHL) {
@@ -2608,7 +2608,7 @@ public class Intersectiond {
     /**
      * Test whether the one circle with center <tt>(aX, aY)</tt> and square radius <code>radiusSquaredA</code> intersects the other
      * circle with center <tt>(bX, bY)</tt> and square radius <code>radiusSquaredB</code>, and store the center of the line segment of
-     * intersection in the <tt>(x, y)</tt> components of the supplied vector and the half-length of that line segment in the z component.
+     * intersection in the <tt>(x, y)</tt> component of the supplied vector and the half-length of that line segment in the z component.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
      * 
@@ -2625,7 +2625,7 @@ public class Intersectiond {
      * @param radiusSquaredB
      *              the square of the second circle's radius
      * @param intersectionCenterAndHL
-     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> components and the radius in the w component
+     *              will hold the center of the circle of intersection in the <tt>(x, y, z)</tt> component and the radius in the w component
      * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
      */
     public static boolean intersectCircleCircle(double aX, double aY, double radiusSquaredA, double bX, double bY, double radiusSquaredB, Vector3d intersectionCenterAndHL) {
@@ -2645,7 +2645,7 @@ public class Intersectiond {
     /**
      * Test whether the one circle with center <code>centerA</code> and square radius <code>radiusSquaredA</code> intersects the other
      * circle with center <code>centerB</code> and square radius <code>radiusSquaredB</code>, and store the center of the line segment of
-     * intersection in the <tt>(x, y)</tt> components of the supplied vector and the half-length of that line segment in the z component.
+     * intersection in the <tt>(x, y)</tt> component of the supplied vector and the half-length of that line segment in the z component.
      * <p>
      * Reference: <a href="http://gamedev.stackexchange.com/questions/75756/sphere-sphere-intersection-and-circle-sphere-intersection">http://gamedev.stackexchange.com</a>
      * 
@@ -2658,7 +2658,7 @@ public class Intersectiond {
      * @param radiusSquaredB
      *              the square of the second circle's radius
      * @param intersectionCenterAndHL
-     *              will hold the center of the line segment of intersection in the <tt>(x, y)</tt> components and the half-length in the z component
+     *              will hold the center of the line segment of intersection in the <tt>(x, y)</tt> component and the half-length in the z component
      * @return <code>true</code> iff both circles intersect; <code>false</code> otherwise
      */
     public static boolean intersectCircleCircle(Vector2d centerA, double radiusSquaredA, Vector2d centerB, double radiusSquaredB, Vector3d intersectionCenterAndHL) {

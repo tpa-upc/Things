@@ -5,6 +5,7 @@ import files.Files;
 import graphics.Renderer;
 import input.Keyboard;
 import input.Mouse;
+import time.Time;
 import window.Window;
 
 /**
@@ -17,6 +18,9 @@ public class Cat {
 
     /** Audio renderer */
     public static AudioRenderer audioRenderer;
+
+    /** Timing */
+    public static Time time;
 
     /** Window */
     public static Window window;

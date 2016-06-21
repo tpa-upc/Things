@@ -79,7 +79,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4d} with the first three components from the
+     * Create a new {@link Vector4d} with the first three component from the
      * given <code>v</code> and the given <code>w</code>.
      * 
      * @param v
@@ -95,7 +95,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4d} with the first two components from the
+     * Create a new {@link Vector4d} with the first two component from the
      * given <code>v</code> and the given <code>z</code> and <code>w</code>.
      *
      * @param v
@@ -113,10 +113,10 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4d} and initialize all four components with the given value.
+     * Create a new {@link Vector4d} and initialize all four component with the given value.
      *
      * @param d
-     *          the value of all four components
+     *          the value of all four component
      */
     public Vector4d(double d) {
         this(d, d, d, d); 
@@ -136,7 +136,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4d} with the x, y, and z components from the
+     * Create a new {@link Vector4d} with the x, y, and z component from the
      * given <code>v</code> and the w component from the given <code>w</code>.
      * 
      * @param v
@@ -152,8 +152,8 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Create a new {@link Vector4d} with the x and y components from the
-     * given <code>v</code> and the z and w components from the given <code>z</code> and <code>w</code>.
+     * Create a new {@link Vector4d} with the x and y component from the
+     * given <code>v</code> and the z and w component from the given <code>z</code> and <code>w</code>.
      *
      * @param v
      *          the {@link Vector2f}
@@ -286,7 +286,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x, y, and z components of this to the components of
+     * Set the x, y, and z component of this to the component of
      * <code>v</code> and the w component to <code>w</code>.
      * 
      * @param v
@@ -304,7 +304,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x, y, and z components of this to the components of
+     * Set the x, y, and z component of this to the component of
      * <code>v</code> and the w component to <code>w</code>.
      * 
      * @param v
@@ -322,8 +322,8 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x and y components from the given <code>v</code>
-     * and the z and w components to the given <code>z</code> and <code>w</code>.
+     * Set the x and y component from the given <code>v</code>
+     * and the z and w component to the given <code>z</code> and <code>w</code>.
      *
      * @param v
      *          the {@link Vector2d}
@@ -342,10 +342,10 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x, y, z, and w components to the supplied value.
+     * Set the x, y, z, and w component to the supplied value.
      *
      * @param d
-     *          the value of all four components
+     *          the value of all four component
      * @return this
      */
     public Vector4d set(double d) {
@@ -353,15 +353,15 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x and y components from the given <code>v</code>
-     * and the z and w components to the given <code>z</code> and <code>w</code>.
+     * Set the x and y component from the given <code>v</code>
+     * and the z and w component to the given <code>z</code> and <code>w</code>.
      *
      * @param v
      *          the {@link Vector2f}
      * @param z
-     *          the z components
+     *          the z component
      * @param w
-     *          the w components
+     *          the w component
      * @return this
      */
     public Vector4d set(Vector2f v, double z, double w) {
@@ -373,7 +373,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set the x, y, z, and w components to the supplied values.
+     * Set the x, y, z, and w component to the supplied values.
      * 
      * @param x
      *          the x component
@@ -1309,7 +1309,7 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Set all components to zero.
+     * Set all component to zero.
      * 
      * @return this
      */
@@ -1362,10 +1362,10 @@ public class Vector4d implements Externalizable {
     }
 
     /**
-     * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
+     * Return a string representation of this vector by formatting the vector component with the given {@link NumberFormat}.
      * 
      * @param formatter
-     *          the {@link NumberFormat} used to format the vector components with
+     *          the {@link NumberFormat} used to format the vector component with
      * @return the string representation
      */
     public String toString(NumberFormat formatter) {

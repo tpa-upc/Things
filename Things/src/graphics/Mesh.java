@@ -30,11 +30,10 @@ public class Mesh {
     private Map<Attribute, VertexBuffer> buffers;
 
     /** Mesh primitive */
-    private Primitive primitive;
+    private Primitive primitive = Primitive.TRIANGLES;
 
-    public Mesh (Usage usage, Primitive primitive) {
+    public Mesh (Usage usage) {
         this.usage = usage;
-        this.primitive = primitive;
         this.buffers = new HashMap<>();
     }
 
@@ -132,7 +131,7 @@ public class Mesh {
         return ret;
     }
 
-    /** Destroy mesh resources. CPU & GPU*/
+    /** Destroy mesh assets. CPU & GPU*/
     public void destroy () {
         destroy = true;
         data = null;

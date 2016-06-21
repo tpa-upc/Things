@@ -279,7 +279,7 @@ public class Matrix4f implements Externalizable {
     }
 
     /**
-     * Create a new {@link Matrix4f} by reading its 16 float components from the given {@link FloatBuffer}
+     * Create a new {@link Matrix4f} by reading its 16 float component from the given {@link FloatBuffer}
      * at the buffer's current position.
      * <p>
      * That FloatBuffer is expected to hold the values in column-major order.
@@ -1231,7 +1231,7 @@ public class Matrix4f implements Externalizable {
      * @param other
      *          the other matrix 
      * @param otherFactor
-     *          the factor to multiply each of the other matrix's 4x3 components
+     *          the factor to multiply each of the other matrix's 4x3 component
      * @return this
      */
     public Matrix4f fma4x3(Matrix4f other, float otherFactor) {
@@ -1243,14 +1243,14 @@ public class Matrix4f implements Externalizable {
      * by first multiplying each component of <code>other</code>'s 4x3 submatrix by <code>otherFactor</code>,
      * adding that to <code>this</code> and storing the final result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * <p>
      * The matrices <code>this</code> and <code>other</code> will not be changed.
      * 
      * @param other
      *          the other matrix 
      * @param otherFactor
-     *          the factor to multiply each of the other matrix's 4x3 components
+     *          the factor to multiply each of the other matrix's 4x3 component
      * @param dest
      *          will hold the result
      * @return dest
@@ -1410,7 +1410,7 @@ public class Matrix4f implements Externalizable {
      * Component-wise add the upper 4x3 submatrices of <code>this</code> and <code>other</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param other
      *          the other addend
@@ -1453,7 +1453,7 @@ public class Matrix4f implements Externalizable {
      * Component-wise subtract the upper 4x3 submatrices of <code>subtrahend</code> from <code>this</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param subtrahend
      *          the subtrahend
@@ -1496,7 +1496,7 @@ public class Matrix4f implements Externalizable {
      * Component-wise multiply the upper 4x3 submatrices of <code>this</code> by <code>other</code>
      * and store the result in <code>dest</code>.
      * <p>
-     * The other components of <code>dest</code> will be setIndices to the ones of <code>this</code>.
+     * The other component of <code>dest</code> will be setIndices to the ones of <code>this</code>.
      * 
      * @param other
      *          the other matrix
@@ -2291,7 +2291,7 @@ public class Matrix4f implements Externalizable {
     }
 
     /**
-     * Set only the translation components <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(x, y, z)</tt>.
+     * Set only the translation component <tt>(m30, m31, m32)</tt> of this matrix to the given values <tt>(x, y, z)</tt>.
      * <p>
      * Note that this will only work properly for orthogonal matrices (without any perspective).
      * <p>
@@ -2317,7 +2317,7 @@ public class Matrix4f implements Externalizable {
     }
 
     /**
-     * Set only the translation components <tt>(m30, m31, m32)</tt> of this matrix to the values <tt>(xyz.x, xyz.y, xyz.z)</tt>.
+     * Set only the translation component <tt>(m30, m31, m32)</tt> of this matrix to the values <tt>(xyz.x, xyz.y, xyz.z)</tt>.
      * <p>
      * Note that this will only work properly for orthogonal matrices (without any perspective).
      * <p>
@@ -2339,10 +2339,10 @@ public class Matrix4f implements Externalizable {
     }
 
     /**
-     * Get only the translation components <tt>(m30, m31, m32)</tt> of this matrix and store them in the given vector <code>xyz</code>.
+     * Get only the translation component <tt>(m30, m31, m32)</tt> of this matrix and store them in the given vector <code>xyz</code>.
      * 
      * @param dest
-     *          will hold the translation components of this matrix
+     *          will hold the translation component of this matrix
      * @return dest
      */
     public Vector3f getTranslation(Vector3f dest) {
@@ -2907,7 +2907,7 @@ public class Matrix4f implements Externalizable {
     /**
      * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -4075,7 +4075,7 @@ public class Matrix4f implements Externalizable {
      * @see #scale(float, float, float, Matrix4f)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @param dest
      *            will hold the result
      * @return dest
@@ -4097,7 +4097,7 @@ public class Matrix4f implements Externalizable {
      * @see #scale(float, float, float)
      * 
      * @param xyz
-     *            the factor for all components
+     *            the factor for all component
      * @return this
      */
     public Matrix4f scale(float xyz) {
@@ -5102,7 +5102,7 @@ public class Matrix4f implements Externalizable {
      * Apply rotation to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis and store the result in <code>dest</code>.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -5188,7 +5188,7 @@ public class Matrix4f implements Externalizable {
      * Apply rotation to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -5226,7 +5226,7 @@ public class Matrix4f implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -5306,7 +5306,7 @@ public class Matrix4f implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -5344,7 +5344,7 @@ public class Matrix4f implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -5431,7 +5431,7 @@ public class Matrix4f implements Externalizable {
      * <p>
      * This method assumes <code>this</code> to be {@link #isAffine() affine}.
      * <p>
-     * The axis described by the three components needs to be a unit vector.
+     * The axis described by the three component needs to be a unit vector.
      * <p>
      * When used with a right-handed coordinate system, the produced rotation will rotate vector 
      * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
@@ -9799,7 +9799,7 @@ public class Matrix4f implements Externalizable {
      * @param row
      *          the row index in <tt>[0..3]</tt>
      * @param dest
-     *          will hold the row components
+     *          will hold the row component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>row</code> is not in <tt>[0..3]</tt>
      */
@@ -9841,7 +9841,7 @@ public class Matrix4f implements Externalizable {
      * @param column
      *          the column index in <tt>[0..3]</tt>
      * @param dest
-     *          will hold the column components
+     *          will hold the column component
      * @return the passed in destination
      * @throws IndexOutOfBoundsException if <code>column</code> is not in <tt>[0..3]</tt>
      */
@@ -10053,7 +10053,7 @@ public class Matrix4f implements Externalizable {
      * transformation was applied to it in order to yield homogeneous clipping space.
      * <p>
      * The frustum plane will be given in the form of a general plane equation:
-     * <tt>a*x + b*y + c*z + d = 0</tt>, where the given {@link Vector4f} components will
+     * <tt>a*x + b*y + c*z + d = 0</tt>, where the given {@link Vector4f} component will
      * hold the <tt>(a, b, c, d)</tt> values of the equation.
      * <p>
      * The plane normal, which is <tt>(a, b, c)</tt>, is directed "inwards" of the frustum.
