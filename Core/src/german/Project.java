@@ -1,21 +1,17 @@
 package german;
 
 import assets.MeshAssetLoader;
+import assets.TextureAssetLoader;
 import cat.ApplicationListener;
 import cat.Cat;
 import component.Camera;
 import component.Component;
 import component.Geometry;
 import component.Transform;
-import graphics.Attribute;
 import graphics.Mesh;
-import graphics.Usage;
-import graphics.VertexBuffer;
-import manager.Render;
+import graphics.Texture;
+import manager.RenderManager;
 import scene.*;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
 
 /**
  * Created by germangb on 18/06/16.
@@ -30,7 +26,7 @@ public class Project implements ApplicationListener {
     @Override
     public void init() {
         scene = new SceneGraph();
-        scene.addManager(new Render());
+        scene.addManager(new RenderManager());
 
         thing = new Thing(scene);
         thing.addComponent(new Component() {
@@ -60,7 +56,16 @@ public class Project implements ApplicationListener {
             e.printStackTrace();
         }
 
-        Geometry geo = new Geometry(mesh);
+        TextureAssetLoader texLoad = new TextureAssetLoader();
+        Texture texture = null;
+        try {
+            texture = texLoad.load("pattern.png", null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+        Geometry geo = new Geometry(mesh, texture);
         thing.addComponent(geo);
 
         scene.getRoot().addChild(thing);

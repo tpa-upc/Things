@@ -2,7 +2,6 @@ package scene;
 
 import component.Component;
 import manager.Manager;
-import manager.Render;
 
 import java.util.*;
 

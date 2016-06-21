@@ -52,8 +52,8 @@ public enum Attribute {
         return name;
     }
 
-    @Override
+    /*@Override
     public String toString() {
         return name+"("+size+")";
-    }
+    }*/
 }

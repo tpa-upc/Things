@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by germangb on 19/06/16.
  */
-public class Render extends Manager {
+public class RenderManager extends Manager {
 
     /** Camera */
     Camera camera;
@@ -32,8 +32,8 @@ public class Render extends Manager {
     @Override
     public void onInit() {
         createProgram();
-        state.depthTest = DepthTest.DISABLED;
-        state.mode = PolygonMode.WIREFRAME;
+        state.depthTest = DepthTest.LESS;
+        state.mode = PolygonMode.FILL;
     }
 
     private void createProgram() {
@@ -41,23 +41,34 @@ public class Render extends Manager {
         String vert = "#version 130\n" +
                 "\n" +
                 "in vec3 a_position;\n" +
+                "in vec2 a_uv;\n" +
+                "\n" +
+                "out vec2 v_uv;\n" +
                 "\n" +
                 "uniform mat4 u_mvp;\n" +
                 "\n" +
                 "void main () {\n" +
                 "    gl_Position = u_mvp * vec4(a_position, 1.);\n" +
+                "    v_uv = a_uv;\n" +
                 "}";
         //language=GLSL
         String frag = "#version 130\n" +
                 "\n" +
+                "in vec2 v_uv;\n" +
+                "\n" +
                 "out vec4 frag_color;\n" +
                 "\n" +
+                "uniform sampler2D u_texture;\n" +
+                "\n" +
                 "void main () {\n" +
-                "    frag_color = vec4(1., 0., 1., 0.);\n" +
+                "    vec3 color = texture2D(u_texture, v_uv).rgb;\n" +
+                "    frag_color = vec4(color, 1.);\n" +
                 "}";
         program = new ShaderProgram(vert, frag, new Attribute[] {
-                Attribute.POSITION
+                Attribute.POSITION,
+                Attribute.UV
         });
+        program.setUniform("u_texture", 0);
     }
 
     @Override
@@ -80,6 +91,8 @@ public class Render extends Manager {
             program.setUniform("u_mvp", mvp);
 
             Mesh mesh = geo.getMesh();
+            Texture tex = geo.getTexture();
+            Cat.renderer.bindTexture(0, tex);
             Cat.renderer.renderMesh(mesh);
         }
     }

@@ -1,6 +1,6 @@
 package component;
 
-import manager.Render;
+import manager.RenderManager;
 import math.FrustumIntersection;
 import math.Matrix4f;
 import math.Quaternionf;
@@ -59,14 +59,14 @@ public class Camera extends Component {
     public void onInit() {
         // set as renderer camera
         thing.getScene()
-                .getManager(Render.class)
+                .getManager(RenderManager.class)
                 .setCamera(this);
     }
 
     @Override
     public void onFree() {
         thing.getScene()
-                .getManager(Render.class)
+                .getManager(RenderManager.class)
                 .setCamera(null);
     }
 
