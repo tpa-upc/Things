@@ -2,13 +2,14 @@ package input;
 
 import graphics.LwjglUtils;
 import org.lwjgl.glfw.GLFWKeyCallback;
+import utils.Destroyable;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Created by germangb on 18/06/16.
  */
-public class LwjglKeyboard implements Keyboard {
+public class LwjglKeyboard implements Keyboard, Destroyable {
 
     long window;
     KeyboardListener listener = null;
@@ -48,7 +49,8 @@ public class LwjglKeyboard implements Keyboard {
         }
     }
 
-    public void free () {
+    @Override
+    public void destroy () {
         key.free();
     }
 

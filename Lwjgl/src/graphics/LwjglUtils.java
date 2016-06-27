@@ -1,5 +1,6 @@
 package graphics;
 
+import audio.AudioFormat;
 import input.Key;
 import math.*;
 
@@ -11,6 +12,7 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT_SUPER;
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL15.*;
 import static org.lwjgl.opengl.GL20.*;
+import static org.lwjgl.openal.AL10.*;
 
 /**
  * Created by germangb on 17/06/16.
@@ -136,6 +138,17 @@ public class LwjglUtils {
             case RGBA: return GL_RGBA;
             case RED: return GL_RED;
             case DEPTH: return GL_DEPTH_COMPONENT;
+            default:
+                throw new RuntimeException("This should never be reached");
+        }
+    }
+
+    public static int audioFormat (AudioFormat format) {
+        switch (format) {
+            case MONO8: return AL_FORMAT_MONO8;
+            case MONO16: return AL_FORMAT_MONO16;
+            case STEREO8: return AL_FORMAT_STEREO8;
+            case STEREO16: return AL_FORMAT_STEREO16;
             default:
                 throw new RuntimeException("This should never be reached");
         }
@@ -397,4 +410,5 @@ public class LwjglUtils {
         }
         return code;
     }
+
 }

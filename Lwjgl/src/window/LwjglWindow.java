@@ -1,12 +1,14 @@
 package window;
 
 import org.lwjgl.glfw.GLFWWindowSizeCallback;
+import utils.Destroyable;
+
 import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Created by germangb on 17/06/16.
  */
-public class LwjglWindow implements Window {
+public class LwjglWindow implements Window, Destroyable {
 
     // glfw win params
     private long window;
@@ -34,7 +36,8 @@ public class LwjglWindow implements Window {
         });
     }
 
-    public void free () {
+    @Override
+    public void destroy () {
         sizeCall.free();
     }
 

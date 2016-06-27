@@ -4,7 +4,6 @@ import cat.Cat;
 import com.google.gson.Gson;
 import graphics.*;
 
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.ByteBuffer;
@@ -45,17 +44,12 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
 
         Primitive prim = null;
 
-        switch (parsed.primitive) {
-            case "TRIANGLES": prim = Primitive.TRIANGLES; break;
-            case "TRIANGLE_STRIP": prim = Primitive.TRIANGLE_STRIP; break;
-            case "TRIANGLE_FAN": prim = Primitive.TRIANGLE_FAN; break;
-            case "LINES": prim = Primitive.LINES; break;
-            case "LINE_STRIP": prim = Primitive.LINE_STRIP; break;
-            case "LINE_LOOP": prim = Primitive.LINE_LOOP; break;
-            case "POINTS": prim = Primitive.POINTS; break;
-            default:
-                // :(
-                throw new RuntimeException("Wront primitive ("+parsed.primitive+")");
+        try {
+            prim = Primitive.valueOf(parsed.primitive);
+        } catch (Exception e) {
+            throw new RuntimeException("Wront primitive ("+parsed.primitive+")");
+        } finally {
+            mesh.setPrimitive(prim);
         }
 
         // attributes
@@ -63,16 +57,10 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
             JsonAttribute attr = parsed.attributes[i];
             Attribute attribute = null;
 
-            switch (attr.name) {
-                case "POSITION": attribute = Attribute.POSITION; break;
-                case "UV": attribute = Attribute.UV; break;
-                case "NORMAL": attribute = Attribute.NORMAL; break;
-                case "COLOR": attribute = Attribute.COLOR; break;
-                case "TANGENT": attribute = Attribute.TANGENT; break;
-                case "JOINT": attribute = Attribute.JOINT; break;
-                case "WEIGHT": attribute = Attribute.WEIGHT; break;
-                default:
-                    throw new RuntimeException("Unknown attribute ("+attr.name+")");
+            try {
+                attribute = Attribute.valueOf(attr.name);
+            } catch (Exception e) {
+                throw new RuntimeException("Unknown attribute ("+attr.name+")");
             }
 
             VertexBuffer pos = new VertexBuffer(attribute, Usage.STATIC);

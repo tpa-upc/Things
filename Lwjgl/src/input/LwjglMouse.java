@@ -3,13 +3,14 @@ package input;
 import org.lwjgl.glfw.GLFWCursorPosCallback;
 import org.lwjgl.glfw.GLFWMouseButtonCallback;
 import org.lwjgl.glfw.GLFWScrollCallback;
+import utils.Destroyable;
 
 import static org.lwjgl.glfw.GLFW.*;
 
 /**
  * Created by germangb on 18/06/16.
  */
-public class LwjglMouse implements Mouse {
+public class LwjglMouse implements Mouse, Destroyable {
 
     long window;
     MouseListener listener = null;
@@ -83,7 +84,8 @@ public class LwjglMouse implements Mouse {
         y = (float) yp[0];
     }
 
-    public void free () {
+    @Override
+    public void destroy () {
         call.free();
         pos.free();
         scr.free();

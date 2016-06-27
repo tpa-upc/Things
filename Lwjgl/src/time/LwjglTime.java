@@ -7,6 +7,7 @@ import static org.lwjgl.glfw.GLFW.*;
  */
 public class LwjglTime implements Time {
 
+    int frames = 0;
     float lastFrame = 0;
     float lastFpsTime = 0;
     int countFrames = 0;
@@ -14,6 +15,7 @@ public class LwjglTime implements Time {
     float delta = 0;
 
     public void update () {
+        ++frames;
         float now = (float) glfwGetTime();
         delta = lastFrame - now;
         lastFrame = now;
@@ -39,5 +41,10 @@ public class LwjglTime implements Time {
     @Override
     public float getFps() {
         return lastFps;
+    }
+
+    @Override
+    public int getFrame() {
+        return frames;
     }
 }

@@ -2,6 +2,7 @@ package graphics;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
+import utils.Destroyable;
 
 import java.nio.*;
 import java.util.*;
@@ -15,7 +16,7 @@ import static org.lwjgl.opengl.GL30.*;
 /**
  * Created by germangb on 17/06/16.
  */
-public class LwjglRenderer implements Renderer {
+public class LwjglRenderer implements Renderer, Destroyable {
 
     Map<ShaderProgram, LwjglUtils.GLSLProgram> programs;
     Map<Mesh, Integer> indices;
@@ -98,7 +99,8 @@ public class LwjglRenderer implements Renderer {
         }
     }
 
-    public void free () {
+    @Override
+    public void destroy () {
         indices.values().forEach(GL15::glDeleteBuffers);
         buffers.values().forEach(GL15::glDeleteBuffers);
         textures.values().forEach(GL11::glDeleteTextures);
@@ -165,6 +167,11 @@ public class LwjglRenderer implements Renderer {
     public RenderStats getStats() {
         // stats from last frame
         return statsPrevious;
+    }
+
+    @Override
+    public void clearColor(float r, float g, float b, float a) {
+        glClearColor(r, g, b, a);
     }
 
     @Override

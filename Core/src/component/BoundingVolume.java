@@ -10,18 +10,23 @@ import java.nio.FloatBuffer;
 /**
  * Created by germangb on 19/06/16.
  */
-public class Boundary extends Component {
+public class BoundingVolume extends Component {
 
     private static Vector3f aux = new Vector3f();
 
     /** AABB box min */
-    public final Vector3f min = new Vector3f(1);
+    public final Vector3f min = new Vector3f(0);
 
     /** AABB box max */
-    public final Vector3f max = new Vector3f(1);
+    public final Vector3f max = new Vector3f(0);
 
     /** frustum culling enabling flag */
     private boolean ignoreCulling = false;
+
+    @Override
+    public void onInit() {
+        compute();
+    }
 
     /**
      * Recompute AABB.

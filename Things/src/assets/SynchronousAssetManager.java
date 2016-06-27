@@ -1,13 +1,12 @@
 package assets;
 
+import animation.Skeleton;
 import fonts.BitmapFontInfo;
 import graphics.Mesh;
 import graphics.Texture;
+import utils.Destroyable;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by germangb on 21/06/16.
@@ -21,11 +20,13 @@ public class SynchronousAssetManager implements AssetManager {
     Map<String, Class<?>> types = new HashMap<>();
     Map<String, Object> loaded = new HashMap<>();
     Map<String, Object> hints = new HashMap<>();
+    List<Destroyable> toDestroy = new ArrayList<>();
 
     public SynchronousAssetManager () {
         addLoader(new TextureAssetLoader(), Texture.class);
         addLoader(new MeshAssetLoader(), Mesh.class);
         addLoader(new BitmapFontInfoAssetLoader(), BitmapFontInfo.class);
+        addLoader(new SkeletonAssetLoader(), Skeleton.class);
     }
 
     private void loadOne () {
@@ -35,6 +36,9 @@ public class SynchronousAssetManager implements AssetManager {
         try {
             AssetLoader loader = loaders.get(type);
             Object asset = loader.load(file, hints.get(file));
+            if (asset instanceof Destroyable) {
+                toDestroy.add((Destroyable) asset);
+            }
             loaded.put(file, asset);
             if (listener != null) {
                 listener.onLoaded(file, type);
@@ -86,11 +90,14 @@ public class SynchronousAssetManager implements AssetManager {
 
     @Override
     public void finishLoading() {
-        while (!update());
+        while (toLoad.size() > 0) {
+            loadOne();
+        }
     }
 
     @Override
-    public void free() {
-
+    public void destroy() {
+        toDestroy.forEach(Destroyable::destroy);
+        toDestroy.clear();
     }
 }

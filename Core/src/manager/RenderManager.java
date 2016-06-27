@@ -1,6 +1,7 @@
 package manager;
 
 import cat.Cat;
+import component.BoundingVolume;
 import component.Camera;
 import component.Geometry;
 import component.Transform;
@@ -64,6 +65,7 @@ public class RenderManager extends Manager {
                 "    vec3 color = texture2D(u_texture, v_uv).rgb;\n" +
                 "    frag_color = vec4(color, 1.);\n" +
                 "}";
+
         program = new ShaderProgram(vert, frag, new Attribute[] {
                 Attribute.POSITION,
                 Attribute.UV
@@ -73,6 +75,8 @@ public class RenderManager extends Manager {
 
     @Override
     public void onUpdate() {
+        Cat.renderer.beginFrame();
+        Cat.renderer.clearColor(1, 1, 1, 1);
         Cat.renderer.clearBuffers(BufferType.COLOR, BufferType.DEPTH);
         Cat.renderer.setState(state);
         Cat.renderer.bindProgram(program);
@@ -87,6 +91,11 @@ public class RenderManager extends Manager {
         for (Geometry geo : geometry) {
             // compute mvp
             Transform trans = geo.getThing().getComponent(Transform.class);
+            BoundingVolume volume = geo.getThing().getComponent(BoundingVolume.class);
+            if (volume != null && !volume.testCulling(camera)) {
+                continue;
+            }
+
             mvp.set(vp).mul(trans.model);
             program.setUniform("u_mvp", mvp);
 
@@ -95,6 +104,11 @@ public class RenderManager extends Manager {
             Cat.renderer.bindTexture(0, tex);
             Cat.renderer.renderMesh(mesh);
         }
+
+        Cat.renderer.endFrame();
+
+        RenderStats stats = Cat.renderer.getStats();
+        //System.out.println(stats.ebos+" "+Cat.time.getFps());
     }
 
     /**

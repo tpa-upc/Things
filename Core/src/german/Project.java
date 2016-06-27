@@ -1,28 +1,28 @@
 package german;
 
+import animation.Skeleton;
+import assets.AssetListener;
 import assets.AssetManager;
 import assets.SynchronousAssetManager;
 import cat.ApplicationListener;
 import cat.Cat;
-import component.Camera;
-import component.Component;
-import component.Geometry;
-import component.Transform;
+import component.*;
 import fonts.BitmapFontInfo;
 import graphics.Mesh;
 import graphics.Texture;
 import manager.RenderManager;
-import math.Quaternionf;
 import scene.*;
+
+import java.util.Random;
 
 /**
  * Created by germangb on 18/06/16.
  */
 public class Project implements ApplicationListener {
 
+    AssetManager manager;
     SceneGraph scene;
 
-    Thing thing;
     Thing camera;
 
     @Override
@@ -30,43 +30,59 @@ public class Project implements ApplicationListener {
         scene = new SceneGraph();
         scene.addManager(new RenderManager());
 
-        thing = new Thing(scene);
-        thing.addComponent(new Component() {
-            Quaternionf rot = new Quaternionf();
+        camera = new Thing(scene);
+        camera.addComponent(new Camera());
+
+        camera.addComponent(new Component() {
             @Override
             public void onUpdate() {
-                //rot.rotateX(0.2275f * Cat.time.getDelta());
-                //rot.rotateY(0.4376f * Cat.time.getDelta());
-                //rot.rotateZ(0.2561f * Cat.time.getDelta());
-                rot.rotateY(Cat.mouse.getDX() * 0.02431f);
-                rot.rotateX(Cat.mouse.getDY() * 0.02431f);
-
-                thing.getTransform().rotation.slerp(rot, Cat.time.getTime()*0.005f);
+                thing.getTransform().rotation.rotateY(Cat.mouse.getDX() * 0.01f);
             }
         });
 
-        camera = new Thing(scene);
-        camera.addComponent(new Camera());
         scene.getRoot().addChild(camera);
 
         camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), 4f/3, 0.1f, 100f);
-        camera.getComponent(Transform.class).position.set(-1, 2, 2);
-        camera.getComponent(Transform.class).rotation.lookRotate(-1, 2, 2, 0, 1, 0);
+        camera.getComponent(Transform.class).position.set(0, 1.5f, 0);
 
-        AssetManager manager = new SynchronousAssetManager();
+        manager = new SynchronousAssetManager();
+        manager.setListener(new AssetListener() {
+            @Override
+            public void onLoaded(String file, Class<?> type) {
+            }
+
+            @Override
+            public void onFailed(String file, Class<?> type, Exception e) {
+                e.printStackTrace();
+            }
+        });
+
         manager.loadAsset("mesh.json", Mesh.class);
         manager.loadAsset("pattern.png", Texture.class);
         manager.loadAsset("font.json", BitmapFontInfo.class);
+        manager.loadAsset("skeleton.json", Skeleton.class);
         manager.finishLoading();
 
         Mesh mesh = manager.getAsset("mesh.json", Mesh.class);
         Texture texture = manager.getAsset("pattern.png", Texture.class);
         BitmapFontInfo font = manager.getAsset("font.json", BitmapFontInfo.class);
 
-        Geometry geo = new Geometry(mesh, texture);
-        thing.addComponent(geo);
+        Random rand = new Random(420);
+        for (int i = 0; i < 128; ++i) {
+            float r = 64;
+            float x = rand.nextFloat()*2-1;
+            float z = rand.nextFloat()*2-1;
 
-        scene.getRoot().addChild(thing);
+            Thing thing = new Thing(scene);
+            thing.getTransform().position.set(x*r, 0, z*r);
+            Geometry geo = new Geometry(mesh, texture);
+            BoundingVolume vol = new BoundingVolume();
+            thing.addComponent(geo);
+            thing.addComponent(vol);
+            scene.getRoot().addChild(thing);
+        }
+
+        //System.out.println(Primitive.valueOf("TRIANGLES"));
     }
 
     @Override
@@ -75,7 +91,7 @@ public class Project implements ApplicationListener {
     }
 
     @Override
-    public void free() {
-
+    public void destroy() {
+        manager.destroy();
     }
 }

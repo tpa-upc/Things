@@ -22,4 +22,10 @@ public interface Time {
      * @return frames per second in frames
      */
     float getFps ();
+
+    /**
+     * Get the current frame
+     * @return current frame
+     */
+    int getFrame ();
 }

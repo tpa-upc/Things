@@ -8,7 +8,11 @@ import graphics.LwjglRenderer;
 import input.*;
 import org.lwjgl.opengl.GL;
 import time.LwjglTime;
+import utils.Destroyable;
 import window.LwjglWindow;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
@@ -55,6 +59,8 @@ public class LwjglApplication implements Application {
         glfwSwapInterval(opts.swapInterval);
         glfwMakeContextCurrent(window);
 
+        List<Destroyable> toDestroy = new ArrayList<>();
+
         // Things
         LwjglRenderer renderer = new LwjglRenderer();
         LwjglWindow win = new LwjglWindow(window);
@@ -62,7 +68,19 @@ public class LwjglApplication implements Application {
         LwjglTime time = new LwjglTime();
         Keyboard keyb = opts.hasKeyboard ? new LwjglKeyboard(window) : new DummyKeyboard();
         Mouse mouse = opts.hasMouse ? new LwjglMouse(window) : new DummyMouse();
-        AudioRenderer audio = opts.hasAudio ? new LwjglAudioRenderer() : new DummyAudioRenderer();
+        AudioRenderer audio = opts.hasAudio ? new LwjglAudioRenderer(opts.maxAudioSources) : new DummyAudioRenderer();
+
+        toDestroy.add(renderer);
+        toDestroy.add(win);
+        if (opts.hasMouse) {
+            toDestroy.add((LwjglMouse) mouse);
+        }
+        if (opts.hasKeyboard) {
+            toDestroy.add((LwjglKeyboard) keyb);
+        }
+        if (opts.hasAudio) {
+            toDestroy.add((LwjglAudioRenderer) audio);
+        }
 
         Cat.time = time;
         Cat.renderer = renderer;
@@ -95,17 +113,9 @@ public class LwjglApplication implements Application {
         }
 
         // clean stuff
-        listener.free();
-        win.free();
-        if (audio instanceof LwjglAudioRenderer) {
-            ((LwjglAudioRenderer)audio).free();
-        }
-        if (mouse instanceof LwjglMouse) {
-            ((LwjglMouse)mouse).free();
-        }
-        renderer.free();
-        if (keyb instanceof LwjglKeyboard) {
-            ((LwjglKeyboard)keyb).free();
+        listener.destroy();
+        for (Destroyable d : toDestroy) {
+            d.destroy();
         }
 
         glfwDestroyWindow(window);

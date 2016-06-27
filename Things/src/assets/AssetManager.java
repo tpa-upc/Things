@@ -1,9 +1,11 @@
 package assets;
 
+import utils.Destroyable;
+
 /**
  * Created by germangb on 20/06/16.
  */
-public interface AssetManager {
+public interface AssetManager extends Destroyable {
 
     /**
      * Get asset listener
@@ -49,6 +51,6 @@ public interface AssetManager {
     /** Blocks until all assets have been loaded */
     void finishLoading ();
 
-    /** cleanup */
-    void free ();
+    @Override
+    void destroy ();
 }

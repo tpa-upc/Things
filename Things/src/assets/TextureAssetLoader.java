@@ -41,15 +41,15 @@ public class TextureAssetLoader implements AssetLoader<Texture> {
         // read data
         int ncomp = alpha ? 4 : 3;
         ByteBuffer pixels = ByteBuffer.allocateDirect(width*height*ncomp).order(ByteOrder.nativeOrder());
-        for (int y = 0; y < height; ++y) {
-            for (int x = 0; x < width; ++x) {
-                int argb = im.getRGB(y, x);
-                byte red = (byte) ((argb >> 24) & 0xff);
-                byte gre = (byte) ((argb >> 16) & 0xff);
-                byte blu = (byte) ((argb >> 8) & 0xff);
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                int argb = im.getRGB(x, y);
+                byte red = (byte) ((argb >> 16) & 0xff);
+                byte gre = (byte) ((argb >> 8) & 0xff);
+                byte blu = (byte) (argb & 0xff);
                 pixels.put(new byte[] {red, gre, blu});
                 if (alpha) {
-                    byte alp = (byte)(argb & 0xff);
+                    byte alp = (byte)((argb >> 24) & 0xff);
                     pixels.put(alp);
                 }
             }

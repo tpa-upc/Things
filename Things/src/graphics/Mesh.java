@@ -124,6 +124,14 @@ public class Mesh implements Destroyable {
     }
 
     /**
+     * Primitive setter
+     * @param primitive
+     */
+    public void setPrimitive(Primitive primitive) {
+        this.primitive = primitive;
+    }
+
+    /**
      * Check signal. Sets dirty to false
      * @return true if data is dirty
      */

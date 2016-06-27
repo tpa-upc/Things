@@ -11,7 +11,8 @@ public class LwjglOptions {
     public int swapInterval = 1;
     public boolean resizable = false;
     public boolean fullscreen = false;
-    public boolean hasAudio = true;
     public boolean hasKeyboard = true;
     public boolean hasMouse = true;
+    public boolean hasAudio = true;
+    public int maxAudioSources = 32;
 }
