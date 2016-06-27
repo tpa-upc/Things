@@ -39,12 +39,12 @@ public class RenderManager extends Manager {
 
     private void createProgram() {
         //language=GLSL
-        String vert = "#version 130\n" +
+        String vert = "#version 120\n" +
                 "\n" +
-                "in vec3 a_position;\n" +
-                "in vec2 a_uv;\n" +
+                "attribute vec3 a_position;\n" +
+                "attribute vec2 a_uv;\n" +
                 "\n" +
-                "out vec2 v_uv;\n" +
+                "varying vec2 v_uv;\n" +
                 "\n" +
                 "uniform mat4 u_mvp;\n" +
                 "\n" +
@@ -53,17 +53,17 @@ public class RenderManager extends Manager {
                 "    v_uv = a_uv;\n" +
                 "}";
         //language=GLSL
-        String frag = "#version 130\n" +
+        String frag = "#version 120\n" +
                 "\n" +
-                "in vec2 v_uv;\n" +
+                "varying vec2 v_uv;\n" +
                 "\n" +
-                "out vec4 frag_color;\n" +
+                "//out vec4 frag_color;\n" +
                 "\n" +
                 "uniform sampler2D u_texture;\n" +
                 "\n" +
                 "void main () {\n" +
                 "    vec3 color = texture2D(u_texture, v_uv).rgb;\n" +
-                "    frag_color = vec4(color, 1.);\n" +
+                "    gl_FragColor = vec4(color, 1.);\n" +
                 "}";
 
         program = new ShaderProgram(vert, frag, new Attribute[] {
