@@ -3,6 +3,7 @@ package graphics;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import utils.Destroyable;
+import utils.LwjglUtils;
 
 import java.nio.*;
 import java.util.*;

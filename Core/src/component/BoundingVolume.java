@@ -49,6 +49,10 @@ public class BoundingVolume extends Component {
             }
         }
 
+        // TODO transform AAB and recompute AAB of the transformed box
+
+        // ...
+
         min.add(trans.position);
         max.add(trans.position);
     }

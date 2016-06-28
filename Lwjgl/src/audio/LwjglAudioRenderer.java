@@ -1,14 +1,13 @@
 package audio;
 
-import graphics.LwjglUtils;
+import utils.LwjglUtils;
 import math.Vector3f;
 import org.lwjgl.openal.*;
 import utils.Destroyable;
 
 import java.nio.*;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.lwjgl.openal.AL10.*;
 import static org.lwjgl.openal.ALC10.*;
@@ -32,6 +31,11 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
     // buffers
     Map<Sound, Integer> buffers = new HashMap<>();
 
+    // handles
+    private int handleCount = 0;
+    private int[] handles;  // index is al source
+    private Map<Integer, Integer> handle2source = new HashMap<>();
+
     public LwjglAudioRenderer (int maxSources) {
         this.device = ALC10.alcOpenDevice((ByteBuffer) null);
         this.context = ALC10.alcCreateContext(device, (IntBuffer) null);
@@ -39,9 +43,14 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
         alcMakeContextCurrent(context);
         this.alCaps = AL.createCapabilities(alcCaps);
 
+        // index is al source handle
+        handles = new int[maxSources+1];
+
         // allocate fixed number of sources
         while (maxSources-- > 0) {
-            available.add(alGenSources());
+            int src = alGenSources();
+            available.add(src);
+            handles[src] = 0;
         }
     }
 
@@ -57,13 +66,28 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
         ALC10.alcCloseDevice(device);
     }
 
+    private void checkDestroy () {
+        // look for destroyed sound
+        List<Sound> toDestroy = buffers.keySet().stream()
+                .filter(Sound::isDestroy)
+                .collect(Collectors.toCollection(LinkedList::new));
+
+        // delete buffers
+        for (Sound sound : toDestroy) {
+            int id = buffers.remove(sound);
+            alDeleteBuffers(id);
+        }
+    }
+
     public void update () {
+        //System.out.println("avail="+available.size()+"\tbusy="+busy.size());
+
         int size = busy.size();
         for (int i = 0; i < size; ++i) {
             int source = busy.poll();
 
             // if source is stopped, release it
-            if (alGetSourcei(source, AL10.AL_STOPPED) == AL_TRUE) {
+            if (alGetSourcei(source, AL10.AL_SOURCE_STATE) == AL_STOPPED) {
                 available.add(source);
             } else {
                 busy.add(source);
@@ -94,7 +118,7 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
         // Get a source
         Integer source = available.poll();
 
-        if (sound == null) {
+        if (source == null) {
             // no available :(
             return -1;
         }
@@ -104,8 +128,10 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
 
         if (buffer == null) {
             // create buffer
-            buffer = createBuffer(sound);
+            createBuffer(sound, buffer = alGenBuffers());
             buffers.put(sound, buffer);
+        } else if (sound.dirty()) {
+            createBuffer(sound, buffer);
         }
 
         // assign buffer to source & properties
@@ -116,41 +142,50 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
         alSourcePlay(source);
         busy.add(source);
 
-        // return al source as a handle
-        return source;
+        // source handle
+        //handleCount++;
+        handles[source] = ++handleCount;
+        handle2source.put(handleCount, source);
+        return handleCount;
     }
 
     @Override
     public void stopSound(int handle) {
-        alSourceStop(handle);
+        int source = handle2source.get(handle);
+        if (handles[source] == handle) {
+            alSourceStop(source);
+        }
     }
 
     @Override
     public void pauseSound(int handle) {
-        alSourcePause(handle);
+        int source = handle2source.get(handle);
+        if (handles[source] == handle) {
+            alSourcePause(source);
+        }
     }
 
     @Override
     public void resumeSound(int handle) {
-        alSourcePlay(handle);
+        int source = handle2source.get(handle);
+        if (handles[source] == handle) {
+            alSourcePause(source);
+        }
     }
 
-    private Integer createBuffer (Sound sound) {
+    private void createBuffer (Sound sound, int buffer) {
         int format = LwjglUtils.audioFormat(sound.getFormat());
         Buffer data = sound.getData();
-
-        int buffer = alGenBuffers();
+        sound.dirty();
 
         if (data instanceof ByteBuffer) {
             alBufferData(buffer, format, (ByteBuffer) data, sound.getSampling());
         } else if (data instanceof ShortBuffer) {
             alBufferData(buffer, format, (ShortBuffer) data, sound.getSampling());
         } else if (data instanceof IntBuffer) {
-            alBufferData(buffer, format, (ByteBuffer) data, sound.getSampling());
+            alBufferData(buffer, format, (IntBuffer) data, sound.getSampling());
         } else if (data instanceof FloatBuffer) {
             alBufferData(buffer, format, (FloatBuffer) data, sound.getSampling());
         }
-
-        return buffer;
     }
 }

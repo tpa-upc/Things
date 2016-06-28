@@ -17,7 +17,7 @@ public class Cat {
     public static Renderer renderer;
 
     /** Audio renderer */
-    public static AudioRenderer audioRenderer;
+    public static AudioRenderer audio;
 
     /** Timing */
     public static Time time;

@@ -1,6 +1,7 @@
-package graphics;
+package utils;
 
 import audio.AudioFormat;
+import graphics.*;
 import input.Key;
 import math.*;
 
@@ -19,16 +20,16 @@ import static org.lwjgl.openal.AL10.*;
  */
 public class LwjglUtils {
 
-    static FloatBuffer mat = ByteBuffer.allocateDirect(16<<2).order(ByteOrder.nativeOrder()).asFloatBuffer();
+    public static FloatBuffer mat = ByteBuffer.allocateDirect(16<<2).order(ByteOrder.nativeOrder()).asFloatBuffer();
 
     /** GLSL program vars */
-    static class GLSLProgram {
-        int program;
-        int vertex;
-        int fragment;
+    public static class GLSLProgram {
+        public int program;
+        public int vertex;
+        public int fragment;
     }
 
-    static GLSLProgram createProgram (ShaderProgram program) {
+    public static GLSLProgram createProgram (ShaderProgram program) {
         GLSLProgram prog = new GLSLProgram();
 
         // compile shaders
@@ -67,7 +68,7 @@ public class LwjglUtils {
         return shader;
     }
 
-    static void uniform (int loc, Object val) {
+    public static void uniform (int loc, Object val) {
         if (val instanceof Integer) {
             glUniform1i(loc, (int) val);
         } else if (val instanceof Float) {
@@ -90,7 +91,7 @@ public class LwjglUtils {
         }
     }
 
-    static int usage (Usage usage) {
+    public static int usage (Usage usage) {
         switch (usage) {
             case STATIC: return GL_STATIC_DRAW;
             case DYNAMIC: return GL_DYNAMIC_DRAW;
@@ -100,7 +101,7 @@ public class LwjglUtils {
         }
     }
 
-    static int primitive (Primitive prim) {
+    public static int primitive (Primitive prim) {
         switch (prim) {
             case TRIANGLES: return GL_TRIANGLES;
             case TRIANGLE_FAN: return GL_TRIANGLE_FAN;
@@ -114,7 +115,7 @@ public class LwjglUtils {
         }
     }
 
-    static int textureFilter (TextureFilter filt) {
+    public static int textureFilter (TextureFilter filt) {
         switch (filt) {
             case BILINEAR: return GL_LINEAR;
             case NEAREST: return GL_NEAREST;
@@ -123,7 +124,7 @@ public class LwjglUtils {
         }
     }
 
-    static int textureWrap (TextureWrap wrap) {
+    public static int textureWrap (TextureWrap wrap) {
         switch (wrap) {
             case REPEAT: return GL_REPEAT;
             case CLAMP: return GL_CLAMP;
@@ -132,7 +133,7 @@ public class LwjglUtils {
         }
     }
 
-    static int textureFormat (TextureFormat format) {
+    public static int textureFormat (TextureFormat format) {
         switch (format) {
             case RGB: return GL_RGB;
             case RGBA: return GL_RGBA;
@@ -154,7 +155,7 @@ public class LwjglUtils {
         }
     }
 
-    static void setCulling (Culling cull) {
+    public static void setCulling (Culling cull) {
         switch (cull) {
             case DISABLED:
                 glDisable(GL_CULL_FACE);
@@ -172,7 +173,7 @@ public class LwjglUtils {
         }
     }
 
-    static void setBlending (Blending blend) {
+    public static void setBlending (Blending blend) {
         switch (blend) {
             case DISABLED:
                 glDisable(GL_BLEND);
@@ -190,7 +191,7 @@ public class LwjglUtils {
         }
     }
 
-    static void setDepthTest (DepthTest depth) {
+    public static void setDepthTest (DepthTest depth) {
         if (depth != DepthTest.DISABLED) {
             glEnable(GL_DEPTH_TEST);
         }
@@ -228,7 +229,7 @@ public class LwjglUtils {
         }
     }
 
-    static int getBufferBitmask (BufferType... bufs) {
+    public static int getBufferBitmask (BufferType... bufs) {
         int mask = 0;
         for (int i = 0; i < bufs.length; ++i) {
             switch (bufs[i]) {
@@ -249,7 +250,7 @@ public class LwjglUtils {
         return mask;
     }
 
-    static int renderMode (PolygonMode mode) {
+    public static int renderMode (PolygonMode mode) {
         switch (mode) {
             case FILL: return GL_FILL;
             case WIREFRAME: return GL_LINE;
@@ -258,7 +259,7 @@ public class LwjglUtils {
         }
     }
 
-    static void bufferData (int target, Buffer data, Usage us) {
+    public static void bufferData (int target, Buffer data, Usage us) {
         int usage = LwjglUtils.usage(us);
 
         if (data instanceof FloatBuffer) {
@@ -274,7 +275,7 @@ public class LwjglUtils {
         }
     }
 
-    static void bufferSubData (int target, Buffer data) {
+    public static void bufferSubData (int target, Buffer data) {
         if (data instanceof FloatBuffer) {
             glBufferSubData(target, 0, (FloatBuffer) data);
         } else if (data instanceof DoubleBuffer) {
@@ -288,7 +289,7 @@ public class LwjglUtils {
         }
     }
 
-    static int nioToSigned (Buffer buffer) {
+    public static int nioToSigned (Buffer buffer) {
         if (buffer instanceof FloatBuffer) return GL_FLOAT;
         else if (buffer instanceof DoubleBuffer) return GL_DOUBLE;
         else if (buffer instanceof IntBuffer) return GL_INT;
@@ -297,7 +298,7 @@ public class LwjglUtils {
         throw new RuntimeException("This should never be reached");
     }
 
-    static int nioToUnsigned (Buffer buffer) {
+    public static int nioToUnsigned (Buffer buffer) {
         if (buffer instanceof FloatBuffer) return GL_FLOAT;
         else if (buffer instanceof DoubleBuffer) return GL_DOUBLE;
         else if (buffer instanceof IntBuffer) return GL_UNSIGNED_INT;

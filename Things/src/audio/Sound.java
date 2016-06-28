@@ -93,4 +93,12 @@ public class Sound implements Destroyable {
         destroy = true;
         data = null;
     }
+
+    /**
+     * Check destroy flag
+     * @return
+     */
+    public boolean isDestroy() {
+        return destroy;
+    }
 }

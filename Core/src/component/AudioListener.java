@@ -31,6 +31,10 @@ public class AudioListener extends Component {
         up.set(aux.x, aux.y, aux.z);
 
         // update listener position & orientation
-        Cat.audioRenderer.setListener(pos, look, up);
+        Cat.audio.setListener(pos, look, up);
+
+        //System.out.println(pos);
+        //System.out.println(look);
+        //System.out.println(up+"\n");
     }
 }

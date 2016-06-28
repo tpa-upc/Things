@@ -89,7 +89,7 @@ public class LwjglApplication implements Application {
         Cat.keyboard = keyb;
         Cat.mouse = mouse;
         Cat.files = files;
-        Cat.audioRenderer = audio;
+        Cat.audio = audio;
 
         // main loop
         GL.createCapabilities();

@@ -1,6 +1,6 @@
 package input;
 
-import graphics.LwjglUtils;
+import utils.LwjglUtils;
 import org.lwjgl.glfw.GLFWKeyCallback;
 import utils.Destroyable;
 
