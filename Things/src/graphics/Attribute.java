@@ -10,8 +10,9 @@ public enum Attribute {
     NORMAL ("a_normal", 3, 2),
     COLOR ("a_color", 3, 3),
     TANGENT ("a_tangent", 3, 4),
-    JOINTS ("a_joints", 4, 5),
-    WEIGHTS ("a_weights", 4, 6);
+    BITANGENT ("a_bitangent", 3, 5),
+    JOINTS ("a_joints", 4, 6),
+    WEIGHTS ("a_weights", 4, 7);
 
     /** Attribute's name */
     public final String name;

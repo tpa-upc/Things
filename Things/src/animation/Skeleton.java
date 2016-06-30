@@ -38,6 +38,11 @@ public class Skeleton {
         hash.put(joint.getName(), joint);
     }
 
+    /** Compute bind transformations */
+    public void bind () {
+        joints.forEach(Joint::bind);
+    }
+
     /** Update joint transformations */
     public void update () {
         joints.forEach(Joint::update);

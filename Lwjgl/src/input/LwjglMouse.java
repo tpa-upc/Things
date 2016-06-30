@@ -73,8 +73,8 @@ public class LwjglMouse implements Mouse, Destroyable {
 
         if (first) {
             first = false;
-            dx = (float) xp[0];
-            dy = (float) yp[0];
+            dx = 0;
+            dy = 0;
         } else {
             dx = (float) xp[0] - x;
             dy = (float) yp[0] - y;

@@ -23,4 +23,8 @@ public class RenderState {
     // depth stuff
     public boolean depthMask = true;
     public DepthTest depthTest = DepthTest.DISABLED;
+
+    // point & line size
+    public int pointSize = 1;
+    public int lineWidth = 1;
 }

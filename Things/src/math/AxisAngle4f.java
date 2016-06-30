@@ -30,7 +30,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 /**
- * Represents a 3D rotation of a given radians about an axis represented as an
+ * Represents a 3D rotate of a given radians about an axis represented as an
  * unit 3D vector.
  * <p>
  * This class uses single-precision component.
@@ -46,20 +46,20 @@ public class AxisAngle4f implements Externalizable {
      */
     public float angle;
     /**
-     * The x-component of the rotation axis.
+     * The x-component of the rotate axis.
      */
     public float x;
     /**
-     * The y-component of the rotation axis.
+     * The y-component of the rotate axis.
      */
     public float y;
     /**
-     * The z-component of the rotation axis.
+     * The z-component of the rotate axis.
      */
     public float z;
 
     /**
-     * Create a new {@link AxisAngle4f} with zero rotation about <tt>(0, 0, 1)</tt>.
+     * Create a new {@link AxisAngle4f} with zero rotate about <tt>(0, 0, 1)</tt>.
      */
     public AxisAngle4f() {
         z = 1.0f;
@@ -103,11 +103,11 @@ public class AxisAngle4f implements Externalizable {
      * @param angle
      *            the angle in radians
      * @param x
-     *            the x-coordinate of the rotation axis
+     *            the x-coordinate of the rotate axis
      * @param y
-     *            the y-coordinate of the rotation axis
+     *            the y-coordinate of the rotate axis
      * @param z
-     *            the z-coordinate of the rotation axis
+     *            the z-coordinate of the rotate axis
      */
     public AxisAngle4f(float angle, float x, float y, float z) {
         this.x = x;
@@ -120,7 +120,7 @@ public class AxisAngle4f implements Externalizable {
      * Create a new {@link AxisAngle4f} with the given values.
      *
      * @param angle the angle in radians
-     * @param v     the rotation axis as a {@link Vector3f}
+     * @param v     the rotate axis as a {@link Vector3f}
      */
     public AxisAngle4f(float angle, Vector3f v) {
         this(angle, v.x, v.y, v.z);
@@ -148,11 +148,11 @@ public class AxisAngle4f implements Externalizable {
      * @param angle
      *            the angle in radians
      * @param x
-     *            the x-coordinate of the rotation axis
+     *            the x-coordinate of the rotate axis
      * @param y
-     *            the y-coordinate of the rotation axis
+     *            the y-coordinate of the rotate axis
      * @param z
-     *            the z-coordinate of the rotation axis
+     *            the z-coordinate of the rotate axis
      * @return this
      */
     public AxisAngle4f set(float angle, float x, float y, float z) {
@@ -169,7 +169,7 @@ public class AxisAngle4f implements Externalizable {
      * @param angle
      *            the angle in radians
      * @param v    
-     *            the rotation axis as a {@link Vector3f}
+     *            the rotate axis as a {@link Vector3f}
      * @return this
      */
     public AxisAngle4f set(float angle, Vector3f v) {
@@ -213,7 +213,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4f} to be equivalent to the rotation 
+     * Set this {@link AxisAngle4f} to be equivalent to the rotate
      * of the given {@link Matrix3f}.
      * 
      * @param m
@@ -231,7 +231,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4f} to be equivalent to the rotation 
+     * Set this {@link AxisAngle4f} to be equivalent to the rotate
      * of the given {@link Matrix3d}.
      * 
      * @param m
@@ -285,7 +285,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Quaternionf} to be equivalent to this {@link AxisAngle4f} rotation.
+     * Set the given {@link Quaternionf} to be equivalent to this {@link AxisAngle4f} rotate.
      * 
      * @see Quaternionf#set(AxisAngle4f)
      * 
@@ -298,7 +298,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Quaterniond} to be equivalent to this {@link AxisAngle4f} rotation.
+     * Set the given {@link Quaterniond} to be equivalent to this {@link AxisAngle4f} rotate.
      * 
      * @see Quaterniond#set(AxisAngle4f)
      * 
@@ -311,7 +311,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Matrix4f} to a rotation transformation equivalent to this {@link AxisAngle4f}.
+     * Set the given {@link Matrix4f} to a rotate transformation equivalent to this {@link AxisAngle4f}.
      * 
      * @see Matrix4f#set(AxisAngle4f)
      * 
@@ -324,7 +324,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Matrix3f} to a rotation transformation equivalent to this {@link AxisAngle4f}.
+     * Set the given {@link Matrix3f} to a rotate transformation equivalent to this {@link AxisAngle4f}.
      * 
      * @see Matrix3f#set(AxisAngle4f)
      * 
@@ -337,7 +337,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Matrix4d} to a rotation transformation equivalent to this {@link AxisAngle4f}.
+     * Set the given {@link Matrix4d} to a rotate transformation equivalent to this {@link AxisAngle4f}.
      * 
      * @see Matrix4f#set(AxisAngle4f)
      * 
@@ -350,7 +350,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Set the given {@link Matrix3d} to a rotation transformation equivalent to this {@link AxisAngle4f}.
+     * Set the given {@link Matrix3d} to a rotate transformation equivalent to this {@link AxisAngle4f}.
      * 
      * @see Matrix3f#set(AxisAngle4f)
      * 
@@ -390,7 +390,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Increase the rotation angle by the given amount.
+     * Increase the rotate angle by the given amount.
      * <p>
      * This method also takes care of wrapping around.
      * 
@@ -405,7 +405,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Transform the given vector by the rotation transformation described by this {@link AxisAngle4f}.
+     * Transform the given vector by the rotate transformation described by this {@link AxisAngle4f}.
      * 
      * @param v
      *          the vector to transform
@@ -416,7 +416,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Transform the given vector by the rotation transformation described by this {@link AxisAngle4f}
+     * Transform the given vector by the rotate transformation described by this {@link AxisAngle4f}
      * and store the result in <code>dest</code>.
      * 
      * @param v
@@ -436,7 +436,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Transform the given vector by the rotation transformation described by this {@link AxisAngle4f}.
+     * Transform the given vector by the rotate transformation described by this {@link AxisAngle4f}.
      * 
      * @param v
      *          the vector to transform
@@ -447,7 +447,7 @@ public class AxisAngle4f implements Externalizable {
     }
 
     /**
-     * Transform the given vector by the rotation transformation described by this {@link AxisAngle4f}
+     * Transform the given vector by the rotate transformation described by this {@link AxisAngle4f}
      * and store the result in <code>dest</code>.
      * 
      * @param v

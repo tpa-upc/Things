@@ -18,7 +18,7 @@ public class SkeletonAssetLoader implements AssetLoader<Skeleton> {
         String name;
 
         float[] translate;
-        float[] rotation;
+        float[] rotate;
         float[] scale;
     }
 
@@ -42,7 +42,7 @@ public class SkeletonAssetLoader implements AssetLoader<Skeleton> {
             JsonJoint jo = skel.joints[i];
             Joint joint = new Joint(jo.parent < 0 ? null :soFar.get(jo.parent), jo.name);
             joint.translate.set(jo.translate[0], jo.translate[1], jo.translate[2]);
-            joint.rotation.set(jo.rotation[0], jo.rotation[1], jo.rotation[2], jo.rotation[3]);
+            joint.rotate.set(jo.rotate[0], jo.rotate[1], jo.rotate[2], jo.rotate[3]);
             joint.scale.set(jo.scale[0], jo.scale[1], jo.scale[2]);
             joint.update();
 

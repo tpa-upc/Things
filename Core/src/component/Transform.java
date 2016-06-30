@@ -18,7 +18,7 @@ public class Transform extends Component {
     /** Component Rotation */
     public final Quaternionf rotation = new Quaternionf();
 
-    /** Transformation (scale + rotation + translation) */
+    /** Transformation (scale + rotate + translation) */
     public final Matrix4f model = new Matrix4f();
 
     @Override

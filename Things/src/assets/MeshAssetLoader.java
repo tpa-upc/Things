@@ -55,7 +55,7 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
         // attributes
         for (int i = 0; i < parsed.attributes.length; ++i) {
             JsonAttribute attr = parsed.attributes[i];
-            Attribute attribute = null;
+            Attribute attribute;
 
             try {
                 attribute = Attribute.valueOf(attr.name);

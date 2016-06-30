@@ -22,7 +22,7 @@ public class Joint {
     public final Vector3f translate = new Vector3f();
 
     /** Rotation relative to parent */
-    public final Quaternionf rotation = new Quaternionf();
+    public final Quaternionf rotate = new Quaternionf();
 
     /** Scale relative to parent */
     public final Vector3f scale = new Vector3f(1f);
@@ -33,9 +33,20 @@ public class Joint {
     /** Absolute transformation (parent.absolute * local) */
     public final Matrix4f absolute = new Matrix4f();
 
+    /** Skinning transformation */
+    public final Matrix4f skin = new Matrix4f();
+
+    /** Inverted bind matrix */
+    public final Matrix4f invBind = new Matrix4f();
+
     public Joint (Joint parent, String name) {
         this.parent = parent;
         this.name = name;
+    }
+
+    /** bind matrix calculations */
+    public void bind () {
+        invBind.set(absolute).invert();
     }
 
     /** Update transformations */
@@ -43,7 +54,7 @@ public class Joint {
         // local transformation
         local.identity()
                 .translate(translate)
-                .rotate(rotation)
+                .rotate(rotate)
                 .scale(scale);
 
         if (parent != null) {

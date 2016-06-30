@@ -17,7 +17,7 @@ public class LwjglTime implements Time {
     public void update () {
         ++frames;
         float now = (float) glfwGetTime();
-        delta = lastFrame - now;
+        delta = now - lastFrame;
         lastFrame = now;
         if (now - lastFpsTime > 1) {
             lastFps = countFrames;

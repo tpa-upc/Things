@@ -159,6 +159,8 @@ public class LwjglRenderer implements Renderer, Destroyable {
         glColorMask(state.redMask, state.greenMask, state.blueMask, state.alphaMask);
         glDepthMask(state.depthMask);
         glPolygonMode(GL_FRONT_AND_BACK, LwjglUtils.renderMode(state.mode));
+        glPointSize(state.pointSize);
+        glLineWidth(state.lineWidth);
         LwjglUtils.setCulling(state.culling);
         LwjglUtils.setDepthTest(state.depthTest);
         LwjglUtils.setBlending(state.blending);
@@ -418,7 +420,8 @@ public class LwjglRenderer implements Renderer, Destroyable {
         else if (data instanceof ShortBuffer) off <<= 1;
 
         int type = LwjglUtils.nioToUnsigned(data);
-        glDrawElements(GL_TRIANGLES, mesh.getCount(), type, off);
+        int prim = LwjglUtils.primitive(mesh.getPrimitive());
+        glDrawElements(prim, mesh.getCount(), type, off);
         stats.vertices += mesh.getCount();
     }
 }

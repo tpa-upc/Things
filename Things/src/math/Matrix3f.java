@@ -367,7 +367,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4f}.
+     * Set this matrix to be equivalent to the rotate specified by the given {@link AxisAngle4f}.
      * 
      * @param axisAngle
      *          the {@link AxisAngle4f}
@@ -404,7 +404,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to be equivalent to the rotation specified by the given {@link AxisAngle4d}.
+     * Set this matrix to be equivalent to the rotate specified by the given {@link AxisAngle4d}.
      * 
      * @param axisAngle
      *          the {@link AxisAngle4d}
@@ -441,7 +441,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to be equivalent to the rotation specified by the given {@link Quaternionf}.
+     * Set this matrix to be equivalent to the rotate specified by the given {@link Quaternionf}.
      * 
      * @see Quaternionf#get(Matrix3f)
      * 
@@ -455,7 +455,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation equivalent to the given quaternion.
+     * Set this matrix to a rotate equivalent to the given quaternion.
      * 
      * @see Quaterniond#get(Matrix3f)
      * 
@@ -703,7 +703,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Get the current values of <code>this</code> matrix and store the represented rotation
+     * Get the current values of <code>this</code> matrix and store the represented rotate
      * into the given {@link AxisAngle4f}.
      * 
      * @see AxisAngle4f#set(Matrix3f)
@@ -717,7 +717,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Get the current values of <code>this</code> matrix and store the represented rotation
+     * Get the current values of <code>this</code> matrix and store the represented rotate
      * into the given {@link Quaternionf}.
      * <p>
      * This method assumes that the three column vectors of this matrix are not normalized and
@@ -734,7 +734,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Get the current values of <code>this</code> matrix and store the represented rotation
+     * Get the current values of <code>this</code> matrix and store the represented rotate
      * into the given {@link Quaternionf}.
      * <p>
      * This method assumes that the three column vectors of this matrix are normalized.
@@ -750,7 +750,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Get the current values of <code>this</code> matrix and store the represented rotation
+     * Get the current values of <code>this</code> matrix and store the represented rotate
      * into the given {@link Quaterniond}.
      * <p>
      * This method assumes that the three column vectors of this matrix are not normalized and
@@ -767,7 +767,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Get the current values of <code>this</code> matrix and store the represented rotation
+     * Get the current values of <code>this</code> matrix and store the represented rotate
      * into the given {@link Quaterniond}.
      * <p>
      * This method assumes that the three column vectors of this matrix are normalized.
@@ -1318,12 +1318,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
+     * Set this matrix to a rotate matrix which rotates the given radians about a given axis.
      * <p>
      * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
+     * matrix to obtain an additional rotate.
      * <p>
-     * In order to post-multiply a rotation transformation directly to a
+     * In order to post-multiply a rotate transformation directly to a
      * matrix, use {@link #rotate(float, Vector3f) rotate()} instead.
      * 
      * @see #rotate(float, Vector3f)
@@ -1339,12 +1339,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation using the given {@link AxisAngle4f}.
+     * Set this matrix to a rotate transformation using the given {@link AxisAngle4f}.
      * <p>
      * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
+     * matrix to obtain an additional rotate.
      * <p>
-     * In order to apply the rotation transformation to an existing transformation,
+     * In order to apply the rotate transformation to an existing transformation,
      * use {@link #rotate(AxisAngle4f) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
@@ -1360,14 +1360,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation matrix which rotates the given radians about a given axis.
+     * Set this matrix to a rotate matrix which rotates the given radians about a given axis.
      * <p>
      * The axis described by the three component needs to be a unit vector.
      * <p>
      * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
+     * matrix to obtain an additional rotate.
      * <p>
-     * In order to apply the rotation transformation to an existing transformation,
+     * In order to apply the rotate transformation to an existing transformation,
      * use {@link #rotate(float, float, float, float) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
@@ -1377,11 +1377,11 @@ public class Matrix3f implements Externalizable {
      * @param angle
      *          the angle in radians
      * @param x
-     *          the x-component of the rotation axis
+     *          the x-component of the rotate axis
      * @param y
-     *          the y-component of the rotation axis
+     *          the y-component of the rotate axis
      * @param z
-     *          the z-component of the rotation axis
+     *          the z-component of the rotate axis
      * @return this
      */
     public Matrix3f rotation(float angle, float x, float y, float z) {
@@ -1402,7 +1402,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation about the X axis.
+     * Set this matrix to a rotate transformation about the X axis.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1438,7 +1438,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation about the Y axis.
+     * Set this matrix to a rotate transformation about the Y axis.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1474,7 +1474,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation about the Z axis.
+     * Set this matrix to a rotate transformation about the Z axis.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1510,8 +1510,8 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation of <code>angleX</code> radians about the X axis, followed by a rotation
-     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleZ</code> radians about the Z axis.
+     * Set this matrix to a rotate of <code>angleX</code> radians about the X axis, followed by a rotate
+     * of <code>angleY</code> radians about the Y axis and followed by a rotate of <code>angleZ</code> radians about the Z axis.
      * <p>
      * This method is equivalent to calling: <tt>rotationX(angleX).rotateY(angleY).rotateZ(angleZ)</tt>
      * 
@@ -1557,8 +1557,8 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation
-     * of <code>angleY</code> radians about the Y axis and followed by a rotation of <code>angleX</code> radians about the X axis.
+     * Set this matrix to a rotate of <code>angleZ</code> radians about the Z axis, followed by a rotate
+     * of <code>angleY</code> radians about the Y axis and followed by a rotate of <code>angleX</code> radians about the X axis.
      * <p>
      * This method is equivalent to calling: <tt>rotationZ(angleZ).rotateY(angleY).rotateX(angleX)</tt>
      * 
@@ -1604,8 +1604,8 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation of <code>angleY</code> radians about the Y axis, followed by a rotation
-     * of <code>angleX</code> radians about the X axis and followed by a rotation of <code>angleZ</code> radians about the Z axis.
+     * Set this matrix to a rotate of <code>angleY</code> radians about the Y axis, followed by a rotate
+     * of <code>angleX</code> radians about the X axis and followed by a rotate of <code>angleZ</code> radians about the Z axis.
      * <p>
      * This method is equivalent to calling: <tt>rotationY(angleY).rotateX(angleX).rotateZ(angleZ)</tt>
      * 
@@ -1651,12 +1651,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to the rotation transformation of the given {@link Quaternionf}.
+     * Set this matrix to the rotate transformation of the given {@link Quaternionf}.
      * <p>
      * The resulting matrix can be multiplied against another transformation
-     * matrix to obtain an additional rotation.
+     * matrix to obtain an additional rotate.
      * <p>
-     * In order to apply the rotation transformation to an existing transformation,
+     * In order to apply the rotate transformation to an existing transformation,
      * use {@link #rotate(Quaternionf) rotate()} instead.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
@@ -1745,13 +1745,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the X axis to this matrix by rotating the given amount of radians
+     * Apply rotate about the X axis to this matrix by rotating the given amount of radians
      * and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1801,12 +1801,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the X axis to this matrix by rotating the given amount of radians.
+     * Apply rotate about the X axis to this matrix by rotating the given amount of radians.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1819,13 +1819,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the Y axis to this matrix by rotating the given amount of radians
+     * Apply rotate about the Y axis to this matrix by rotating the given amount of radians
      * and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1875,12 +1875,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the Y axis to this matrix by rotating the given amount of radians.
+     * Apply rotate about the Y axis to this matrix by rotating the given amount of radians.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1893,13 +1893,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the Z axis to this matrix by rotating the given amount of radians
+     * Apply rotate about the Z axis to this matrix by rotating the given amount of radians
      * and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1949,12 +1949,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation about the Z axis to this matrix by rotating the given amount of radians.
+     * Apply rotate about the Z axis to this matrix by rotating the given amount of radians.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Basic_rotations">http://en.wikipedia.org</a>
      * 
@@ -1967,13 +1967,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation of <code>angleX</code> radians about the X axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
-     * followed by a rotation of <code>angleZ</code> radians about the Z axis.
+     * Apply rotate of <code>angleX</code> radians about the X axis, followed by a rotate of <code>angleY</code> radians about the Y axis and
+     * followed by a rotate of <code>angleZ</code> radians about the Z axis.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * rotation will be applied first!
+     * rotate will be applied first!
      * <p>
      * This method is equivalent to calling: <tt>rotateX(angleX).rotateY(angleY).rotateZ(angleZ)</tt>
      * 
@@ -1990,13 +1990,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation of <code>angleX</code> radians about the X axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
-     * followed by a rotation of <code>angleZ</code> radians about the Z axis and store the result in <code>dest</code>.
+     * Apply rotate of <code>angleX</code> radians about the X axis, followed by a rotate of <code>angleY</code> radians about the Y axis and
+     * followed by a rotate of <code>angleZ</code> radians about the Z axis and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * rotation will be applied first!
+     * rotate will be applied first!
      * <p>
      * This method is equivalent to calling: <tt>rotateX(angleX, dest).rotateY(angleY).rotateZ(angleZ)</tt>
      * 
@@ -2046,13 +2046,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
-     * followed by a rotation of <code>angleX</code> radians about the X axis.
+     * Apply rotate of <code>angleZ</code> radians about the Z axis, followed by a rotate of <code>angleY</code> radians about the Y axis and
+     * followed by a rotate of <code>angleX</code> radians about the X axis.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * rotation will be applied first!
+     * rotate will be applied first!
      * <p>
      * This method is equivalent to calling: <tt>rotateZ(angleZ).rotateY(angleY).rotateX(angleX)</tt>
      * 
@@ -2069,13 +2069,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation of <code>angleZ</code> radians about the Z axis, followed by a rotation of <code>angleY</code> radians about the Y axis and
-     * followed by a rotation of <code>angleX</code> radians about the X axis and store the result in <code>dest</code>.
+     * Apply rotate of <code>angleZ</code> radians about the Z axis, followed by a rotate of <code>angleY</code> radians about the Y axis and
+     * followed by a rotate of <code>angleX</code> radians about the X axis and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>, the
-     * rotation will be applied first!
+     * rotate will be applied first!
      * <p>
      * This method is equivalent to calling: <tt>rotateZ(angleZ, dest).rotateY(angleY).rotateX(angleX)</tt>
      * 
@@ -2125,13 +2125,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation to this matrix by rotating the given amount of radians
+     * Apply rotate to this matrix by rotating the given amount of radians
      * about the given axis specified as x, y and z component.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      * 
@@ -2150,13 +2150,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply rotation to this matrix by rotating the given amount of radians
+     * Apply rotate to this matrix by rotating the given amount of radians
      * about the given axis specified as x, y and z component, and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>M * R</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * R * v</code>
-     * , the rotation will be applied first!
+     * , the rotate will be applied first!
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      * 
@@ -2177,7 +2177,7 @@ public class Matrix3f implements Externalizable {
         float c = (float) Math.cos(ang);
         float C = 1.0f - c;
 
-        // rotation matrix elements:
+        // rotate matrix elements:
         // m30, m31, m32, m03, m13, m23 = 0
         float xx = x * x, xy = x * y, xz = x * z;
         float yy = y * y, yz = y * z;
@@ -2215,22 +2215,22 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Pre-multiply a rotation to this matrix by rotating the given amount of radians
+     * Pre-multiply a rotate to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis and store the result in <code>dest</code>.
      * <p>
      * The axis described by the three component needs to be a unit vector.
      * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
+     * When used with a right-handed coordinate system, the produced rotate will rotate vector
+     * counter-clockwise around the rotate axis, when viewing along the negative axis direction towards the origin.
+     * When used with a left-handed coordinate system, the rotate is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>R * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>R * M * v</code>, the
-     * rotation will be applied last!
+     * rotate will be applied last!
      * <p>
-     * In order to setIndices the matrix to a rotation matrix without pre-multiplying the rotation
-     * transformation, use {@link #rotation(float, float, float, float) rotation()}.
+     * In order to setIndices the matrix to a rotate matrix without pre-multiplying the rotate
+     * transformation, use {@link #rotation(float, float, float, float) rotate()}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      * 
@@ -2286,22 +2286,22 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Pre-multiply a rotation to this matrix by rotating the given amount of radians
+     * Pre-multiply a rotate to this matrix by rotating the given amount of radians
      * about the specified <tt>(x, y, z)</tt> axis.
      * <p>
      * The axis described by the three component needs to be a unit vector.
      * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
+     * When used with a right-handed coordinate system, the produced rotate will rotate vector
+     * counter-clockwise around the rotate axis, when viewing along the negative axis direction towards the origin.
+     * When used with a left-handed coordinate system, the rotate is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>R</code> the rotate matrix,
      * then the new matrix will be <code>R * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>R * M * v</code>, the
-     * rotation will be applied last!
+     * rotate will be applied last!
      * <p>
-     * In order to setIndices the matrix to a rotation matrix without pre-multiplying the rotation
-     * transformation, use {@link #rotation(float, float, float, float) rotation()}.
+     * In order to setIndices the matrix to a rotate matrix without pre-multiplying the rotate
+     * transformation, use {@link #rotation(float, float, float, float) rotate()}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle">http://en.wikipedia.org</a>
      * 
@@ -2322,14 +2322,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply the rotation transformation of the given {@link Quaternionf} to this matrix.
+     * Apply the rotate transformation of the given {@link Quaternionf} to this matrix.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotate matrix obtained from the given quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
+     * the quaternion rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(Quaternionf)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
@@ -2345,15 +2345,15 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply the rotation transformation of the given {@link Quaternionf} to this matrix and store
+     * Apply the rotate transformation of the given {@link Quaternionf} to this matrix and store
      * the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotate matrix obtained from the given quaternion,
      * then the new matrix will be <code>M * Q</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * Q * v</code>,
-     * the quaternion rotation will be applied first!
+     * the quaternion rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(Quaternionf)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
@@ -2410,19 +2410,19 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Pre-multiply the rotation transformation of the given {@link Quaternionf} to this matrix and store
+     * Pre-multiply the rotate transformation of the given {@link Quaternionf} to this matrix and store
      * the result in <code>dest</code>.
      * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
+     * When used with a right-handed coordinate system, the produced rotate will rotate vector
+     * counter-clockwise around the rotate axis, when viewing along the negative axis direction towards the origin.
+     * When used with a left-handed coordinate system, the rotate is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotate matrix obtained from the given quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
+     * the quaternion rotate will be applied last!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without pre-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without pre-multiplying,
      * use {@link #rotation(Quaternionf)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
@@ -2479,18 +2479,18 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Pre-multiply the rotation transformation of the given {@link Quaternionf} to this matrix.
+     * Pre-multiply the rotate transformation of the given {@link Quaternionf} to this matrix.
      * <p>
-     * When used with a right-handed coordinate system, the produced rotation will rotate vector 
-     * counter-clockwise around the rotation axis, when viewing along the negative axis direction towards the origin.
-     * When used with a left-handed coordinate system, the rotation is clockwise.
+     * When used with a right-handed coordinate system, the produced rotate will rotate vector
+     * counter-clockwise around the rotate axis, when viewing along the negative axis direction towards the origin.
+     * When used with a left-handed coordinate system, the rotate is clockwise.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotation matrix obtained from the given quaternion,
+     * If <code>M</code> is <code>this</code> matrix and <code>Q</code> the rotate matrix obtained from the given quaternion,
      * then the new matrix will be <code>Q * M</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>Q * M * v</code>,
-     * the quaternion rotation will be applied last!
+     * the quaternion rotate will be applied last!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without pre-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without pre-multiplying,
      * use {@link #rotation(Quaternionf)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Quaternion">http://en.wikipedia.org</a>
@@ -2506,14 +2506,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f}, to this matrix.
+     * Apply a rotate transformation, rotating about the given {@link AxisAngle4f}, to this matrix.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotate matrix obtained from the given {@link AxisAngle4f},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
+     * the {@link AxisAngle4f} rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(AxisAngle4f)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
@@ -2530,14 +2530,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation, rotating about the given {@link AxisAngle4f} and store the result in <code>dest</code>.
+     * Apply a rotate transformation, rotating about the given {@link AxisAngle4f} and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given {@link AxisAngle4f},
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotate matrix obtained from the given {@link AxisAngle4f},
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the {@link AxisAngle4f} rotation will be applied first!
+     * the {@link AxisAngle4f} rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(AxisAngle4f)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
@@ -2556,14 +2556,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis, to this matrix.
+     * Apply a rotate transformation, rotating the given radians about the specified axis, to this matrix.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotate matrix obtained from the given angle and axis,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
+     * the axis-angle rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(float, Vector3f)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
@@ -2574,7 +2574,7 @@ public class Matrix3f implements Externalizable {
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
+     *          the rotate axis (needs to be {@link Vector3f#normalize() normalized})
      * @return this
      */
     public Matrix3f rotate(float angle, Vector3f axis) {
@@ -2582,14 +2582,14 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
+     * Apply a rotate transformation, rotating the given radians about the specified axis and store the result in <code>dest</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotation matrix obtained from the given angle and axis,
+     * If <code>M</code> is <code>this</code> matrix and <code>A</code> the rotate matrix obtained from the given angle and axis,
      * then the new matrix will be <code>M * A</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * A * v</code>,
-     * the axis-angle rotation will be applied first!
+     * the axis-angle rotate will be applied first!
      * <p>
-     * In order to setIndices the matrix to a rotation transformation without post-multiplying,
+     * In order to setIndices the matrix to a rotate transformation without post-multiplying,
      * use {@link #rotation(float, Vector3f)}.
      * <p>
      * Reference: <a href="http://en.wikipedia.org/wiki/Rotation_matrix#Axis_and_angle">http://en.wikipedia.org</a>
@@ -2600,7 +2600,7 @@ public class Matrix3f implements Externalizable {
      * @param angle
      *          the angle in radians
      * @param axis
-     *          the rotation axis (needs to be {@link Vector3f#normalize() normalized})
+     *          the rotate axis (needs to be {@link Vector3f#normalize() normalized})
      * @param dest
      *          will hold the result
      * @return dest
@@ -2610,12 +2610,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix to make <code>-z</code> point along <code>dir</code>. 
+     * Apply a rotate transformation to this matrix to make <code>-z</code> point along <code>dir</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotate matrix,
      * then the new matrix will be <code>M * L</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * L * v</code>, the
-     * lookalong rotation transformation will be applied first!
+     * lookalong rotate transformation will be applied first!
      * <p>
      * In order to setIndices the matrix to a lookalong transformation without post-multiplying it,
      * use {@link #setLookAlong(Vector3f, Vector3f) setLookAlong()}.
@@ -2634,13 +2634,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix to make <code>-z</code> point along <code>dir</code>
+     * Apply a rotate transformation to this matrix to make <code>-z</code> point along <code>dir</code>
      * and store the result in <code>dest</code>. 
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotate matrix,
      * then the new matrix will be <code>M * L</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * L * v</code>, the
-     * lookalong rotation transformation will be applied first!
+     * lookalong rotate transformation will be applied first!
      * <p>
      * In order to setIndices the matrix to a lookalong transformation without post-multiplying it,
      * use {@link #setLookAlong(Vector3f, Vector3f) setLookAlong()}.
@@ -2661,13 +2661,13 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix to make <code>-z</code> point along <code>dir</code>
+     * Apply a rotate transformation to this matrix to make <code>-z</code> point along <code>dir</code>
      * and store the result in <code>dest</code>. 
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotate matrix,
      * then the new matrix will be <code>M * L</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * L * v</code>, the
-     * lookalong rotation transformation will be applied first!
+     * lookalong rotate transformation will be applied first!
      * <p>
      * In order to setIndices the matrix to a lookalong transformation without post-multiplying it,
      * use {@link #setLookAlong(float, float, float, float, float, float) setLookAlong()}
@@ -2746,12 +2746,12 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Apply a rotation transformation to this matrix to make <code>-z</code> point along <code>dir</code>. 
+     * Apply a rotate transformation to this matrix to make <code>-z</code> point along <code>dir</code>.
      * <p>
-     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotation matrix,
+     * If <code>M</code> is <code>this</code> matrix and <code>L</code> the lookalong rotate matrix,
      * then the new matrix will be <code>M * L</code>. So when transforming a
      * vector <code>v</code> with the new matrix by using <code>M * L * v</code>, the
-     * lookalong rotation transformation will be applied first!
+     * lookalong rotate transformation will be applied first!
      * <p>
      * In order to setIndices the matrix to a lookalong transformation without post-multiplying it,
      * use {@link #setLookAlong(float, float, float, float, float, float) setLookAlong()}
@@ -2778,7 +2778,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation to make <code>-z</code>
+     * Set this matrix to a rotate transformation to make <code>-z</code>
      * point along <code>dir</code>.
      * <p>
      * In order to apply the lookalong transformation to any previous existing transformation,
@@ -2798,7 +2798,7 @@ public class Matrix3f implements Externalizable {
     }
 
     /**
-     * Set this matrix to a rotation transformation to make <code>-z</code>
+     * Set this matrix to a rotate transformation to make <code>-z</code>
      * point along <code>dir</code>.
      * <p>
      * In order to apply the lookalong transformation to any previous existing transformation,

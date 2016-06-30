@@ -119,7 +119,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Create a new {@link Quaternionf} which represents the rotation of the given {@link AxisAngle4f}.
+     * Create a new {@link Quaternionf} which represents the rotate of the given {@link AxisAngle4f}.
      * 
      * @param axisAngle
      *          the {@link AxisAngle4f}
@@ -207,7 +207,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Return the angle in radians represented by this quaternion rotation.
+     * Return the angle in radians represented by this quaternion rotate.
      * 
      * @return the angle in radians
      */
@@ -217,10 +217,10 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set the given destination matrix to the rotation represented by <code>this</code>.
+     * Set the given destination matrix to the rotate represented by <code>this</code>.
      * 
      * @param dest
-     *          the matrix to write the rotation into
+     *          the matrix to write the rotate into
      * @return the passed in destination
      */
     public Matrix3f get(Matrix3f dest) {
@@ -249,10 +249,10 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set the given destination matrix to the rotation represented by <code>this</code>.
+     * Set the given destination matrix to the rotate represented by <code>this</code>.
      * 
      * @param dest
-     *          the matrix to write the rotation into
+     *          the matrix to write the rotate into
      * @return the passed in destination
      */
     public Matrix3d get(Matrix3d dest) {
@@ -281,10 +281,10 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set the given destination matrix to the rotation represented by <code>this</code>.
+     * Set the given destination matrix to the rotate represented by <code>this</code>.
      * 
      * @param dest
-     *          the matrix to write the rotation into
+     *          the matrix to write the rotate into
      * @return the passed in destination
      */
     public Matrix4f get(Matrix4f dest) {
@@ -320,10 +320,10 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set the given destination matrix to the rotation represented by <code>this</code>.
+     * Set the given destination matrix to the rotate represented by <code>this</code>.
      * 
      * @param dest
-     *          the matrix to write the rotation into
+     *          the matrix to write the rotate into
      * @return the passed in destination
      */
     public Matrix4d get(Matrix4d dest) {
@@ -359,7 +359,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set the given {@link AxisAngle4f} to represent the rotation of
+     * Set the given {@link AxisAngle4f} to represent the rotate of
      * <code>this</code> quaternion.
      * 
      * @param dest
@@ -474,7 +474,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation equivalent to the given {@link AxisAngle4f}.
+     * Set this quaternion to a rotate equivalent to the given {@link AxisAngle4f}.
      * 
      * @param axisAngle
      *          the {@link AxisAngle4f}
@@ -485,7 +485,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation equivalent to the given {@link AxisAngle4d}.
+     * Set this quaternion to a rotate equivalent to the given {@link AxisAngle4d}.
      * 
      * @param axisAngle
      *          the {@link AxisAngle4d}
@@ -496,19 +496,19 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation equivalent to the supplied axis and
+     * Set this quaternion to a rotate equivalent to the supplied axis and
      * angle (in radians).
      * <p>
-     * This method assumes that the given rotation axis <tt>(x, y, z)</tt> is already normalized
+     * This method assumes that the given rotate axis <tt>(x, y, z)</tt> is already normalized
      * 
      * @param angle
      *          the angle in radians
      * @param x
-     *          the x-component of the normalized rotation axis
+     *          the x-component of the normalized rotate axis
      * @param y
-     *          the y-component of the normalized rotation axis
+     *          the y-component of the normalized rotate axis
      * @param z
-     *          the z-component of the normalized rotation axis
+     *          the z-component of the normalized rotate axis
      * @return this
      */
     public Quaternionf setAngleAxis(float angle, float x, float y, float z) {
@@ -521,19 +521,19 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation equivalent to the supplied axis and
+     * Set this quaternion to a rotate equivalent to the supplied axis and
      * angle (in radians).
      * <p>
-     * This method assumes that the given rotation axis <tt>(x, y, z)</tt> is already normalized
+     * This method assumes that the given rotate axis <tt>(x, y, z)</tt> is already normalized
      * 
      * @param angle
      *          the angle in radians
      * @param x
-     *          the x-component of the normalized rotation axis
+     *          the x-component of the normalized rotate axis
      * @param y
-     *          the y-component of the normalized rotation axis
+     *          the y-component of the normalized rotate axis
      * @param z
-     *          the z-component of the normalized rotation axis
+     *          the z-component of the normalized rotate axis
      * @return this
      */
     public Quaternionf setAngleAxis(double angle, double x, double y, double z) {
@@ -546,13 +546,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this {@link Quaternionf} to a rotation of the given angle in radians about the supplied
+     * Set this {@link Quaternionf} to a rotate of the given angle in radians about the supplied
      * axis, all of which are specified via the {@link AxisAngle4f}.
      * 
      * @see #rotationAxis(float, float, float, float)
      * 
      * @param axisAngle
-     *            the {@link AxisAngle4f} giving the rotation angle in radians and the axis to rotate about
+     *            the {@link AxisAngle4f} giving the rotate angle in radians and the axis to rotate about
      * @return this
      */
     public Quaternionf rotationAxis(AxisAngle4f axisAngle) {
@@ -560,16 +560,16 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation of the given angle in radians about the supplied axis.
+     * Set this quaternion to a rotate of the given angle in radians about the supplied axis.
      * 
      * @param angle
-     *          the rotation angle in radians
+     *          the rotate angle in radians
      * @param axisX
-     *          the x-coordinate of the rotation axis
+     *          the x-coordinate of the rotate axis
      * @param axisY
-     *          the y-coordinate of the rotation axis
+     *          the y-coordinate of the rotate axis
      * @param axisZ
-     *          the z-coordinate of the rotation axis
+     *          the z-coordinate of the rotate axis
      * @return this
      */
     public Quaternionf rotationAxis(float angle, float axisX, float axisY, float axisZ) {
@@ -586,12 +586,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to a rotation of the given angle in radians about the supplied axis.
+     * Set this quaternion to a rotate of the given angle in radians about the supplied axis.
      * 
      * @see #rotationAxis(float, float, float, float)
      * 
      * @param angle
-     *          the rotation angle in radians
+     *          the rotate angle in radians
      * @param axis
      *          the axis to rotate about
      * @return this
@@ -601,7 +601,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to represent a rotation of the given angles in radians about the basis unit axes of the cartesian space.
+     * Set this quaternion to represent a rotate of the given angles in radians about the basis unit axes of the cartesian space.
      * 
      * @param angleX
      *              the angle in radians to rotate about the x axis
@@ -632,7 +632,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to represent a rotation of the given radians about the x axis.
+     * Set this quaternion to represent a rotate of the given radians about the x axis.
      * 
      * @param angle
      *              the angle in radians to rotate about the x axis
@@ -649,7 +649,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to represent a rotation of the given radians about the y axis.
+     * Set this quaternion to represent a rotate of the given radians about the y axis.
      * 
      * @param angle
      *              the angle in radians to rotate about the y axis
@@ -666,7 +666,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion to represent a rotation of the given radians about the z axis.
+     * Set this quaternion to represent a rotate of the given radians about the z axis.
      * 
      * @param angle
      *              the angle in radians to rotate about the z axis
@@ -1088,7 +1088,7 @@ public class Quaternionf implements Externalizable {
 
     /**
      * Transform the given vector by this quaternion.
-     * This will apply the rotation described by this quaternion to the given vector.
+     * This will apply the rotate described by this quaternion to the given vector.
      * 
      * @param vec
      *          the vector to transform
@@ -1100,7 +1100,7 @@ public class Quaternionf implements Externalizable {
 
     /**
      * Transform the given vector by this quaternion.
-     * This will apply the rotation described by this quaternion to the given vector.
+     * This will apply the rotate described by this quaternion to the given vector.
      * <p>
      * Only the first three component of the given 4D vector are being used and modified.
      * 
@@ -1114,7 +1114,7 @@ public class Quaternionf implements Externalizable {
 
     /**
      * Transform the given vector by this quaternion and store the result in <code>dest</code>.
-     * This will apply the rotation described by this quaternion to the given vector.
+     * This will apply the rotate described by this quaternion to the given vector.
      * 
      * @param vec
      *          the vector to transform
@@ -1143,7 +1143,7 @@ public class Quaternionf implements Externalizable {
 
     /**
      * Transform the given vector by this quaternion and store the result in <code>dest</code>.
-     * This will apply the rotation described by this quaternion to the given vector.
+     * This will apply the rotate described by this quaternion to the given vector.
      * <p>
      * Only the first three component of the given 4D vector are being used and setIndices on the destination.
      * 
@@ -1288,15 +1288,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles using rotation sequence <tt>XYZ</tt>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles using rotate sequence <tt>XYZ</tt>.
      * <p>
      * This method is equivalent to calling: <tt>rotateX(angleX).rotateY(angleY).rotateZ(angleZ)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleX
      *              the angle in radians to rotate about the x axis
@@ -1311,15 +1311,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles using rotation sequence <tt>XYZ</tt> and store the result in <code>dest</code>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles using rotate sequence <tt>XYZ</tt> and store the result in <code>dest</code>.
      * <p>
      * This method is equivalent to calling: <tt>rotateX(angleX, dest).rotateY(angleY).rotateZ(angleZ)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleX
      *              the angle in radians to rotate about the x axis
@@ -1356,15 +1356,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles, using the rotation sequence <tt>ZYX</tt>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles, using the rotate sequence <tt>ZYX</tt>.
      * <p>
      * This method is equivalent to calling: <tt>rotateZ(angleZ).rotateY(angleY).rotateX(angleX)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleZ
      *              the angle in radians to rotate about the z axis
@@ -1379,15 +1379,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles, using the rotation sequence <tt>ZYX</tt> and store the result in <code>dest</code>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles, using the rotate sequence <tt>ZYX</tt> and store the result in <code>dest</code>.
      * <p>
      * This method is equivalent to calling: <tt>rotateZ(angleZ, dest).rotateY(angleY).rotateX(angleX)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleZ
      *              the angle in radians to rotate about the z axis
@@ -1424,15 +1424,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles, using the rotation sequence <tt>YXZ</tt>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles, using the rotate sequence <tt>YXZ</tt>.
      * <p>
      * This method is equivalent to calling: <tt>rotateY(angleY).rotateX(angleX).rotateZ(angleZ)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleY
      *              the angle in radians to rotate about the y axis
@@ -1447,15 +1447,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
-     * called the euler angles, using the rotation sequence <tt>YXZ</tt> and store the result in <code>dest</code>.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the cartesian base unit axes,
+     * called the euler angles, using the rotate sequence <tt>YXZ</tt> and store the result in <code>dest</code>.
      * <p>
      * This method is equivalent to calling: <tt>rotateY(angleY, dest).rotateX(angleX).rotateZ(angleZ)</tt>
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angleY
      *              the angle in radians to rotate about the y axis
@@ -1492,7 +1492,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Get the euler angles in radians in rotation sequence <tt>XYZ</tt> of this quaternion and store them in the 
+     * Get the euler angles in radians in rotate sequence <tt>XYZ</tt> of this quaternion and store them in the
      * provided parameter <code>eulerAngles</code>.
      * 
      * @param eulerAngles
@@ -1516,7 +1516,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion from the supplied euler angles (in radians) with rotation order XYZ.
+     * Set this quaternion from the supplied euler angles (in radians) with rotate order XYZ.
      * <p>
      * This method is equivalent to calling: <tt>rotationX(angleX).rotateY(angleY).rotateZ(angleZ)</tt>
      * <p>
@@ -1551,7 +1551,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion from the supplied euler angles (in radians) with rotation order ZYX.
+     * Set this quaternion from the supplied euler angles (in radians) with rotate order ZYX.
      * <p>
      * This method is equivalent to calling: <tt>rotationZ(angleZ).rotateY(angleY).rotateX(angleX)</tt>
      * <p>
@@ -1586,7 +1586,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set this quaternion from the supplied euler angles (in radians) with rotation order YXZ.
+     * Set this quaternion from the supplied euler angles (in radians) with rotate order YXZ.
      * <p>
      * This method is equivalent to calling: <tt>rotationY(angleY).rotateX(angleX).rotateZ(angleZ)</tt>
      * <p>
@@ -1678,7 +1678,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Scale the rotation represented by this quaternion by the given <code>factor</code> using sperical linear interpolation.
+     * Scale the rotate represented by this quaternion by the given <code>factor</code> using sperical linear interpolation.
      * <p>
      * This method is equivalent to performing a spherical linear interpolation between the unit quaternion and <code>this</code>,
      * and thus equivalent to calling: <tt>new Quaterniond().slerp(this, factor)</tt>
@@ -1696,7 +1696,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Scale the rotation represented by this quaternion by the given <code>factor</code> using sperical linear interpolation, and store the result in <code>dest</code>.
+     * Scale the rotate represented by this quaternion by the given <code>factor</code> using sperical linear interpolation, and store the result in <code>dest</code>.
      * <p>
      * This method is equivalent to performing a spherical linear interpolation between the unit quaternion and <code>this</code>,
      * and thus equivalent to calling: <tt>new Quaternionf().slerp(this, factor, dest)</tt>
@@ -1733,11 +1733,11 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Integrate the rotation given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis, respectively,
-     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotation to the rotation represented by this quaternion.
+     * Integrate the rotate given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis, respectively,
+     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotate to the rotate represented by this quaternion.
      * <p>
-     * This method pre-multiplies the rotation given by <code>dt</code> and <code>(vx, vy, vz)</code> by <code>this</code>, so
-     * the angular velocities are always relative to the local coordinate system of the rotation represented by <code>this</code> quaternion.
+     * This method pre-multiplies the rotate given by <code>dt</code> and <code>(vx, vy, vz)</code> by <code>this</code>, so
+     * the angular velocities are always relative to the local coordinate system of the rotate represented by <code>this</code> quaternion.
      * <p>
      * This method is equivalent to calling: <code>rotateLocal(dt * vx, dt * vy, dt * vz)</code>
      * <p>
@@ -1760,12 +1760,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Integrate the rotation given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis, respectively,
-     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotation to the rotation represented by this quaternion
+     * Integrate the rotate given by the angular velocity <code>(vx, vy, vz)</code> around the x, y and z axis, respectively,
+     * with respect to the given elapsed time delta <code>dt</code> and add the differentiate rotate to the rotate represented by this quaternion
      * and store the result into <code>dest</code>.
      * <p>
-     * This method pre-multiplies the rotation given by <code>dt</code> and <code>(vx, vy, vz)</code> by <code>this</code>, so
-     * the angular velocities are always relative to the local coordinate system of the rotation represented by <code>this</code> quaternion.
+     * This method pre-multiplies the rotate given by <code>dt</code> and <code>(vx, vy, vz)</code> by <code>this</code>, so
+     * the angular velocities are always relative to the local coordinate system of the rotate represented by <code>this</code> quaternion.
      * <p>
      * This method is equivalent to calling: <code>rotateLocal(dt * vx, dt * vy, dt * vz, dest)</code>
      * <p>
@@ -1839,7 +1839,7 @@ public class Quaternionf implements Externalizable {
      * <p>
      * This method performs a series of small-step nlerp interpolations to avoid doing a costly spherical linear interpolation, like
      * {@link #slerp(Quaternionf, float, Quaternionf) slerp},
-     * by subdividing the rotation arc between <code>this</code> and <code>q</code> via non-spherical linear interpolations as long as
+     * by subdividing the rotate arc between <code>this</code> and <code>q</code> via non-spherical linear interpolations as long as
      * the absolute dot product of <code>this</code> and <code>q</code> is greater than the given <code>dotThreshold</code> parameter.
      * <p>
      * Thanks to <tt>@theagentd</tt> at <a href="http://www.java-gaming.org/">http://www.java-gaming.org/</a> for providing the code.
@@ -1908,15 +1908,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to this quaternion that maps the given direction to the positive Z axis.
+     * Apply a rotate to this quaternion that maps the given direction to the positive Z axis.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotate, this method will choose the one that ensures the given up direction to remain
      * parallel to the plane spanned by the <code>up</code> and <code>dir</code> vectors. 
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * <p>
      * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      * 
@@ -1934,15 +1934,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to this quaternion that maps the given direction to the positive Z axis, and store the result in <code>dest</code>.
+     * Apply a rotate to this quaternion that maps the given direction to the positive Z axis, and store the result in <code>dest</code>.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotate, this method will choose the one that ensures the given up direction to remain
      * parallel to the plane spanned by the <code>up</code> and <code>dir</code> vectors. 
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * <p>
      * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      * 
@@ -1962,15 +1962,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to this quaternion that maps the given direction to the positive Z axis.
+     * Apply a rotate to this quaternion that maps the given direction to the positive Z axis.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotate, this method will choose the one that ensures the given up direction to remain
      * parallel to the plane spanned by the <tt>up</tt> and <tt>dir</tt> vectors. 
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * <p>
      * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      * 
@@ -1995,15 +1995,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to this quaternion that maps the given direction to the positive Z axis, and store the result in <code>dest</code>.
+     * Apply a rotate to this quaternion that maps the given direction to the positive Z axis, and store the result in <code>dest</code>.
      * <p>
-     * Because there are multiple possibilities for such a rotation, this method will choose the one that ensures the given up direction to remain
+     * Because there are multiple possibilities for such a rotate, this method will choose the one that ensures the given up direction to remain
      * parallel to the plane spanned by the <tt>up</tt> and <tt>dir</tt> vectors. 
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * <p>
      * Reference: <a href="http://answers.unity3d.com/questions/467614/what-is-the-source-code-of-quaternionlookrotation.html">http://answers.unity3d.com</a>
      * 
@@ -2088,7 +2088,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set <code>this</code> quaternion to a rotation that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt>.
+     * Set <code>this</code> quaternion to a rotate that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt>.
      * <p>
      * Since there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
@@ -2123,7 +2123,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Set <code>this</code> quaternion to a rotation that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Set <code>this</code> quaternion to a rotate that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * 
@@ -2140,15 +2140,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt> and
+     * Apply a rotate to <code>this</code> that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt> and
      * store the result in <code>dest</code>.
      * <p>
      * Since there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * <p>
      * Reference: <a href="http://stackoverflow.com/questions/1171849/finding-quaternion-representing-the-rotation-from-one-vector-to-another#answer-1171995">stackoverflow.com</a>
      * 
@@ -2192,14 +2192,14 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt>.
+     * Apply a rotate to <code>this</code> that rotates the <tt>fromDir</tt> vector to point along <tt>toDir</tt>.
      * <p>
      * Since there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateTo(float, float, float, float, float, float, Quaternionf)
      * 
@@ -2222,15 +2222,15 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code> and
+     * Apply a rotate to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code> and
      * store the result in <code>dest</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateTo(float, float, float, float, float, float, Quaternionf)
      * 
@@ -2247,14 +2247,14 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
+     * Apply a rotate to <code>this</code> that rotates the <code>fromDir</code> vector to point along <code>toDir</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateTo(float, float, float, float, float, float, Quaternionf)
      * 
@@ -2269,12 +2269,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the basis unit axes of the cartesian space.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the basis unit axes of the cartesian space.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2291,13 +2291,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
      * cartesian space and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float)
      * 
@@ -2343,13 +2343,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
      * local coordinate system represented by this quaternion.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @see #rotateLocal(float, float, float, Quaternionf)
      * 
@@ -2366,13 +2366,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the basis unit axes of the
      * local coordinate system represented by this quaternion and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @see #rotateLocal(float, float, float)
      * 
@@ -2413,12 +2413,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the x axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the x axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2431,13 +2431,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the x axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the x axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2458,12 +2458,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the y axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the y axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2476,13 +2476,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the y axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the y axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2503,12 +2503,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the z axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the z axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2521,13 +2521,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the z axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the z axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotate(float, float, float, Quaternionf)
      * 
@@ -2548,12 +2548,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local x axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local x axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local x axis
@@ -2564,13 +2564,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local x axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local x axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local x axis
@@ -2590,12 +2590,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local y axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local y axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local y axis
@@ -2606,13 +2606,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local y axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local y axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local y axis
@@ -2632,12 +2632,12 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local z axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local z axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local z axis
@@ -2648,13 +2648,13 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the local z axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the local z axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>R * Q</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>R * Q</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>R * Q * v</code>, the
-     * rotation represented by <code>this</code> will be applied first!
+     * rotate represented by <code>this</code> will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the local z axis
@@ -2674,22 +2674,22 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the specified axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the specified axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @param angle
      *              the angle in radians to rotate about the specified axis
      * @param axisX
-     *              the x coordinate of the rotation axis
+     *              the x coordinate of the rotate axis
      * @param axisY
-     *              the y coordinate of the rotation axis
+     *              the y coordinate of the rotate axis
      * @param axisZ
-     *              the z coordinate of the rotation axis
+     *              the z coordinate of the rotate axis
      * @param dest
      *              will hold the result
      * @return dest
@@ -2712,20 +2712,20 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the specified axis
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the specified axis
      * and store the result in <code>dest</code>.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateAxis(float, float, float, float, Quaternionf)
      * 
      * @param angle
      *              the angle in radians to rotate about the specified axis
      * @param axis
-     *              the rotation axis
+     *              the rotate axis
      * @param dest
      *              will hold the result
      * @return dest
@@ -2735,19 +2735,19 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the specified axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the specified axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateAxis(float, float, float, float, Quaternionf)
      * 
      * @param angle
      *              the angle in radians to rotate about the specified axis
      * @param axis
-     *              the rotation axis
+     *              the rotate axis
      * @return this
      */
     public Quaternionf rotateAxis(float angle, Vector3f axis) {
@@ -2755,23 +2755,23 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Apply a rotation to <code>this</code> quaternion rotating the given radians about the specified axis.
+     * Apply a rotate to <code>this</code> quaternion rotating the given radians about the specified axis.
      * <p>
      * If <code>Q</code> is <code>this</code> quaternion and <code>R</code> the quaternion representing the 
-     * specified rotation, then the new quaternion will be <code>Q * R</code>. So when transforming a
+     * specified rotate, then the new quaternion will be <code>Q * R</code>. So when transforming a
      * vector <code>v</code> with the new quaternion by using <code>Q * R * v</code>, the
-     * rotation added by this method will be applied first!
+     * rotate added by this method will be applied first!
      * 
      * @see #rotateAxis(float, float, float, float, Quaternionf)
      * 
      * @param angle
      *              the angle in radians to rotate about the specified axis
      * @param axisX
-     *              the x coordinate of the rotation axis
+     *              the x coordinate of the rotate axis
      * @param axisY
-     *              the y coordinate of the rotation axis
+     *              the y coordinate of the rotate axis
      * @param axisZ
-     *              the z coordinate of the rotation axis
+     *              the z coordinate of the rotate axis
      * @return this
      */
     public Quaternionf rotateAxis(float angle, float axisX, float axisY, float axisZ) {
@@ -2849,8 +2849,8 @@ public class Quaternionf implements Externalizable {
      * Compute the difference between <code>this</code> and the <code>other</code> quaternion
      * and store the result in <code>this</code>.
      * <p>
-     * The difference is the rotation that has to be applied to get from
-     * <code>this</code> rotation to <code>other</code>. If <tt>T</tt> is <code>this</code>, <tt>Q</tt>
+     * The difference is the rotate that has to be applied to get from
+     * <code>this</code> rotate to <code>other</code>. If <tt>T</tt> is <code>this</code>, <tt>Q</tt>
      * is <code>other</code> and <tt>D</tt> is the computed difference, then the following equation holds:
      * <p>
      * <tt>T * D = Q</tt>
@@ -2869,8 +2869,8 @@ public class Quaternionf implements Externalizable {
      * Compute the difference between <code>this</code> and the <code>other</code> quaternion
      * and store the result in <code>dest</code>.
      * <p>
-     * The difference is the rotation that has to be applied to get from
-     * <code>this</code> rotation to <code>other</code>. If <tt>T</tt> is <code>this</code>, <tt>Q</tt>
+     * The difference is the rotate that has to be applied to get from
+     * <code>this</code> rotate to <code>other</code>. If <tt>T</tt> is <code>this</code>, <tt>Q</tt>
      * is <code>other</code> and <tt>D</tt> is the computed difference, then the following equation holds:
      * <p>
      * <tt>T * D = Q</tt>
@@ -2897,7 +2897,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+X</tt> before the rotation transformation represented by <code>this</code> quaternion is applied.
+     * Obtain the direction of <tt>+X</tt> before the rotate transformation represented by <code>this</code> quaternion is applied.
      * <p>
      * This method is equivalent to the following code:
      * <pre>
@@ -2924,7 +2924,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+X</tt> before the rotation transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
+     * Obtain the direction of <tt>+X</tt> before the rotate transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
      * The quaternion <i>must</i> be {@link #normalize() normalized} for this method to work.
      * <p>
      * This method is equivalent to the following code:
@@ -2947,7 +2947,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+Y</tt> before the rotation transformation represented by <code>this</code> quaternion is applied.
+     * Obtain the direction of <tt>+Y</tt> before the rotate transformation represented by <code>this</code> quaternion is applied.
      * <p>
      * This method is equivalent to the following code:
      * <pre>
@@ -2975,7 +2975,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+Y</tt> before the rotation transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
+     * Obtain the direction of <tt>+Y</tt> before the rotate transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
      * The quaternion <i>must</i> be {@link #normalize() normalized} for this method to work.
      * <p>
      * This method is equivalent to the following code:
@@ -2999,7 +2999,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+Z</tt> before the rotation transformation represented by <code>this</code> quaternion is applied.
+     * Obtain the direction of <tt>+Z</tt> before the rotate transformation represented by <code>this</code> quaternion is applied.
      * <p>
      * This method is equivalent to the following code:
      * <pre>
@@ -3027,7 +3027,7 @@ public class Quaternionf implements Externalizable {
     }
 
     /**
-     * Obtain the direction of <tt>+Z</tt> before the rotation transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
+     * Obtain the direction of <tt>+Z</tt> before the rotate transformation represented by <code>this</code> <i>normalized</i> quaternion is applied.
      * The quaternion <i>must</i> be {@link #normalize() normalized} for this method to work.
      * <p>
      * This method is equivalent to the following code:
