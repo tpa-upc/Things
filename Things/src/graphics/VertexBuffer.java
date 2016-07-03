@@ -10,17 +10,13 @@ public class VertexBuffer {
     /** signal renderer */
     private boolean dirty = true;
 
-    /** Vertex attribute */
-    private Attribute attribute;
-
     /** Mesh usage */
     private Usage usage;
 
     /** Vertex data */
     private Buffer data = null;
 
-    public VertexBuffer (Attribute attribute, Usage usage) {
-        this.attribute = attribute;
+    public VertexBuffer (Usage usage) {
         this.usage = usage;
     }
 
@@ -49,14 +45,6 @@ public class VertexBuffer {
         boolean ret = dirty;
         dirty = false;
         return ret;
-    }
-
-    /**
-     * Get attribute
-     * @return attribute
-     */
-    public Attribute getAttribute() {
-        return attribute;
     }
 
     /**

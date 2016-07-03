@@ -13,7 +13,14 @@ import java.util.*;
  */
 public class SynchronousAssetManager implements AssetManager {
 
-    AssetListener listener;
+    AssetListener listener = new AssetAdapter() {
+        @Override
+        public void onFailed(String file, Class<?> type, Exception e) {
+            if (e != null) {
+                e.printStackTrace();
+            }
+        }
+    };
 
     Map<Class<?>, AssetLoader> loaders = new HashMap<>();
     Queue<String> toLoad = new LinkedList<>();

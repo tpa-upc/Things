@@ -71,27 +71,11 @@ public class Project implements ApplicationListener {
         camera = new Thing(scene);
         camera.addComponent(new Camera());
         camera.addComponent(new AudioListener());
-        camera.addComponent(new Component() {
-            float rot = 0, rotd = 0;
-            float rot2 = 0, rotd2 = 0;
-            @Override
-            public void onUpdate() {
-                //System.out.println(Cat.mouse.getDX()+" "+Cat.mouse.getDY());
-                /*rotd += Cat.mouse.getDX() * 0.01f;
-                rotd2 += Cat.mouse.getDY() * 0.01f;
-                rot += (rotd - rot) * Cat.time.getDelta() * 8;
-                rot2 += (rotd2 - rot2) * Cat.time.getDelta() * 8;
-                thing.getTransform().rotation.identity().rotateX(rot2);
-                thing.getTransform().rotation.rotateY(rot);*/
-            }
-        });
-
         scene.getRoot().addChild(camera);
 
         camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), 4f/3, 0.1f, 100f);
         camera.getComponent(Transform.class).position.set(3, 3, 6.5f);
         camera.getTransform().rotation.lookRotate(1, 0.8f, 2, 0, 1, 0);
-        //camera.getTransform().position.set(0, 0, 10);
 
         manager = new SynchronousAssetManager();
         manager.setListener(new AssetListener() {
@@ -106,6 +90,7 @@ public class Project implements ApplicationListener {
         });
 
         manager.loadAsset("scene.json", Mesh.class);
+        manager.loadAsset("map/height_0_0.json", Mesh.class);
         manager.loadAsset("pattern.png", Texture.class);
         manager.loadAsset("font.json", BitmapFont.class);
         manager.loadAsset("scene-skeleton.json", Skeleton.class);
@@ -119,31 +104,16 @@ public class Project implements ApplicationListener {
         thing.getTransform().position.set(0, 0, 0);
         thing.getTransform().rotation.rotateX((float)Math.toRadians(-90));
 
+        Thing chunk = new Thing(scene);
+        chunk.addComponent(new Geometry(manager.getAsset("map/height_0_0.json", Mesh.class), texture));
+        scene.getRoot().addChild(chunk);
+
         Geometry geo = new Geometry(mesh, texture);
         BoundingVolume vol = new BoundingVolume();
         thing.addComponent(geo);
         thing.addComponent(vol);
         thing.addComponent(new SkeletonComponent(manager.getAsset("scene-skeleton.json", Skeleton.class)));
         scene.getRoot().addChild(thing);
-
-        /*Random rand = new Random(420);
-        for (int i = 0; i < 1; ++i) {
-            float r = 64;
-            float x = rand.nextFloat()*2-1;
-            float z = rand.nextFloat()*2-1;
-            x = 8;
-            z = 0;
-
-            Thing thing = new Thing(scene);
-            thing.getTransform().position.set(x*r, 0, z*r);
-            Geometry geo = new Geometry(mesh, texture);
-            BoundingVolume vol = new BoundingVolume();
-            thing.addComponent(geo);
-            thing.addComponent(vol);
-            scene.getRoot().addChild(thing);
-        }*/
-
-        //System.out.println(Primitive.valueOf("TRIANGLES"));
     }
 
     @Override

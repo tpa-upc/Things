@@ -63,10 +63,9 @@ public class LwjglRenderer implements Renderer, Destroyable {
                 Mesh mesh = it.next();
                 if (mesh.isDestroy()) {
                     destroyMesh.add(mesh);
-                    List<VertexBuffer> buffers = mesh.getVertexBuffers();
-                    for (VertexBuffer buf : buffers) {
-                        destroyVbo.add(buf);
-                    }
+
+                    Map<Attribute, VertexBuffer> buffers = mesh.getVertexBuffers();
+                    destroyVbo.addAll(buffers.values());
                 }
             }
 

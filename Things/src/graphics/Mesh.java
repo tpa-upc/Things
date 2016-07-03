@@ -43,43 +43,20 @@ public class Mesh implements Destroyable {
         this.bufferList = new ArrayList<>();
     }
 
-    ///**
-    // * Add vertex buffer
-    // * @param buff vertex buffer
-    // */
-    //@Deprecated
-    //public void addVertexBuffer (VertexBuffer buff) {
-    //    this.buffers.put(buff.getAttribute(), buff);
-    //    this.bufferList.add(buff);
-    //}
-
     /**
-     * Create a vertex buffer
-     * @param attr
-     * @param usage
-     * @return
+     * Add vertex buffer
+     * @param buff vertex buffer
      */
-    public VertexBuffer createVertexBuffer (Attribute attr, Usage usage) {
-        VertexBuffer buffer = new VertexBuffer(attr, usage);
-        buffers.put(attr, buffer);
-        bufferList.add(buffer);
-        return buffer;
+    public void addVertexBuffer (Attribute attr, VertexBuffer buff) {
+        this.buffers.put(attr, buff);
     }
 
-    ///**
-    // * Get vertex buffers
-    // * @return vertex buffers
-    // */
-    //public Iterator<VertexBuffer> getVertexBuffers() {
-    //    return buffers.values().iterator();
-    //}
-
     /**
-     * Get vertex buffers
+     * Get vertex buffers hashmap
      * @return
      */
-    public List<VertexBuffer> getVertexBuffers () {
-        return bufferList;
+    public Map<Attribute, VertexBuffer> getVertexBuffers () {
+        return buffers;
     }
 
     /**

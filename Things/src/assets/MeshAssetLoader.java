@@ -40,7 +40,11 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
         JsonMesh parsed = gson.fromJson(reader, JsonMesh.class);
 
         // create mesh
-        Mesh mesh = new Mesh(Usage.STATIC);
+        Usage indUsage = Usage.STATIC;
+        if (hints != null && hints instanceof MeshHints) {
+            indUsage = ((MeshHints) hints).usage;
+        }
+        Mesh mesh = new Mesh(indUsage);
 
         Primitive prim = null;
 
@@ -63,13 +67,23 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
                 throw new RuntimeException("Unknown attribute ("+attr.name+")");
             }
 
-            VertexBuffer pos = mesh.createVertexBuffer(attribute, Usage.STATIC);
-            //VertexBuffer pos = new VertexBuffer(attribute, Usage.STATIC);
+            // buffer usage
+            Usage usage = Usage.STATIC;
+            if (hints != null && hints instanceof MeshHints) {
+                MeshHints mhint = (MeshHints) hints;
+                if (mhint.bufferUsage.containsKey(attribute)) {
+                    usage = mhint.bufferUsage.get(attribute);
+                }
+            }
+
+            VertexBuffer pos = new VertexBuffer(Usage.STATIC);
+            mesh.addVertexBuffer(attribute, pos);
+
             FloatBuffer posData = ByteBuffer.allocateDirect(attr.data.length<<2).order(ByteOrder.nativeOrder())
                     .asFloatBuffer()
                     .put(attr.data);
+
             pos.setData(posData.flip());
-            //mesh.addVertexBuffer(pos);
         }
 
         IntBuffer data = ByteBuffer.allocateDirect(parsed.data.length<<2).order(ByteOrder.nativeOrder())

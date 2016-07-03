@@ -10,28 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
+import dae.Common.JsonMesh;
+import dae.Common.JsonAttribute;
+import dae.Common.JsonMeta;
+
 /**
  * Created by germangb on 29/06/16.
  */
 public class ColladaToJson {
-
-    class JsonMeta {
-        String name = "mesh_name";
-        String author = "germangb";
-        String tool = "collada-2-json-0";
-    }
-
-    class JsonAttribute {
-        String name;
-        float[] data;
-    }
-
-    class JsonMesh {
-        JsonMeta meta;
-        String primitive;
-        JsonAttribute[] attributes;
-        int[] data;
-    }
 
     class JsonJoint {
         int parent;
