@@ -40,7 +40,7 @@ public class SkeletonAssetLoader implements AssetLoader<Skeleton> {
         // build joints
         for (int i = 0; i < skel.joints.length; ++i) {
             JsonJoint jo = skel.joints[i];
-            Joint joint = new Joint(jo.parent < 0 ? null :soFar.get(jo.parent), jo.name);
+            Joint joint = new Joint(jo.parent < 0 ? null : soFar.get(jo.parent), jo.name);
             joint.translate.set(jo.translate[0], jo.translate[1], jo.translate[2]);
             joint.rotate.set(jo.rotate[0], jo.rotate[1], jo.rotate[2], jo.rotate[3]);
             joint.scale.set(jo.scale[0], jo.scale[1], jo.scale[2]);

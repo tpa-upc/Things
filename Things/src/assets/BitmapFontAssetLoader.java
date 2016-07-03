@@ -2,7 +2,7 @@ package assets;
 
 import cat.Cat;
 import com.google.gson.Gson;
-import fonts.BitmapFontInfo;
+import fonts.BitmapFont;
 import fonts.GlyphInfo;
 
 import java.io.InputStream;
@@ -11,7 +11,7 @@ import java.io.InputStreamReader;
 /**
  * Created by germangb on 21/06/16.
  */
-public class BitmapFontInfoAssetLoader implements AssetLoader<BitmapFontInfo> {
+public class BitmapFontAssetLoader implements AssetLoader<BitmapFont> {
 
     class JsonCommon {
         int lineHeight;
@@ -32,13 +32,13 @@ public class BitmapFontInfoAssetLoader implements AssetLoader<BitmapFontInfo> {
     }
 
     @Override
-    public BitmapFontInfo load(String path, Object hints) throws Exception {
+    public BitmapFont load(String path, Object hints) throws Exception {
         Gson gson = new Gson();
         InputStream is = Cat.files.getFile(path);
         JsonFont font = gson.fromJson(new InputStreamReader(is), JsonFont.class);
 
         // create info
-        BitmapFontInfo info = new BitmapFontInfo();
+        BitmapFont info = new BitmapFont();
         info.setBase(font.common.base);
         info.setLineHeight(font.common.lineHeight);
 

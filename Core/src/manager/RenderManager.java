@@ -117,7 +117,9 @@ public class RenderManager extends Manager {
         boneMesh = new Mesh(Usage.STREAM);
         boneMesh.setPrimitive(Primitive.LINES);
         boneMesh.setIndices(0, 2);
-        VertexBuffer attr = new VertexBuffer(Attribute.POSITION, Usage.STATIC);
+
+        //VertexBuffer attr = new VertexBuffer(Attribute.POSITION, Usage.STATIC);
+        VertexBuffer attr = boneMesh.createVertexBuffer(Attribute.POSITION, Usage.STATIC);
 
         FloatBuffer data = ByteBuffer.allocateDirect(10<<2)
                 .order(ByteOrder.nativeOrder())
@@ -133,7 +135,7 @@ public class RenderManager extends Manager {
                 .put(new int[] {0, 1});
 
         attr.setData(data.flip());
-        boneMesh.addVertexBuffer(attr);
+        //boneMesh.addVertexBuffer(attr);
         boneMesh.setData(index.flip());
     }
 

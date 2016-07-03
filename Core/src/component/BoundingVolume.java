@@ -41,7 +41,7 @@ public class BoundingVolume extends Component {
 
         // test geometry
         if (geo != null) {
-            VertexBuffer vb = geo.getMesh().getBuffer(Attribute.POSITION);
+            VertexBuffer vb = geo.getMesh().getVertexBuffer(Attribute.POSITION);
             try {
                 FloatBuffer data = (FloatBuffer) vb.getData();
                 AABB(data, min, max);

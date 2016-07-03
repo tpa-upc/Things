@@ -63,12 +63,13 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
                 throw new RuntimeException("Unknown attribute ("+attr.name+")");
             }
 
-            VertexBuffer pos = new VertexBuffer(attribute, Usage.STATIC);
+            VertexBuffer pos = mesh.createVertexBuffer(attribute, Usage.STATIC);
+            //VertexBuffer pos = new VertexBuffer(attribute, Usage.STATIC);
             FloatBuffer posData = ByteBuffer.allocateDirect(attr.data.length<<2).order(ByteOrder.nativeOrder())
                     .asFloatBuffer()
                     .put(attr.data);
             pos.setData(posData.flip());
-            mesh.addVertexBuffer(pos);
+            //mesh.addVertexBuffer(pos);
         }
 
         IntBuffer data = ByteBuffer.allocateDirect(parsed.data.length<<2).order(ByteOrder.nativeOrder())

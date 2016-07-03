@@ -63,8 +63,9 @@ public class LwjglRenderer implements Renderer, Destroyable {
                 Mesh mesh = it.next();
                 if (mesh.isDestroy()) {
                     destroyMesh.add(mesh);
-                    for (Iterator<VertexBuffer> it0 = mesh.getBuffers(); it0.hasNext();) {
-                        destroyVbo.add(it0.next());
+                    List<VertexBuffer> buffers = mesh.getVertexBuffers();
+                    for (VertexBuffer buf : buffers) {
+                        destroyVbo.add(buf);
                     }
                 }
             }
@@ -358,7 +359,7 @@ public class LwjglRenderer implements Renderer, Destroyable {
 
         for (int i = 0; i < attr.length; ++i) {
             // get vertex buffer
-            VertexBuffer vb = mesh.getBuffer(attr[i]);
+            VertexBuffer vb = mesh.getVertexBuffer(attr[i]);
             Buffer data = vb.getData();
 
             Integer id = buffers.get(vb);

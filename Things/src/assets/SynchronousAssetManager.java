@@ -1,7 +1,7 @@
 package assets;
 
 import animation.Skeleton;
-import fonts.BitmapFontInfo;
+import fonts.BitmapFont;
 import graphics.Mesh;
 import graphics.Texture;
 import utils.Destroyable;
@@ -25,7 +25,7 @@ public class SynchronousAssetManager implements AssetManager {
     public SynchronousAssetManager () {
         addLoader(new TextureAssetLoader(), Texture.class);
         addLoader(new MeshAssetLoader(), Mesh.class);
-        addLoader(new BitmapFontInfoAssetLoader(), BitmapFontInfo.class);
+        addLoader(new BitmapFontAssetLoader(), BitmapFont.class);
         addLoader(new SkeletonAssetLoader(), Skeleton.class);
     }
 

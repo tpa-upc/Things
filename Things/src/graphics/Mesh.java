@@ -31,28 +31,55 @@ public class Mesh implements Destroyable {
     /** vertex buffers */
     private Map<Attribute, VertexBuffer> buffers;
 
+    /** vertex buffers as a list */
+    private List<VertexBuffer> bufferList;
+
     /** Mesh primitive */
     private Primitive primitive = Primitive.TRIANGLES;
 
     public Mesh (Usage usage) {
         this.usage = usage;
         this.buffers = new HashMap<>();
+        this.bufferList = new ArrayList<>();
     }
 
+    ///**
+    // * Add vertex buffer
+    // * @param buff vertex buffer
+    // */
+    //@Deprecated
+    //public void addVertexBuffer (VertexBuffer buff) {
+    //    this.buffers.put(buff.getAttribute(), buff);
+    //    this.bufferList.add(buff);
+    //}
+
     /**
-     * Add vertex buffer
-     * @param buff vertex buffer
+     * Create a vertex buffer
+     * @param attr
+     * @param usage
+     * @return
      */
-    public void addVertexBuffer (VertexBuffer buff) {
-        this.buffers.put(buff.getAttribute(), buff);
+    public VertexBuffer createVertexBuffer (Attribute attr, Usage usage) {
+        VertexBuffer buffer = new VertexBuffer(attr, usage);
+        buffers.put(attr, buffer);
+        bufferList.add(buffer);
+        return buffer;
     }
+
+    ///**
+    // * Get vertex buffers
+    // * @return vertex buffers
+    // */
+    //public Iterator<VertexBuffer> getVertexBuffers() {
+    //    return buffers.values().iterator();
+    //}
 
     /**
      * Get vertex buffers
-     * @return vertex buffers
+     * @return
      */
-    public Iterator<VertexBuffer> getBuffers () {
-        return buffers.values().iterator();
+    public List<VertexBuffer> getVertexBuffers () {
+        return bufferList;
     }
 
     /**
@@ -60,7 +87,7 @@ public class Mesh implements Destroyable {
      * @param attr vertex attribute
      * @return vertex buffer or null
      */
-    public VertexBuffer getBuffer (Attribute attr) {
+    public VertexBuffer getVertexBuffer(Attribute attr) {
         return buffers.get(attr);
     }
 

@@ -9,7 +9,7 @@ import audio.Sound;
 import cat.ApplicationListener;
 import cat.Cat;
 import component.*;
-import fonts.BitmapFontInfo;
+import fonts.BitmapFont;
 import graphics.Mesh;
 import graphics.Texture;
 import input.Key;
@@ -107,13 +107,13 @@ public class Project implements ApplicationListener {
 
         manager.loadAsset("scene.json", Mesh.class);
         manager.loadAsset("pattern.png", Texture.class);
-        manager.loadAsset("font.json", BitmapFontInfo.class);
+        manager.loadAsset("font.json", BitmapFont.class);
         manager.loadAsset("scene-skeleton.json", Skeleton.class);
         manager.finishLoading();
 
         Mesh mesh = manager.getAsset("scene.json", Mesh.class);
         Texture texture = manager.getAsset("pattern.png", Texture.class);
-        BitmapFontInfo font = manager.getAsset("font.json", BitmapFontInfo.class);
+        BitmapFont font = manager.getAsset("font.json", BitmapFont.class);
 
         Thing thing = new Thing(scene);
         thing.getTransform().position.set(0, 0, 0);

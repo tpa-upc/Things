@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  * Created by germangb on 21/06/16.
  */
-public class BitmapFontInfo {
+public class BitmapFont {
 
     /** line height */
     private int lineHeight;
@@ -17,7 +17,7 @@ public class BitmapFontInfo {
     /** Glyph info */
     private Map<Integer, GlyphInfo> glyphs = new HashMap<>();
 
-    public BitmapFontInfo () {
+    public BitmapFont() {
     }
 
     /**
