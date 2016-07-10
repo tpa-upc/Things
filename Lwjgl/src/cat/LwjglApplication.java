@@ -43,7 +43,7 @@ public class LwjglApplication implements Application {
 
     public void run () {
         if (!glfwInit()) {
-            throw new RuntimeException("Can't init GLFW");
+            throw new RuntimeException("Can't onInit GLFW");
         }
 
         // create window
@@ -93,10 +93,10 @@ public class LwjglApplication implements Application {
 
         // main loop
         GL.createCapabilities();
-        listener.init();
+        listener.onInit();
 
         while (!glfwWindowShouldClose(window)) {
-            listener.update();
+            listener.onUpdate();
             renderer.update();
             time.update();
             if (keyb instanceof LwjglKeyboard) {

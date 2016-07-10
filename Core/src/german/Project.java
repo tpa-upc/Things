@@ -1,9 +1,7 @@
 package german;
 
 import animation.Skeleton;
-import assets.AssetListener;
-import assets.AssetManager;
-import assets.SynchronousAssetManager;
+import assets.*;
 import audio.AudioFormat;
 import audio.Sound;
 import cat.ApplicationListener;
@@ -16,6 +14,7 @@ import input.Key;
 import input.KeyboardListener;
 import manager.RenderManager;
 import scene.*;
+import terrain.Terrain;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -33,37 +32,8 @@ public class Project implements ApplicationListener {
     Thing camera;
 
     @Override
-    public void init() {
-        int sampl = 44100;
-        int seconds = 2;
-        ShortBuffer samples = ByteBuffer.allocateDirect(seconds*sampl<<1).order(ByteOrder.nativeOrder()).asShortBuffer();
-
-        Cat.keyboard.setListener(new KeyboardListener() {
-            Random rand = new Random();
-            @Override
-            public void onKeyDown(Key key) {
-                if (key == Key.UP) {
-                    int freq = rand.nextInt(260)+260;
-                    Sound sound = new Sound(AudioFormat.MONO16, sampl);
-                    int total = sampl*seconds;
-                    for (int i = 0; i < total; ++i) {
-                        float fad = ((total - (float)i) / total) * i/10000f;
-                        float lol = (float) Math.cos(2*Math.PI*freq/sampl*i) * 0.25f * Math.min(Math.max(fad, 0), 1);
-                        short lol16 = (short) (lol * Short.MAX_VALUE);
-                        samples.put(i, lol16);
-                    }
-                    sound.setData(samples);
-                    Cat.audio.playSound(sound, false);
-
-                    System.out.println(Cat.time.getFps());
-                }
-            }
-
-            @Override
-            public void onKeyUp(Key key) {
-
-            }
-        });
+    public void onInit() {
+        System.out.println("init");
 
         scene = new SceneGraph();
         scene.addManager(new RenderManager());
@@ -73,51 +43,100 @@ public class Project implements ApplicationListener {
         camera.addComponent(new AudioListener());
         scene.getRoot().addChild(camera);
 
-        camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), 4f/3, 0.1f, 100f);
-        camera.getComponent(Transform.class).position.set(3, 3, 6.5f);
-        camera.getTransform().rotation.lookRotate(1, 0.8f, 2, 0, 1, 0);
+        camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), 4f/3, 0.1f, 1000);
+        camera.getTransform().position.set(-16, 16, -16);
+        camera.getTransform().rotation.lookRotate(-1, 0, -1, 0, 1, 0);
+        camera.addComponent(new Component() {
 
-        manager = new SynchronousAssetManager();
-        manager.setListener(new AssetListener() {
-            @Override
-            public void onLoaded(String file, Class<?> type) {
-            }
+            float pitch = 0;
+            float yaw = 0;
 
             @Override
-            public void onFailed(String file, Class<?> type, Exception e) {
-                e.printStackTrace();
+            public void onUpdate() {
+                Transform trans = getThing().getTransform();
+                float v = 32;
+                if (Cat.keyboard.isDown(Key.LEFT_SHIFT)) {
+                    trans.position.y -= Cat.time.getDelta() * v;
+                } else if (Cat.keyboard.isDown(Key.SPACE)) {
+                    trans.position.y += Cat.time.getDelta() * v;
+                }
+
+                float lookX = (float) Math.sin(yaw);
+                float lookZ = - (float) Math.cos(yaw);
+
+                float b = 1;
+                if (Cat.keyboard.isDown(Key.W)) {
+                    trans.position.x += lookX * v * Cat.time.getDelta();
+                    trans.position.z += lookZ * v * Cat.time.getDelta();
+                } else if (Cat.keyboard.isDown(Key.S)) {
+                    trans.position.x -= lookX * v * Cat.time.getDelta();
+                    trans.position.z -= lookZ * v * Cat.time.getDelta();
+                }
+
+                if (Cat.keyboard.isDown(Key.D)) {
+                    trans.position.z += lookX * v * Cat.time.getDelta();
+                    trans.position.x -= lookZ * v * Cat.time.getDelta();
+                } else if (Cat.keyboard.isDown(Key.A)) {
+                    trans.position.z -= lookX * v * Cat.time.getDelta();
+                    trans.position.x += lookZ * v * Cat.time.getDelta();
+                }
+
+                float f = 2;
+                if (Cat.keyboard.isDown(Key.LEFT)) {
+                    yaw -= Cat.time.getDelta() * f;
+                } else if (Cat.keyboard.isDown(Key.RIGHT)) {
+                    yaw += Cat.time.getDelta() * f;
+                }
+
+                if (Cat.keyboard.isDown(Key.UP)) {
+                    pitch -= Cat.time.getDelta() * f;
+                } else if (Cat.keyboard.isDown(Key.DOWN)) {
+                    pitch += Cat.time.getDelta() * f;
+                }
+
+                trans.rotation.identity();
+                trans.rotation.rotateX(pitch);
+                trans.rotation.rotateY(yaw);
             }
         });
 
-        manager.loadAsset("scene.json", Mesh.class);
-        manager.loadAsset("map/height_0_0.json", Mesh.class);
+        manager = new SynchronousAssetManager();
+        manager.addLoader(new TerrainAssetLoader(), Terrain.class);
+        //manager.loadAsset("scene.json", Mesh.class);
+
+        BitmapFontHints fontHints = new BitmapFontHints();
+        fontHints.gzip = true;
+
+        manager.loadAsset("font.json.gz", BitmapFont.class, fontHints);
         manager.loadAsset("pattern.png", Texture.class);
-        manager.loadAsset("font.json", BitmapFont.class);
         manager.loadAsset("scene-skeleton.json", Skeleton.class);
+        manager.loadAsset("terrain/test.json", Terrain.class);
+
         manager.finishLoading();
 
         Mesh mesh = manager.getAsset("scene.json", Mesh.class);
         Texture texture = manager.getAsset("pattern.png", Texture.class);
-        BitmapFont font = manager.getAsset("font.json", BitmapFont.class);
+        BitmapFont font = manager.getAsset("font.json.gz", BitmapFont.class);
 
-        Thing thing = new Thing(scene);
-        thing.getTransform().position.set(0, 0, 0);
-        thing.getTransform().rotation.rotateX((float)Math.toRadians(-90));
+        Terrain terr = manager.getAsset("terrain/test.json", Terrain.class);
 
-        Thing chunk = new Thing(scene);
-        chunk.addComponent(new Geometry(manager.getAsset("map/height_0_0.json", Mesh.class), texture));
-        scene.getRoot().addChild(chunk);
+        for (int i = 0; i < 8; ++i) {
+            for (int x = 0; x < 8; ++x) {
+                Thing chunk = new Thing(scene);
+                //chunk.getTransform().position.x = 128*i;
+                //chunk.getTransform().position.z = 128*x;
 
-        Geometry geo = new Geometry(mesh, texture);
-        BoundingVolume vol = new BoundingVolume();
-        thing.addComponent(geo);
-        thing.addComponent(vol);
-        thing.addComponent(new SkeletonComponent(manager.getAsset("scene-skeleton.json", Skeleton.class)));
-        scene.getRoot().addChild(thing);
+                chunk.addComponent(new Geometry(terr.getMesh(i, x), texture));
+                BoundingVolume volume = new BoundingVolume();
+                chunk.addComponent(volume);
+                volume.compute();
+                scene.getRoot().addChild(chunk);
+            }
+        }
     }
 
     @Override
-    public void update() {
+    public void onUpdate() {
         scene.update();
     }
 

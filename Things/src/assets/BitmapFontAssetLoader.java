@@ -7,6 +7,7 @@ import fonts.GlyphInfo;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Created by germangb on 21/06/16.
@@ -35,6 +36,12 @@ public class BitmapFontAssetLoader implements AssetLoader<BitmapFont> {
     public BitmapFont load(String path, Object hints) throws Exception {
         Gson gson = new Gson();
         InputStream is = Cat.files.getFile(path);
+
+        // check if file is gzipped
+        if (hints != null && hints instanceof BitmapFontHints && ((BitmapFontHints) hints).gzip) {
+            is = new GZIPInputStream(is);
+        }
+
         JsonFont font = gson.fromJson(new InputStreamReader(is), JsonFont.class);
 
         // create info

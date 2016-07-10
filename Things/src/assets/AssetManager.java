@@ -34,6 +34,14 @@ public interface AssetManager extends Destroyable {
     void loadAsset (String file, Class<?> type);
 
     /**
+     *
+     * @param file
+     * @param type
+     * @param hints
+     */
+    void loadAsset (String file, Class<?> type, Object hints);
+
+    /**
      * Get asset
      * @param file asset file
      * @param type asset type
@@ -41,6 +49,15 @@ public interface AssetManager extends Destroyable {
      * @return asset, null if not loaded
      */
     <T> T getAsset (String file, Class<T> type);
+
+    /**
+     * Add an asset to the manager
+     * @param file file (hashmap hey)
+     * @param asset asset
+     * @param type asset type
+     * @param <T> type
+     */
+    <T> void addAsset (String file, T asset, Class<T> type);
 
     /**
      * Update asset loading

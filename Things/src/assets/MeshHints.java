@@ -11,6 +11,7 @@ import java.util.Map;
  */
 public class MeshHints {
 
+    public boolean gzip = false;
     public Usage usage = Usage.STATIC;
     public Map<Attribute, Usage> bufferUsage = new HashMap<>();
 }

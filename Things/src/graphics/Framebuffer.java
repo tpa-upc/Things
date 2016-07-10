@@ -72,6 +72,22 @@ public class Framebuffer implements Destroyable {
     }
 
     /**
+     * Get width
+     * @return
+     */
+    public int getWidth () {
+        return width;
+    }
+
+    /**
+     * Get height
+     * @return
+     */
+    public int getHeight () {
+        return height;
+    }
+
+    /**
      * Check destroy flag
      * @return
      */

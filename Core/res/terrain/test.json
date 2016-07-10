@@ -1,0 +1,5 @@
+{
+  "chunk_size": 128,
+  "max_height": 32,
+  "height": "terrain/heightmap.png"
+}

@@ -51,6 +51,7 @@ public class LwjglRenderer implements Renderer, Destroyable {
             List<VertexBuffer> destroyVbo = new ArrayList<>();
             List<Texture> destroyTex = new ArrayList<>();
             List<ShaderProgram> destroyProg= new ArrayList<>();
+            List<Framebuffer> destroyFbo = new ArrayList<>();
 
             for (Iterator<ShaderProgram> it = programs.keySet().iterator(); it.hasNext();) {
                 ShaderProgram prog = it.next();
@@ -76,6 +77,13 @@ public class LwjglRenderer implements Renderer, Destroyable {
                 }
             }
 
+            for (Iterator<Framebuffer> it = framebuffers.keySet().iterator(); it.hasNext();) {
+                Framebuffer fbo= it.next();
+                if (fbo.isDestroy()) {
+                    destroyFbo.add(fbo);
+                }
+            }
+
             for (int i = 0; i < destroyProg.size(); ++i) {
                 LwjglUtils.GLSLProgram id = programs.remove(destroyProg.get(i));
                 glDeleteShader(id.vertex);
@@ -96,6 +104,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
             for (int i = 0; i < destroyTex.size(); ++i) {
                 int id = textures.remove(destroyTex.get(i));
                 glDeleteTextures(id);
+            }
+
+            for (int i = 0; i < destroyFbo.size(); ++i) {
+                int id = framebuffers.remove(destroyFbo.get(i));
+                glDeleteFramebuffers(id);
             }
         }
     }
@@ -175,6 +188,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
     @Override
     public void clearColor(float r, float g, float b, float a) {
         glClearColor(r, g, b, a);
+    }
+
+    @Override
+    public void viewport(int x, int y, int width, int height) {
+        glViewport(x, y, width, height);
     }
 
     @Override
@@ -261,7 +279,7 @@ public class LwjglRenderer implements Renderer, Destroyable {
             id = glGenTextures();
             textures.put(texture, id);
             bound = true;
-            texture.dirty();
+            texture.setDirty(false);
 
             // setIndices params
             glActiveTexture(GL_TEXTURE0+unit);
@@ -276,9 +294,12 @@ public class LwjglRenderer implements Renderer, Destroyable {
             int w = texture.getWidth();
             int h = texture.getHeight();
             int form = LwjglUtils.textureFormat(texture.getFormat());
-            int type = GL_UNSIGNED_BYTE;
             Buffer data = texture.getData();
-            glTexImage2D(GL_TEXTURE_2D, 0, form, w, h, 0, form, type, (ByteBuffer) data);
+            if (data == null || data instanceof ByteBuffer) {
+                glTexImage2D(GL_TEXTURE_2D, 0, form, w, h, 0, form, GL_UNSIGNED_BYTE, (ByteBuffer) data);
+            } else if (data instanceof FloatBuffer) {
+                glTexImage2D(GL_TEXTURE_2D, 0, form, w, h, 0, form, GL_FLOAT, (FloatBuffer) data);
+            }
         }
 
         if (!bound) {
@@ -287,8 +308,10 @@ public class LwjglRenderer implements Renderer, Destroyable {
             stats.textureSwitches++;
         }
 
-        if (texture.dirty()) {
-            // update params
+        if (texture.isDirty()) {
+            texture.setDirty(false);
+
+            // onUpdate params
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, LwjglUtils.textureFilter(texture.getMag()));
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, LwjglUtils.textureFilter(texture.getMin()));
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, LwjglUtils.textureWrap(texture.getWrapU()));
@@ -353,7 +376,7 @@ public class LwjglRenderer implements Renderer, Destroyable {
             return;
         }
 
-        // update vertex attributes
+        // onUpdate vertex attributes
         Attribute[] attr = usedProgram.getAttributes();
 
         for (int i = 0; i < attr.length; ++i) {
@@ -366,7 +389,7 @@ public class LwjglRenderer implements Renderer, Destroyable {
             if (id == null) {
                 buffers.put(vb, id = glGenBuffers());
                 bound = true;
-                vb.dirty();
+                vb.setDirty(false);
 
                 glBindBuffer(GL_ARRAY_BUFFER, id);
                 stats.vbos++;
@@ -378,7 +401,8 @@ public class LwjglRenderer implements Renderer, Destroyable {
                 stats.vbos++;
             }
 
-            if (vb.dirty()) {
+            if (vb.isDirty()) {
+                vb.setDirty(false);
                 LwjglUtils.bufferSubData(GL_ARRAY_BUFFER, data);
             }
 
@@ -401,6 +425,8 @@ public class LwjglRenderer implements Renderer, Destroyable {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
             stats.ebos++;
             LwjglUtils.bufferData(GL_ELEMENT_ARRAY_BUFFER, data, mesh.getUsage());
+
+            mesh.setDirty(false);
         }
 
         if (!bound) {
@@ -408,7 +434,8 @@ public class LwjglRenderer implements Renderer, Destroyable {
             stats.ebos++;
         }
 
-        if (mesh.dirty()) {
+        if (mesh.isDirty()) {
+            mesh.setDirty(false);
             LwjglUtils.bufferSubData(GL_ELEMENT_ARRAY_BUFFER, data);
         }
 

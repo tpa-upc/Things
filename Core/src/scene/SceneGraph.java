@@ -13,7 +13,7 @@ public class SceneGraph {
     /** Root scene */
     private Thing root;
 
-    /** Components to init */
+    /** Components to onInit */
     private Queue<Component> init = new LinkedList<>();
 
     /** Components to free */
@@ -31,14 +31,14 @@ public class SceneGraph {
 
     /** Update thing */
     public void update () {
-        // init subsystems
+        // onInit subsystems
         while (!initSub.isEmpty()) {
             Manager sys = initSub.poll();
             sys.onInit();
             systems.put(sys.getClass(), sys);
         }
 
-        // init component
+        // onInit component
         while (!init.isEmpty()) {
             init.poll().onInit();
         }

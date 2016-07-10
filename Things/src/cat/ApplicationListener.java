@@ -8,10 +8,10 @@ import utils.Destroyable;
 public interface ApplicationListener extends Destroyable {
 
     /** Called at the beginning */
-    void init ();
+    void onInit();
 
     /** Called once every frame */
-    void update ();
+    void onUpdate();
 
     @Override
     void destroy ();

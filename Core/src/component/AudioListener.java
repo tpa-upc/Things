@@ -16,7 +16,7 @@ public class AudioListener extends Component {
 
     @Override
     public void onUpdate() {
-        // update listener's position and orientation
+        // onUpdate listener's position and orientation
         Matrix4f trans = getThing().getTransform().model;
 
         // position vector
@@ -30,7 +30,7 @@ public class AudioListener extends Component {
         aux = trans.getColumn(1, aux);
         up.set(aux.x, aux.y, aux.z);
 
-        // update listener position & orientation
+        // onUpdate listener position & orientation
         Cat.audio.setListener(pos, look, up);
 
         //System.out.println(pos);

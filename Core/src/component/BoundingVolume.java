@@ -23,10 +23,10 @@ public class BoundingVolume extends Component {
     /** frustum culling enabling flag */
     private boolean ignoreCulling = false;
 
-    @Override
-    public void onInit() {
-        compute();
-    }
+    //@Override
+    //public void onInit() {
+    //    compute();
+    //}
 
     /**
      * Recompute AABB.
@@ -52,6 +52,9 @@ public class BoundingVolume extends Component {
         // TODO transform AAB and recompute AAB of the transformed box
 
         // ...
+
+        //max.mul(trans.scale);
+        //min.mul(trans.scale);
 
         min.add(trans.position);
         max.add(trans.position);

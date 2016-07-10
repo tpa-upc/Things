@@ -34,6 +34,11 @@ public class RenderManager extends Manager {
     RenderState state = new RenderState();
     ShaderProgram program;
 
+    RenderState finalState = new RenderState();
+    ShaderProgram finalProgram;
+    Mesh quadMesh;
+    Framebuffer fbo;
+
     RenderState boneState = new RenderState();
     Mesh boneMesh;
     ShaderProgram boneProgram;
@@ -44,6 +49,7 @@ public class RenderManager extends Manager {
 
         state.depthTest = DepthTest.LESS;
         state.mode = PolygonMode.FILL;
+        state.culling = Culling.BACK;
 
         boneState.depthTest = DepthTest.DISABLED;
         boneState.depthMask = false;
@@ -52,45 +58,113 @@ public class RenderManager extends Manager {
 
     private void createProgram() {
         //language=GLSL
+        String vertFinal = "#version 120\n" +
+                "\n" +
+                "attribute vec3 a_position;\n" +
+                "\n" +
+                "varying vec2 v_uv;\n" +
+                "\n" +
+                "void main () {\n" +
+                "    gl_Position = vec4(a_position, 1.0);\n" +
+                "    v_uv = a_position.xy*0.5+0.5;\n" +
+                "}";
+        //language=GLSL
+        String fragFinal = "#version 130\n" +
+                "\n" +
+                "in vec2 v_uv;\n" +
+                "\n" +
+                "out vec4 frag_color;\n" +
+                "\n" +
+                "uniform sampler2D u_texture;\n" +
+                "\n" +
+                "void main () {\n" +
+                "    vec3 color = texture2D(u_texture, v_uv).rgb;\n" +
+                "    frag_color = vec4(color, 1.0);\n" +
+                "}";
+        finalProgram = new ShaderProgram(vertFinal, fragFinal, Attribute.POSITION);
+        fbo = new Framebuffer(640/2, 480/2, true) {
+            @Override
+            protected void createTextures() {
+                Texture tex = new Texture(width, height, TextureFormat.RGB);
+                tex.setWrapU(TextureWrap.CLAMP);
+                tex.setWrapV(TextureWrap.CLAMP);
+                targets.add(tex);
+            }
+        };
+
+        FloatBuffer quadPos = ByteBuffer.allocateDirect(100<<2).order(ByteOrder.nativeOrder()).asFloatBuffer()
+                .put(new float[] {
+                        -1, -1, 0,
+                        +1, -1, 0,
+                        -1, +1, 0,
+                        +1, +1, 0
+                });
+        IntBuffer quadInd = ByteBuffer.allocateDirect(100<<2).order(ByteOrder.nativeOrder()).asIntBuffer()
+                .put(new int[] {
+                        0, 1, 2, 3
+                });
+
+        quadMesh = new Mesh(Usage.STATIC);
+        quadMesh.setIndices(0, 4);
+        quadMesh.setData(quadInd.flip());
+        quadMesh.setPrimitive(Primitive.TRIANGLE_STRIP);
+
+        VertexBuffer quadPosBuffer = new VertexBuffer(Usage.STATIC);
+        quadPosBuffer.setData(quadPos.flip());
+        quadMesh.addVertexBuffer(Attribute.POSITION, quadPosBuffer);
+
+        //language=GLSL
         String vert = "#version 120\n" +
                 "\n" +
                 "attribute vec3 a_position;\n" +
                 "attribute vec3 a_normal;\n" +
-                "attribute vec2 a_uv;\n" +
                 "\n" +
                 "varying vec2 v_uv;\n" +
                 "varying vec3 v_normal;\n" +
+                "varying vec3 v_position;\n" +
+                "varying vec2 v_grid;\n" +
                 "\n" +
                 "uniform mat4 u_mvp;\n" +
                 "uniform mat4 u_mv;\n" +
                 "\n" +
                 "void main () {\n" +
                 "    gl_Position = u_mvp * vec4(a_position, 1.);\n" +
-                "    v_uv = a_uv;\n" +
-                "    v_normal = normalize((u_mv * vec4(a_normal, 0.0)).xyz);\n" +
+                "    v_normal = a_normal;\n" +
+                "    v_position = (u_mv * vec4(a_position, 1.0)).xyz;\n" +
+                "    v_grid = a_position.xz;" +
                 "}";
         //language=GLSL
-        String frag = "#version 120\n" +
+        String frag = "#version 130\n" +
                 "\n" +
-                "varying vec2 v_uv;\n" +
-                "varying vec3 v_normal;\n" +
+                "in vec3 v_normal;\n" +
+                "in vec2 v_uv;\n" +
+                "in vec3 v_position;\n" +
+                "in vec2 v_grid;\n" +
                 "\n" +
-                "//out vec4 frag_color;\n" +
-                "\n" +
-                "uniform sampler2D u_texture;\n" +
+                "out vec4 frag_color;\n" +
                 "\n" +
                 "void main () {\n" +
-                "    vec3 color = texture2D(u_texture, v_uv).rgb;\n" +
-                "    float dif = clamp(dot(v_normal, vec3(0, 0, 1)), 0.0, 1.0);\n" +
-                "    dif = mix(0.5, 1.0, dif);\n" +
-                "    gl_FragColor = vec4(color*dif, 1.);\n" +
+                "    float d = 32;\n" +
+                "    \n" +
+                "    float fog = exp(-max(abs(v_position.z) - d, 0) * 0.01);\n" +
+                "    float fog_grid = exp(-max(abs(v_position.z) - 32, 0) * 0.01);\n" +
+                "    \n" +
+                "    vec3 color = v_normal * 0.5 + 0.5;\n" +
+                "    \n" +
+                "    vec2 grid = fract(v_grid) * 2 - 1;\n" +
+                "    \n" +
+                "    float s = 0.5;\n" +
+                "    float grid_cont = smoothstep(0, 0.1f, min(abs(grid.x - s), abs(grid.y - s)));\n" +
+                "    \n" +
+                "    grid_cont = mix(mix(grid_cont, 1, 0.9), 1.0, 1-fog_grid);\n" +
+                "    \n" +
+                "    vec3 final_color = mix(color * grid_cont, vec3(0.5), 1-fog);\n" +
+                "    \n" +
+                "    frag_color = vec4(final_color, 1);\n" +
                 "}";
 
-        program = new ShaderProgram(vert, frag, new Attribute[] {
-                Attribute.POSITION,
-                Attribute.UV,
-                Attribute.NORMAL
-        });
+        program = new ShaderProgram(vert, frag, Attribute.POSITION,
+                Attribute.NORMAL);
         program.setUniform("u_texture", 0);
 
         //language=GLSL
@@ -109,9 +183,7 @@ public class RenderManager extends Manager {
                 "void main () {\n" +
                 "    gl_FragColor = vec4(0, 0, 0, 1);\n" +
                 "}";
-        boneProgram = new ShaderProgram(vertBone, fragBone, new Attribute[] {
-                Attribute.POSITION
-        });
+        boneProgram = new ShaderProgram(vertBone, fragBone, Attribute.POSITION);
 
         // bone mesh
         boneMesh = new Mesh(Usage.STREAM);
@@ -141,7 +213,9 @@ public class RenderManager extends Manager {
     @Override
     public void onUpdate() {
         Cat.renderer.beginFrame();
-        Cat.renderer.clearColor(1, 1, 1, 1);
+        Cat.renderer.bindFramebuffer(fbo);
+        Cat.renderer.viewport(0, 0, fbo.getWidth(), fbo.getWidth());
+        Cat.renderer.clearColor(0.5f, 0.5f, 0.5f, 1);
         Cat.renderer.clearBuffers(BufferType.COLOR, BufferType.DEPTH);
         Cat.renderer.setState(state);
         Cat.renderer.bindProgram(program);
@@ -179,28 +253,19 @@ public class RenderManager extends Manager {
             Cat.renderer.renderMesh(mesh);
         }
 
-        Cat.renderer.setState(boneState);
-        Cat.renderer.bindProgram(boneProgram);
-
-        for (SkeletonComponent s : skels) {
-            Transform t = s.getThing().getTransform();
-            vp.set(camera.viewProjection).mul(t.model);
-
-            List<Joint> joints = s.getSkeleton().getJoints();
-
-            //System.out.println(joints.get(2).absolute.toString());
-
-            for (int i = 0; i < joints.size(); ++i) {
-                Joint j = joints.get(i);
-                //boneProgram.setUniform("u_mvp", camera.viewProjection);
-                boneProgram.setUniform("u_mvp", mvp.set(vp).mul(j.absolute));
-                Cat.renderer.renderMesh(boneMesh);
-            }
-        }
+        Cat.renderer.bindFramebuffer(null);
+        Cat.renderer.viewport(0, 0, 640, 480);
+        Cat.renderer.setState(finalState);
+        Cat.renderer.clearColor(1, 0, 1, 1);
+        Cat.renderer.clearBuffers(BufferType.COLOR);
+        Cat.renderer.bindProgram(finalProgram);
+        finalProgram.setUniform("u_texture", 0);
+        Cat.renderer.bindTexture(0, fbo.getTargets().get(0));
+        Cat.renderer.renderMesh(quadMesh);
 
         Cat.renderer.endFrame();
 
-        RenderStats stats = Cat.renderer.getStats();
+        //RenderStats stats = Cat.renderer.getStats();
         //System.out.println(stats.ebos+" "+Cat.time.getFps());
     }
 

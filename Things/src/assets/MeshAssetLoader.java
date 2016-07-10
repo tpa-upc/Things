@@ -4,12 +4,14 @@ import cat.Cat;
 import com.google.gson.Gson;
 import graphics.*;
 
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
+import java.util.zip.GZIPInputStream;
 
 /**
  * Created by germangb on 21/06/16.
@@ -36,7 +38,14 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
     @Override
     public Mesh load(String path, Object hints) throws Exception {
         Gson gson = new Gson();
-        Reader reader = new InputStreamReader(Cat.files.getFile(path));
+        InputStream is = Cat.files.getFile(path);
+
+        // check if file is gzipped
+        if (hints != null && hints instanceof MeshHints && ((MeshHints) hints).gzip) {
+            is = new GZIPInputStream(is);
+        }
+
+        Reader reader = new InputStreamReader(is);
         JsonMesh parsed = gson.fromJson(reader, JsonMesh.class);
 
         // create mesh

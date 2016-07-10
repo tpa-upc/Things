@@ -67,7 +67,7 @@ public class FrustumRayBuilder {
      * Reference: <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com</a>
      * 
      * @param m
-     *          the {@link Matrix4f matrix} to update the frustum corner rays and origin with
+     *          the {@link Matrix4f matrix} to onUpdate the frustum corner rays and origin with
      * @return this
      */
     public FrustumRayBuilder set(Matrix4f m) {

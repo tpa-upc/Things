@@ -23,7 +23,7 @@ public class ShaderProgram {
     /** Uniforms */
     private HashMap<String, Object> uniforms;
 
-    public ShaderProgram (String vert, String frag, Attribute[] attributes) {
+    public ShaderProgram (String vert, String frag, Attribute ... attributes) {
         this.vert = vert;
         this.frag = frag;
         this.attributes = attributes;

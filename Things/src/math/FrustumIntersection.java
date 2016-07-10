@@ -140,7 +140,7 @@ public class FrustumIntersection {
     /**
      * Create a new {@link FrustumIntersection} from the given {@link Matrix4f matrix} by extracing the matrix's frustum planes.
      * <p>
-     * In order to update the compute frustum planes later on, call {@link #set(Matrix4f)}.
+     * In order to onUpdate the compute frustum planes later on, call {@link #set(Matrix4f)}.
      * 
      * @see #set(Matrix4f)
      * 
@@ -158,7 +158,7 @@ public class FrustumIntersection {
      * Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix</a>
      * 
      * @param m
-     *          the {@link Matrix4f matrix} to update <code>this</code> frustum culler's frustum planes from
+     *          the {@link Matrix4f matrix} to onUpdate <code>this</code> frustum culler's frustum planes from
      * @return this
      */
     public FrustumIntersection set(Matrix4f m) {

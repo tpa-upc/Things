@@ -1,6 +1,7 @@
 package assets;
 
 import animation.Skeleton;
+import cat.Cat;
 import fonts.BitmapFont;
 import graphics.Mesh;
 import graphics.Texture;
@@ -28,6 +29,8 @@ public class SynchronousAssetManager implements AssetManager {
     Map<String, Object> loaded = new HashMap<>();
     Map<String, Object> hints = new HashMap<>();
     List<Destroyable> toDestroy = new ArrayList<>();
+
+    float lastLoaded = 0;
 
     public SynchronousAssetManager () {
         addLoader(new TextureAssetLoader(), Texture.class);
@@ -74,8 +77,16 @@ public class SynchronousAssetManager implements AssetManager {
 
     @Override
     public void loadAsset(String file, Class<?> type) {
+        loadAsset(file, type, null);
+    }
+
+    @Override
+    public void loadAsset(String file, Class<?> type, Object hints) {
         toLoad.add(file);
         types.put(file, type);
+        if (hints != null) {
+            this.hints.put(file, hints);
+        }
     }
 
     @Override
@@ -88,9 +99,22 @@ public class SynchronousAssetManager implements AssetManager {
     }
 
     @Override
+    public <T> void addAsset(String file, T asset, Class<T> type) {
+        loaded.put(file, asset);
+        if (asset instanceof Destroyable) {
+            toDestroy.add((Destroyable) asset);
+        }
+    }
+
+    @Override
     public boolean update() {
         if (toLoad.size() > 0) {
+            if (Cat.time.getTime() - lastLoaded < 0.01f) {
+                return false;
+            }
+
             loadOne();
+            lastLoaded = Cat.time.getTime();
         }
         return toLoad.size() == 0;
     }

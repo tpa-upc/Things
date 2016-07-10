@@ -1,4 +1,4 @@
-package dae;
+package tools;
 
 import com.google.gson.Gson;
 import math.Matrix4f;
@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 
-import dae.Common.JsonMesh;
-import dae.Common.JsonAttribute;
-import dae.Common.JsonMeta;
+import tools.Common.JsonMesh;
+import tools.Common.JsonAttribute;
+import tools.Common.JsonMeta;
 
 /**
  * Created by germangb on 29/06/16.
@@ -266,7 +266,7 @@ public class ColladaToJson {
 
     public static void main (String[] args) {
         try {
-            String input = "scene.dae";
+            String input = "scene.tools";
             String meshFile = "scene.json";
             String skelFile = "scene-skeleton.json";
 

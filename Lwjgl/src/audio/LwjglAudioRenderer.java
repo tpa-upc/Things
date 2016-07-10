@@ -130,7 +130,8 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
             // create buffer
             createBuffer(sound, buffer = alGenBuffers());
             buffers.put(sound, buffer);
-        } else if (sound.dirty()) {
+        } else if (sound.isDestroy()) {
+            sound.setDirty(false);
             createBuffer(sound, buffer);
         }
 
@@ -176,7 +177,7 @@ public class LwjglAudioRenderer implements AudioRenderer, Destroyable {
     private void createBuffer (Sound sound, int buffer) {
         int format = LwjglUtils.audioFormat(sound.getFormat());
         Buffer data = sound.getData();
-        sound.dirty();
+        sound.setDirty(false);
 
         if (data instanceof ByteBuffer) {
             alBufferData(buffer, format, (ByteBuffer) data, sound.getSampling());

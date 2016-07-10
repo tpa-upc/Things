@@ -61,10 +61,26 @@ public class Texture implements Destroyable {
      * Check signal. Sets dirty to false
      * @return true if data is dirty
      */
-    public boolean dirty () {
+    /*public boolean dirty () {
         boolean ret = dirty;
         dirty = false;
         return ret;
+    }*/
+
+    /**
+     * Dirty flag
+     * @return
+     */
+    public boolean isDirty () {
+        return dirty;
+    }
+
+    /**
+     * Dirty flag setter
+     * @param b
+     */
+    public void setDirty (boolean b) {
+        this.dirty = b;
     }
 
     @Override

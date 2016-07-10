@@ -13,6 +13,7 @@ public class Main {
         opts.width = 640;
         opts.height = 480;
         opts.resizable = false;
+        opts.hasAudio = false;
         opts.maxAudioSources = 32;
 
         LwjglApplication app = new LwjglApplication(argv, new Project(), opts);

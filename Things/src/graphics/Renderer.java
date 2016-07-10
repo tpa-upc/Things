@@ -33,6 +33,15 @@ public interface Renderer {
     void clearColor (float r, float g, float b, float a);
 
     /**
+     * Set viewport
+     * @param x
+     * @param y
+     * @param width
+     * @param height
+     */
+    void viewport (int x, int y, int width, int height);
+
+    /**
      * Clear buffers
      * @param bufs buffers to be cleared
      */
