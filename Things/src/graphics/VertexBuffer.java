@@ -7,6 +7,9 @@ import java.nio.Buffer;
  */
 public class VertexBuffer {
 
+    /** Signal renderer to keep or throw away data once it's uploaded */
+    private boolean keepData = false;
+
     /** signal renderer */
     private boolean dirty = true;
 
@@ -26,7 +29,7 @@ public class VertexBuffer {
      */
     public void setData (Buffer data) {
         this.data = data;
-        this.dirty = true;
+        //this.dirty = true;
     }
 
     /**
@@ -69,5 +72,21 @@ public class VertexBuffer {
      */
     public Usage getUsage() {
         return usage;
+    }
+
+    /**
+     * Set keep data flag
+     * @param keepData
+     */
+    public void setKeepData (boolean keepData) {
+        this.keepData = keepData;
+    }
+
+    /**
+     * Get keep data
+     * @return
+     */
+    public boolean isKeepData () {
+        return keepData;
     }
 }

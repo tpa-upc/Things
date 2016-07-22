@@ -1,5 +1,7 @@
 package terrain;
 
+import cat.Cat;
+import component.AABB;
 import graphics.*;
 import math.Vector3f;
 
@@ -29,8 +31,11 @@ public class Terrain {
     /** Renderable data */
     private Mesh[][] meshes;
 
+    /** AABBs */
+    private AABB[][] volumes;
+
     public Terrain (int size, int chunk) {
-        if (size % chunk != 0) {
+        if (size == 0 || chunk == 0 || size % chunk != 0) {
             throw new IllegalArgumentException("chunk must divide size");
         }
 
@@ -38,6 +43,7 @@ public class Terrain {
         createIndices();
 
         this.meshes = new Mesh[size/chunk][size/chunk];
+        this.volumes = new AABB[size/chunk][size/chunk];
         this.height = new TerrainField(size);
         this.fields = new LinkedHashMap<>();
     }
@@ -53,6 +59,13 @@ public class Terrain {
             meshes[x][z] = createMesh(x, z);
         }
         return meshes[x][z];
+    }
+
+    public AABB getVolume (int x, int z) {
+        if (volumes[x][z] == null) {
+            volumes[x][z] = createBoundingVolume(x, z);
+        }
+        return volumes[x][z];
     }
 
     private void createIndices() {
@@ -76,6 +89,10 @@ public class Terrain {
         }
     }
 
+    private AABB createBoundingVolume(int x, int z) {
+        return null;
+    }
+
     private Mesh createMesh(int x, int z) {
         float[] posData = new float[(chunk+1)*(chunk+1)*3];
         float[] norData = new float[(chunk+1)*(chunk+1)*3];
@@ -97,8 +114,7 @@ public class Terrain {
         mesh.addVertexBuffer(Attribute.NORMAL, norBuf);
         mesh.addVertexBuffer(Attribute.UV, uvBuf);
 
-        IntBuffer nio = ByteBuffer.allocateDirect(indices.length<<2)
-                .order(ByteOrder.nativeOrder())
+        IntBuffer nio = Cat.buffers.allocate(indices.length<<2)
                 .asIntBuffer()
                 .put(indices);
 
@@ -109,8 +125,7 @@ public class Terrain {
 
     private VertexBuffer createBuffer (float[] data, Usage usage) {
         VertexBuffer buffer = new VertexBuffer(usage);
-        FloatBuffer nio = ByteBuffer.allocateDirect(data.length<<2)
-                .order(ByteOrder.nativeOrder())
+        FloatBuffer nio = Cat.buffers.allocate(data.length<<2)
                 .asFloatBuffer()
                 .put(data);
 

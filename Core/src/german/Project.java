@@ -2,8 +2,6 @@ package german;
 
 import animation.Skeleton;
 import assets.*;
-import audio.AudioFormat;
-import audio.Sound;
 import cat.ApplicationListener;
 import cat.Cat;
 import component.*;
@@ -11,15 +9,9 @@ import fonts.BitmapFont;
 import graphics.Mesh;
 import graphics.Texture;
 import input.Key;
-import input.KeyboardListener;
 import manager.RenderManager;
 import scene.*;
 import terrain.Terrain;
-
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.ShortBuffer;
-import java.util.Random;
 
 /**
  * Created by germangb on 18/06/16.
@@ -28,13 +20,10 @@ public class Project implements ApplicationListener {
 
     AssetManager manager;
     SceneGraph scene;
-
     Thing camera;
 
     @Override
     public void onInit() {
-        System.out.println("init");
-
         scene = new SceneGraph();
         scene.addManager(new RenderManager());
 
@@ -102,7 +91,6 @@ public class Project implements ApplicationListener {
 
         manager = new SynchronousAssetManager();
         manager.addLoader(new TerrainAssetLoader(), Terrain.class);
-        //manager.loadAsset("scene.json", Mesh.class);
 
         BitmapFontHints fontHints = new BitmapFontHints();
         fontHints.gzip = true;
@@ -111,10 +99,9 @@ public class Project implements ApplicationListener {
         manager.loadAsset("pattern.png", Texture.class);
         manager.loadAsset("scene-skeleton.json", Skeleton.class);
         manager.loadAsset("terrain/test.json", Terrain.class);
-
         manager.finishLoading();
 
-        Mesh mesh = manager.getAsset("scene.json", Mesh.class);
+        //Mesh mesh = manager.getAsset("scene.json", Mesh.class);
         Texture texture = manager.getAsset("pattern.png", Texture.class);
         BitmapFont font = manager.getAsset("font.json.gz", BitmapFont.class);
 
@@ -123,13 +110,10 @@ public class Project implements ApplicationListener {
         for (int i = 0; i < 8; ++i) {
             for (int x = 0; x < 8; ++x) {
                 Thing chunk = new Thing(scene);
-                //chunk.getTransform().position.x = 128*i;
-                //chunk.getTransform().position.z = 128*x;
-
-                chunk.addComponent(new Geometry(terr.getMesh(i, x), texture));
-                BoundingVolume volume = new BoundingVolume();
-                chunk.addComponent(volume);
-                volume.compute();
+                Geometry geo = new Geometry(terr.getMesh(i, x), texture);
+                chunk.addComponent(geo);
+                geo.computeAABB();
+                geo.setCullingTest(AABB.FrustumCulling.POSITIVE);
                 scene.getRoot().addChild(chunk);
             }
         }

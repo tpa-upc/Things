@@ -10,6 +10,9 @@ import java.util.*;
  */
 public class Mesh implements Destroyable {
 
+    /** Signal renderer to keep or throw away data once it's uploaded */
+    private boolean keepData = false;
+
     /** signal destruction to the renderer */
     private boolean destroy = false;
 
@@ -74,7 +77,7 @@ public class Mesh implements Destroyable {
      */
     public void setData (Buffer data) {
         this.data = data;
-        this.dirty = true;
+        //this.dirty = true;
     }
 
     /**
@@ -178,5 +181,21 @@ public class Mesh implements Destroyable {
      */
     public boolean isDestroy () {
         return destroy;
+    }
+
+    /**
+     * Set keep data flag
+     * @param keepData
+     */
+    public void setKeepData (boolean keepData) {
+        this.keepData = keepData;
+    }
+
+    /**
+     * Get keep data
+     * @return
+     */
+    public boolean isKeepData () {
+        return keepData;
     }
 }

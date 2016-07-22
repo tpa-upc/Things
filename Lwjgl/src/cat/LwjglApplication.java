@@ -9,6 +9,7 @@ import input.*;
 import org.lwjgl.opengl.GL;
 import time.LwjglTime;
 import utils.Destroyable;
+import utils.LwjglBuffers;
 import window.LwjglWindow;
 
 import java.util.ArrayList;
@@ -62,6 +63,7 @@ public class LwjglApplication implements Application {
         List<Destroyable> toDestroy = new ArrayList<>();
 
         // Things
+        LwjglBuffers buffers = new LwjglBuffers();
         LwjglRenderer renderer = new LwjglRenderer();
         LwjglWindow win = new LwjglWindow(window);
         LwjglFiles files = new LwjglFiles();
@@ -82,6 +84,7 @@ public class LwjglApplication implements Application {
             toDestroy.add((LwjglAudioRenderer) audio);
         }
 
+        Cat.buffers = buffers;
         Cat.time = time;
         Cat.renderer = renderer;
         Cat.app = this;

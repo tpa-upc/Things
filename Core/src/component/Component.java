@@ -26,6 +26,14 @@ public abstract class Component {
         return thing;
     }
 
+    /**
+     * Shortcut for getThing().getTransform()
+     * @return
+     */
+    public Transform getTransform () {
+        return thing.getTransform();
+    }
+
     /** Called to initilize component */
     public void onInit () {
     }

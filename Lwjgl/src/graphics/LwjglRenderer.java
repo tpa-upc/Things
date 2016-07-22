@@ -1,5 +1,6 @@
 package graphics;
 
+import cat.Cat;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL15;
 import utils.Destroyable;
@@ -300,6 +301,10 @@ public class LwjglRenderer implements Renderer, Destroyable {
             } else if (data instanceof FloatBuffer) {
                 glTexImage2D(GL_TEXTURE_2D, 0, form, w, h, 0, form, GL_FLOAT, (FloatBuffer) data);
             }
+
+            if (data != null && !texture.isKeepData()) {
+                Cat.buffers.free(data);
+            }
         }
 
         if (!bound) {
@@ -324,6 +329,10 @@ public class LwjglRenderer implements Renderer, Destroyable {
             int type = GL_UNSIGNED_BYTE;
             Buffer data = texture.getData();
             glTexImage2D(GL_TEXTURE_2D, 0, form, w, h, 0, form, type, (ByteBuffer) data);
+
+            if (data != null && !texture.isKeepData()) {
+                Cat.buffers.free(data);
+            }
         }
     }
 
@@ -394,6 +403,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
                 glBindBuffer(GL_ARRAY_BUFFER, id);
                 stats.vbos++;
                 LwjglUtils.bufferData(GL_ARRAY_BUFFER, data, vb.getUsage());
+
+                // destroy data?
+                if (!vb.isKeepData()) {
+                    Cat.buffers.free(data);
+                }
             }
 
             if (!bound) {
@@ -404,6 +418,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
             if (vb.isDirty()) {
                 vb.setDirty(false);
                 LwjglUtils.bufferSubData(GL_ARRAY_BUFFER, data);
+
+                // destroy data?
+                if (!vb.isKeepData()) {
+                    Cat.buffers.free(data);
+                }
             }
 
             // enable attr and pointer
@@ -427,6 +446,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
             LwjglUtils.bufferData(GL_ELEMENT_ARRAY_BUFFER, data, mesh.getUsage());
 
             mesh.setDirty(false);
+
+            // destroy data?
+            if (!mesh.isKeepData()) {
+                Cat.buffers.free(data);
+            }
         }
 
         if (!bound) {
@@ -437,6 +461,11 @@ public class LwjglRenderer implements Renderer, Destroyable {
         if (mesh.isDirty()) {
             mesh.setDirty(false);
             LwjglUtils.bufferSubData(GL_ELEMENT_ARRAY_BUFFER, data);
+
+            // destroy data?
+            if (!mesh.isKeepData()) {
+                Cat.buffers.free(data);
+            }
         }
 
         // uniform variables

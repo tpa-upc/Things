@@ -40,7 +40,7 @@ public class TextureAssetLoader implements AssetLoader<Texture> {
 
         // read data
         int ncomp = alpha ? 4 : 3;
-        ByteBuffer pixels = ByteBuffer.allocateDirect(width*height*ncomp).order(ByteOrder.nativeOrder());
+        ByteBuffer pixels = Cat.buffers.allocate(width*height*ncomp);
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
                 int argb = im.getRGB(x, y);

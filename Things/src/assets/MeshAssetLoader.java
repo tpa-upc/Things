@@ -60,7 +60,7 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
         try {
             prim = Primitive.valueOf(parsed.primitive);
         } catch (Exception e) {
-            throw new RuntimeException("Wront primitive ("+parsed.primitive+")");
+            throw new RuntimeException("Wrong primitive ("+parsed.primitive+")");
         } finally {
             mesh.setPrimitive(prim);
         }
@@ -85,19 +85,16 @@ public class MeshAssetLoader implements AssetLoader<Mesh> {
                 }
             }
 
-            VertexBuffer pos = new VertexBuffer(Usage.STATIC);
+            VertexBuffer pos = new VertexBuffer(usage);
             mesh.addVertexBuffer(attribute, pos);
 
-            FloatBuffer posData = ByteBuffer.allocateDirect(attr.data.length<<2).order(ByteOrder.nativeOrder())
-                    .asFloatBuffer()
-                    .put(attr.data);
-
-            pos.setData(posData.flip());
+            FloatBuffer posData = Cat.buffers.allocate(attr.data);
+            pos.setData(posData);
         }
 
-        IntBuffer data = ByteBuffer.allocateDirect(parsed.data.length<<2).order(ByteOrder.nativeOrder())
-                .asIntBuffer().put(parsed.data);
-        mesh.setData(data.flip());
+        IntBuffer data = Cat.buffers.allocate(parsed.data);
+
+        mesh.setData(data);
         mesh.setIndices(0, parsed.data.length);
 
         return mesh;

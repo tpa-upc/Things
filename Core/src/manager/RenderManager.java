@@ -1,7 +1,5 @@
 package manager;
 
-import animation.Joint;
-import animation.Skeleton;
 import cat.Cat;
 import component.*;
 import graphics.*;
@@ -92,25 +90,21 @@ public class RenderManager extends Manager {
             }
         };
 
-        FloatBuffer quadPos = ByteBuffer.allocateDirect(100<<2).order(ByteOrder.nativeOrder()).asFloatBuffer()
-                .put(new float[] {
-                        -1, -1, 0,
-                        +1, -1, 0,
-                        -1, +1, 0,
-                        +1, +1, 0
-                });
-        IntBuffer quadInd = ByteBuffer.allocateDirect(100<<2).order(ByteOrder.nativeOrder()).asIntBuffer()
-                .put(new int[] {
-                        0, 1, 2, 3
-                });
+        FloatBuffer quadPos = Cat.buffers.allocate(new float[] {
+                -1, -1, 0,
+                +1, -1, 0,
+                -1, +1, 0,
+                +1, +1, 0});
+
+        IntBuffer quadInd = Cat.buffers.allocate(new int[] {0, 1, 2, 3});
 
         quadMesh = new Mesh(Usage.STATIC);
         quadMesh.setIndices(0, 4);
-        quadMesh.setData(quadInd.flip());
+        quadMesh.setData(quadInd);
         quadMesh.setPrimitive(Primitive.TRIANGLE_STRIP);
 
         VertexBuffer quadPosBuffer = new VertexBuffer(Usage.STATIC);
-        quadPosBuffer.setData(quadPos.flip());
+        quadPosBuffer.setData(quadPos);
         quadMesh.addVertexBuffer(Attribute.POSITION, quadPosBuffer);
 
         //language=GLSL
@@ -193,18 +187,11 @@ public class RenderManager extends Manager {
         VertexBuffer attr = new VertexBuffer(Usage.STATIC);
         boneMesh.addVertexBuffer(Attribute.POSITION, attr);
 
-        FloatBuffer data = ByteBuffer.allocateDirect(10<<2)
-                .order(ByteOrder.nativeOrder())
-                .asFloatBuffer()
-                .put(new float[] {
-                        0, 0.05f, 0,
-                        0, 0.95f, 0
-                });
+        FloatBuffer data = Cat.buffers.allocate(10<<2).asFloatBuffer();
+        data.put(new float[] {0, 0.05f, 0, 0, 0.95f, 0});
 
-        IntBuffer index = ByteBuffer.allocateDirect(10<<2)
-                .order(ByteOrder.nativeOrder())
-                .asIntBuffer()
-                .put(new int[] {0, 1});
+        IntBuffer index = Cat.buffers.allocate(10<<2).asIntBuffer();
+        index.put(new int[] {0, 1});
 
         attr.setData(data.flip());
         boneMesh.setData(index.flip());
@@ -230,18 +217,22 @@ public class RenderManager extends Manager {
         List<SkeletonComponent> skels = new ArrayList<>();
 
         for (Geometry geo : geometry) {
-            // compute mvp
             Transform trans = geo.getThing().getComponent(Transform.class);
-            BoundingVolume volume = geo.getThing().getComponent(BoundingVolume.class);
-            if (volume != null && !volume.testCulling(camera)) {
-                continue;
+            AABB volume = geo.getAABB();
+            AABB.FrustumCulling culling = geo.getCulling();
+
+            // frustum culling
+            switch (culling) {
+                case POSITIVE:
+                    if (!volume.testCulling(camera)) continue;
+                    break;
+                case NEGATIVE:
+                    if (volume.testCulling(camera)) continue;
+                    break;
+                case DISABLED:
             }
 
-            SkeletonComponent skel = geo.getThing().getComponent(SkeletonComponent.class);
-            if (skel != null) {
-                skels.add(skel);
-            }
-
+            // compute mvp
             mvp.set(vp).mul(trans.model);
             mv.set(camera.view).mul(trans.model);
             program.setUniform("u_mvp", mvp);

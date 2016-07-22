@@ -9,6 +9,9 @@ import java.nio.Buffer;
  */
 public class Texture implements Destroyable {
 
+    /** Signal renderer to keep or throw away data once it's uploaded */
+    private boolean keepData = false;
+
     /** Destroy signal flag */
     private boolean destroy = false;
 
@@ -171,5 +174,22 @@ public class Texture implements Destroyable {
      */
     public int getHeight() {
         return height;
+    }
+
+
+    /**
+     * Set keep data flag
+     * @param keepData
+     */
+    public void setKeepData (boolean keepData) {
+        this.keepData = keepData;
+    }
+
+    /**
+     * Get keep data
+     * @return
+     */
+    public boolean isKeepData () {
+        return keepData;
     }
 }
