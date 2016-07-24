@@ -3,24 +3,33 @@ package manager;
 import cat.Cat;
 import component.*;
 import graphics.*;
+import input.Key;
 import math.Matrix4f;
+import math.Vector3f;
+import terrain.Terrain;
+import terrain.TerrainField;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by germangb on 19/06/16.
  */
 public class RenderManager extends Manager {
 
+    final static int SCALE = 2;
+
     /** Camera */
     Camera camera;
 
-    /** Geometry to be drawn */
+    /** Terrain to be drawn */
+    List<TerrainChunkComponent> terrain = new ArrayList<>();
     List<Geometry> geometry = new ArrayList<>();
 
     // matrices
@@ -32,26 +41,85 @@ public class RenderManager extends Manager {
     RenderState state = new RenderState();
     ShaderProgram program;
 
+    // AABB rendering
+    Mesh aabbMesh;
+    ShaderProgram aabbProgram;
+    RenderState aabbState = new RenderState();
+    LinkedList<AABB> aabb = new LinkedList<>();
+
     RenderState finalState = new RenderState();
     ShaderProgram finalProgram;
     Mesh quadMesh;
     Framebuffer fbo;
 
-    RenderState boneState = new RenderState();
-    Mesh boneMesh;
-    ShaderProgram boneProgram;
-
     @Override
     public void onInit() {
         createProgram();
+        createAABB();
 
         state.depthTest = DepthTest.LESS;
         state.mode = PolygonMode.FILL;
         state.culling = Culling.BACK;
 
-        boneState.depthTest = DepthTest.DISABLED;
-        boneState.depthMask = false;
-        boneState.lineWidth = 3;
+        aabbState.lineWidth = 1;
+        aabbState.depthTest = DepthTest.LESS;
+    }
+
+    private void createAABB() {
+        //language=GLSL
+        String vert = "#version 130\n" +
+                "\n" +
+                "in vec3 a_position;\n" +
+                "\n" +
+                "uniform mat4 u_mvp;\n" +
+                "\n" +
+                "void main () {\n" +
+                "    gl_Position = u_mvp * vec4(a_position, 1.0);\n" +
+                "}";
+        //language=GLSL
+        String frag = "#version 130\n" +
+                "\n" +
+                "out vec4 frag_color;\n" +
+                "\n" +
+                "void main () {\n" +
+                "    frag_color = vec4(1, 0, 0, 1);\n" +
+                "}";
+        aabbProgram = new ShaderProgram(vert, frag, Attribute.POSITION);
+
+        aabbMesh = new Mesh(Usage.STATIC);
+        VertexBuffer pos = new VertexBuffer(Usage.STATIC);
+        pos.setData(Cat.buffers.allocate(new float[] {
+                +0, +0, +0,
+                +1, +0, +0,
+                +1, +0, +1,
+                +0, +0, +1,
+
+                +0, +1, +0,
+                +1, +1, +0,
+                +1, +1, +1,
+                +0, +1, +1
+        }));
+
+        aabbMesh.setData(Cat.buffers.allocate(new int[] {
+                0, 1,
+                1, 2,
+                2, 3,
+                3, 0,
+
+                4, 5,
+                5, 6,
+                6, 7,
+                7, 4,
+
+                0, 4,
+                1, 5,
+                2, 6,
+                3, 7
+        }));
+
+        aabbMesh.setIndices(0, 24);
+        aabbMesh.setPrimitive(Primitive.LINES);
+        aabbMesh.addVertexBuffer(Attribute.POSITION, pos);
     }
 
     private void createProgram() {
@@ -80,7 +148,7 @@ public class RenderManager extends Manager {
                 "    frag_color = vec4(color, 1.0);\n" +
                 "}";
         finalProgram = new ShaderProgram(vertFinal, fragFinal, Attribute.POSITION);
-        fbo = new Framebuffer(640/2, 480/2, true) {
+        fbo = new Framebuffer(Cat.window.getWidth()/SCALE, Cat.window.getHeight()/SCALE, true) {
             @Override
             protected void createTextures() {
                 Texture tex = new Texture(width, height, TextureFormat.RGB);
@@ -112,6 +180,7 @@ public class RenderManager extends Manager {
                 "\n" +
                 "attribute vec3 a_position;\n" +
                 "attribute vec3 a_normal;\n" +
+                "attribute vec2 a_uv;\n" +
                 "\n" +
                 "varying vec2 v_uv;\n" +
                 "varying vec3 v_normal;\n" +
@@ -125,7 +194,8 @@ public class RenderManager extends Manager {
                 "    gl_Position = u_mvp * vec4(a_position, 1.);\n" +
                 "    v_normal = a_normal;\n" +
                 "    v_position = (u_mv * vec4(a_position, 1.0)).xyz;\n" +
-                "    v_grid = a_position.xz;" +
+                "    v_grid = a_position.xz;\n" +
+                "    v_uv = a_uv;\n" +
                 "}";
         //language=GLSL
         String frag = "#version 130\n" +
@@ -135,66 +205,27 @@ public class RenderManager extends Manager {
                 "in vec3 v_position;\n" +
                 "in vec2 v_grid;\n" +
                 "\n" +
+                "uniform sampler2D u_texture;\n" +
+                "\n" +
                 "out vec4 frag_color;\n" +
                 "\n" +
                 "void main () {\n" +
-                "    float d = 32;\n" +
+                "    float d = 0;\n" +
                 "    \n" +
-                "    float fog = exp(-max(abs(v_position.z) - d, 0) * 0.01);\n" +
-                "    float fog_grid = exp(-max(abs(v_position.z) - 32, 0) * 0.01);\n" +
+                "    float fog = exp(-max(abs(v_position.z) - d, 0) * 0.0025);\n" +
                 "    \n" +
                 "    vec3 color = v_normal * 0.5 + 0.5;\n" +
                 "    \n" +
-                "    vec2 grid = fract(v_grid) * 2 - 1;\n" +
+                "    vec3 field = texture2D(u_texture, v_uv).rgb;\n" +
+                "    color = mix(color, vec3(1,0,1), smoothstep(0.45, 0.5, field.r));\n" +
                 "    \n" +
-                "    float s = 0.5;\n" +
-                "    float grid_cont = smoothstep(0, 0.1f, min(abs(grid.x - s), abs(grid.y - s)));\n" +
-                "    \n" +
-                "    grid_cont = mix(mix(grid_cont, 1, 0.9), 1.0, 1-fog_grid);\n" +
-                "    \n" +
-                "    vec3 final_color = mix(color * grid_cont, vec3(0.5), 1-fog);\n" +
+                "    vec3 final_color = mix(color, vec3(0.5), 1-fog);\n" +
                 "    \n" +
                 "    frag_color = vec4(final_color, 1);\n" +
                 "}";
 
-        program = new ShaderProgram(vert, frag, Attribute.POSITION,
-                Attribute.NORMAL);
+        program = new ShaderProgram(vert, frag, Attribute.POSITION, Attribute.NORMAL, Attribute.UV);
         program.setUniform("u_texture", 0);
-
-        //language=GLSL
-        String vertBone = "#version 120\n" +
-                "\n" +
-                "attribute vec3 a_position;\n" +
-                "\n" +
-                "uniform mat4 u_mvp;\n" +
-                "\n" +
-                "void main () {\n" +
-                "    gl_Position = u_mvp * vec4(a_position, 1.0);\n" +
-                "}";
-        //language=GLSL
-        String fragBone = "#version 120\n" +
-                "\n" +
-                "void main () {\n" +
-                "    gl_FragColor = vec4(0, 0, 0, 1);\n" +
-                "}";
-        boneProgram = new ShaderProgram(vertBone, fragBone, Attribute.POSITION);
-
-        // bone mesh
-        boneMesh = new Mesh(Usage.STREAM);
-        boneMesh.setPrimitive(Primitive.LINES);
-        boneMesh.setIndices(0, 2);
-
-        VertexBuffer attr = new VertexBuffer(Usage.STATIC);
-        boneMesh.addVertexBuffer(Attribute.POSITION, attr);
-
-        FloatBuffer data = Cat.buffers.allocate(10<<2).asFloatBuffer();
-        data.put(new float[] {0, 0.05f, 0, 0, 0.95f, 0});
-
-        IntBuffer index = Cat.buffers.allocate(10<<2).asIntBuffer();
-        index.put(new int[] {0, 1});
-
-        attr.setData(data.flip());
-        boneMesh.setData(index.flip());
     }
 
     @Override
@@ -204,6 +235,10 @@ public class RenderManager extends Manager {
         Cat.renderer.viewport(0, 0, fbo.getWidth(), fbo.getWidth());
         Cat.renderer.clearColor(0.5f, 0.5f, 0.5f, 1);
         Cat.renderer.clearBuffers(BufferType.COLOR, BufferType.DEPTH);
+
+        state.mode = Cat.keyboard.isDown(Key.L) ? PolygonMode.WIREFRAME: PolygonMode.FILL;
+
+        // render terrain
         Cat.renderer.setState(state);
         Cat.renderer.bindProgram(program);
 
@@ -214,22 +249,26 @@ public class RenderManager extends Manager {
             vp.identity();
         }
 
-        List<SkeletonComponent> skels = new ArrayList<>();
+        // render terrain chunks
+        boolean texSet = false;
+        for (TerrainChunkComponent chunk : terrain) {
+            if (!texSet) {
+                texSet = true;
+                Terrain terr = chunk.getTerrain();
+                Map<String, TerrainField> fields = terr.getFields();
 
-        for (Geometry geo : geometry) {
-            Transform trans = geo.getThing().getComponent(Transform.class);
-            AABB volume = geo.getAABB();
-            AABB.FrustumCulling culling = geo.getCulling();
+                for (TerrainField field : fields.values()) {
+                    Texture tex = field.getTexture();
+                    Cat.renderer.bindTexture(0, tex);
+                    program.setUniform("u_texture", 0);
+                }
+            }
 
-            // frustum culling
-            switch (culling) {
-                case POSITIVE:
-                    if (!volume.testCulling(camera)) continue;
-                    break;
-                case NEGATIVE:
-                    if (volume.testCulling(camera)) continue;
-                    break;
-                case DISABLED:
+            Transform trans = chunk.getTransform();
+            AABB volume = chunk.getAABB();
+
+            if (!volume.testCulling(camera)) {
+                continue;
             }
 
             // compute mvp
@@ -238,14 +277,30 @@ public class RenderManager extends Manager {
             program.setUniform("u_mvp", mvp);
             program.setUniform("u_mv", mv);
 
-            Mesh mesh = geo.getMesh();
-            Texture tex = geo.getTexture();
-            Cat.renderer.bindTexture(0, tex);
+            Mesh mesh = chunk.getMesh();
             Cat.renderer.renderMesh(mesh);
+            aabb.add(volume);
+        }
+
+        Cat.renderer.bindProgram(aabbProgram);
+        Cat.renderer.setState(aabbState);
+
+        Matrix4f trans = new Matrix4f();
+        Vector3f sca = new Vector3f();
+
+        aabb.clear();
+        while (!aabb.isEmpty()) {
+            AABB v = aabb.poll();
+            trans.identity();
+            trans.translate(v.min);
+            trans.scale(sca.set(v.max).sub(v.min));
+
+            aabbProgram.setUniform("u_mvp", mvp.set(camera.viewProjection).mul(trans));
+            Cat.renderer.renderMesh(aabbMesh);
         }
 
         Cat.renderer.bindFramebuffer(null);
-        Cat.renderer.viewport(0, 0, 640, 480);
+        Cat.renderer.viewport(0, 0, Cat.window.getWidth(), Cat.window.getHeight());
         Cat.renderer.setState(finalState);
         Cat.renderer.clearColor(1, 0, 1, 1);
         Cat.renderer.clearBuffers(BufferType.COLOR);
@@ -256,38 +311,28 @@ public class RenderManager extends Manager {
 
         Cat.renderer.endFrame();
 
-        //RenderStats stats = Cat.renderer.getStats();
-        //System.out.println(stats.ebos+" "+Cat.time.getFps());
+        if (Cat.time.getFrame() % 60 == 0) {
+            RenderStats stats = Cat.renderer.getStats();
+            System.out.println("EBO=" + stats.ebos + "\tFPS=" + Cat.time.getFps());
+        }
     }
 
-    /**
-     * Add a geometry component to the list of geometry
-     * @param geo Geometry component
-     */
     public void addGeometry (Geometry geo) {
         geometry.add(geo);
     }
 
-    /**
-     * Remove component from the list of geometry
-     * @param geo Geometry component
-     */
     public void removeGeometry (Geometry geo) {
         geometry.remove(geo);
     }
 
-    /**
-     * Set the renderer camera
-     * @param camera camera used in renderer
-     */
+    public void addTerrainChunk (TerrainChunkComponent chunk) { terrain.add(chunk); }
+
+    public void removeTerrainChunk (TerrainChunkComponent chunk) { terrain.remove(chunk); }
+
     public void setCamera (Camera camera) {
         this.camera = camera;
     }
 
-    /**
-     * Returns the camera in the renderer
-     * @return camera
-     */
     public Camera getCamera () {
         return camera;
     }

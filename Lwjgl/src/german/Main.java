@@ -10,7 +10,7 @@ public class Main {
 
     public static void main (String[] argv) {
         LwjglOptions opts = new LwjglOptions();
-        opts.width = 640;
+        opts.width = 720;
         opts.height = 480;
         opts.resizable = false;
         opts.hasAudio = false;

@@ -23,6 +23,12 @@ public class LwjglWindow implements Window, Destroyable {
     public LwjglWindow (long window) {
         this.window = window;
 
+        int[] w= new int[1];
+        int[] h= new int[1];
+        glfwGetWindowSize(window, w, h);
+        this.width = w[0];
+        this.height = h[0];
+
         // window size callback
         glfwSetWindowSizeCallback(window, sizeCall = new GLFWWindowSizeCallback() {
             @Override
@@ -70,6 +76,11 @@ public class LwjglWindow implements Window, Destroyable {
     @Override
     public int getHeight() {
         return height;
+    }
+
+    @Override
+    public float getAspectRatio() {
+        return (float) width / height;
     }
 
     @Override

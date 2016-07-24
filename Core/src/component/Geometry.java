@@ -57,24 +57,25 @@ public class Geometry extends Component {
     private static void AABB (FloatBuffer position, Vector3f min, Vector3f max) {
         // compute aabb
         for (int i = 0; i < position.limit(); i += 3) {
-            min.min(aux.set(position.get(i), position.get(i+1), position.get(i+2)));
-            max.max(aux.set(position.get(i), position.get(i+1), position.get(i+2)));
+            min.x = Math.min(min.x, position.get(i+0));
+            min.y = Math.min(min.y, position.get(i+1));
+            min.z = Math.min(min.z, position.get(i+2));
+
+            max.x = Math.max(max.x, position.get(i+0));
+            max.y = Math.max(max.y, position.get(i+1));
+            max.z = Math.max(max.z, position.get(i+2));
         }
     }
 
     @Override
     public void onInit() {
-        // add to the renderer
-        RenderManager draw = thing.getScene()
-                .getManager(RenderManager.class);
+        RenderManager draw = thing.getScene().getManager(RenderManager.class);
         draw.addGeometry(this);
     }
 
     @Override
     public void onFree() {
-        // remove from the renderer
-        RenderManager draw = thing.getScene()
-                .getManager(RenderManager.class);
+        RenderManager draw = thing.getScene().getManager(RenderManager.class);
         draw.removeGeometry(this);
     }
 

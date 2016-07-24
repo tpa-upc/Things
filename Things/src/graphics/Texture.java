@@ -1,5 +1,6 @@
 package graphics;
 
+import cat.Cat;
 import utils.Destroyable;
 
 import java.nio.Buffer;
@@ -89,7 +90,9 @@ public class Texture implements Destroyable {
     @Override
     public void destroy () {
         destroy = true;
-        data = null;
+        if (data != null) {
+            //Cat.buffers.free(data);
+        }
     }
 
     /**

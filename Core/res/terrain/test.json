@@ -1,5 +1,13 @@
 {
+  "size": 1024,
+
   "chunk_size": 128,
-  "max_height": 32,
-  "height": "terrain/heightmap.png"
+
+  "max_height": 24,
+
+  "height": "terrain/heightmap.png",
+
+  "fields": [
+    "terrain/field.png"
+  ]
 }

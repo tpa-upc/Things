@@ -32,7 +32,7 @@ public class Project implements ApplicationListener {
         camera.addComponent(new AudioListener());
         scene.getRoot().addChild(camera);
 
-        camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), 4f/3, 0.1f, 1000);
+        camera.getComponent(Camera.class).projection.setPerspective((float)Math.toRadians(55), Cat.window.getAspectRatio(), 0.1f, 512);
         camera.getTransform().position.set(-16, 16, -16);
         camera.getTransform().rotation.lookRotate(-1, 0, -1, 0, 1, 0);
         camera.addComponent(new Component() {
@@ -43,7 +43,8 @@ public class Project implements ApplicationListener {
             @Override
             public void onUpdate() {
                 Transform trans = getThing().getTransform();
-                float v = 32;
+                float v = Cat.keyboard.isDown(Key.RIGHT_SHIFT) ? 32 : 2;
+
                 if (Cat.keyboard.isDown(Key.LEFT_SHIFT)) {
                     trans.position.y -= Cat.time.getDelta() * v;
                 } else if (Cat.keyboard.isDown(Key.SPACE)) {
@@ -53,7 +54,6 @@ public class Project implements ApplicationListener {
                 float lookX = (float) Math.sin(yaw);
                 float lookZ = - (float) Math.cos(yaw);
 
-                float b = 1;
                 if (Cat.keyboard.isDown(Key.W)) {
                     trans.position.x += lookX * v * Cat.time.getDelta();
                     trans.position.z += lookZ * v * Cat.time.getDelta();
@@ -104,16 +104,12 @@ public class Project implements ApplicationListener {
         //Mesh mesh = manager.getAsset("scene.json", Mesh.class);
         Texture texture = manager.getAsset("pattern.png", Texture.class);
         BitmapFont font = manager.getAsset("font.json.gz", BitmapFont.class);
+        Terrain terrain = manager.getAsset("terrain/test.json", Terrain.class);
 
-        Terrain terr = manager.getAsset("terrain/test.json", Terrain.class);
-
-        for (int i = 0; i < 8; ++i) {
-            for (int x = 0; x < 8; ++x) {
+        for (int i = 0; i < 16; ++i) {
+            for (int x = 0; x < 16; ++x) {
                 Thing chunk = new Thing(scene);
-                Geometry geo = new Geometry(terr.getMesh(i, x), texture);
-                chunk.addComponent(geo);
-                geo.computeAABB();
-                geo.setCullingTest(AABB.FrustumCulling.POSITIVE);
+                chunk.addComponent(new TerrainChunkComponent(terrain, i, x));
                 scene.getRoot().addChild(chunk);
             }
         }

@@ -34,13 +34,19 @@ public interface Window {
      * Get window width
      * @return window width
      */
-   int getWidth ();
+    int getWidth ();
 
     /**
      * Get window height
      * @return window height
      */
-   int getHeight();
+    int getHeight();
+
+    /**
+     * get window aspect ratio
+     * @return
+     */
+    float getAspectRatio ();
 
     /**
      * Get window title

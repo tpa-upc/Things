@@ -1,5 +1,6 @@
 package graphics;
 
+import cat.Cat;
 import utils.Destroyable;
 
 import java.nio.Buffer;
@@ -167,11 +168,11 @@ public class Mesh implements Destroyable {
     @Override
     public void destroy () {
         destroy = true;
-        data = null;
+        //Cat.buffers.free(data);
 
         // delete vbos
         buffers.values().forEach(vbo -> {
-            vbo.setData(null);
+            //Cat.buffers.free(vbo.getData());
         });
     }
 

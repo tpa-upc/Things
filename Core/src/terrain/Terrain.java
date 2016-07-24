@@ -34,17 +34,17 @@ public class Terrain {
     /** AABBs */
     private AABB[][] volumes;
 
-    public Terrain (int size, int chunk) {
-        if (size == 0 || chunk == 0 || size % chunk != 0) {
-            throw new IllegalArgumentException("chunk must divide size");
+    public Terrain (int size, int length, int chunk) {
+        if (length % chunk != 0) {
+            throw new IllegalArgumentException("chunk must divide length");
         }
 
         this.chunk = chunk;
         createIndices();
 
-        this.meshes = new Mesh[size/chunk][size/chunk];
-        this.volumes = new AABB[size/chunk][size/chunk];
-        this.height = new TerrainField(size);
+        this.meshes = new Mesh[length/chunk][length/chunk];
+        this.volumes = new AABB[length/chunk][length/chunk];
+        this.height = new TerrainField(size, length);
         this.fields = new LinkedHashMap<>();
     }
 
@@ -90,7 +90,9 @@ public class Terrain {
     }
 
     private AABB createBoundingVolume(int x, int z) {
-        return null;
+        AABB aabb = new AABB();
+        setAABB(x, z, aabb.min, aabb.max);
+        return aabb;
     }
 
     private Mesh createMesh(int x, int z) {
@@ -133,29 +135,57 @@ public class Terrain {
         return buffer;
     }
 
+    private void setAABB (int row, int col, Vector3f min, Vector3f max) {
+        int size = height.getSize();
+        int length = height.getLength();
+
+        min.set(Float.MAX_VALUE);
+        max.set(Float.MIN_VALUE);
+
+        Vector3f nor = new Vector3f();
+        for (int r = 0; r < chunk+1; ++r) {
+            for (int c = 0; c < chunk + 1; ++c) {
+                float x = (chunk * row + r) * (float) size / length;
+                float y = height.getValue(chunk * row + r, chunk * col + c);
+                float z = (chunk * col + c) * (float) size / length;
+
+                min.x = Math.min(x, min.x);
+                min.y = Math.min(y, min.y);
+                min.z = Math.min(z, min.z);
+
+                max.x = Math.max(x, max.x);
+                max.y = Math.max(y, max.y);
+                max.z = Math.max(z, max.z);
+            }
+        }
+    }
+
     private void collectPositions (int row, int col, float[] outPos, float[] outNor, float[] outUv) {
+        int size = height.getSize();
+        int length = height.getLength();
+
         Vector3f nor = new Vector3f();
         int i = 0, j = 0, k = 0;
         for (int r = 0; r < chunk+1; ++r) {
             for (int c = 0; c < chunk+1; ++c) {
                 // position
-                outPos[i++] = chunk * row + r;
+                outPos[i++] = (chunk * row + r) * (float) size / length;
                 outPos[i++] = height.getValue(chunk * row + r, chunk * col + c);
-                outPos[i++] = chunk * col + c;
+                outPos[i++] = (chunk * col + c) * (float) size / length;
 
                 // normal
-                float d = 2;
+                int d = 2;
                 nor.x = height.getValue(row*chunk+r+d, col*chunk+c) - height.getValue(row*chunk+r-d, col*chunk+c);
-                nor.x = height.getValue(row*chunk+r, col*chunk+c+d) - height.getValue(row*chunk+r, col*chunk+c-d);
-                nor.y = 2*d;
+                nor.z = height.getValue(row*chunk+r, col*chunk+c+d) - height.getValue(row*chunk+r, col*chunk+c-d);
+                nor.y = 2f * d * size / length;
                 nor.normalize();
                 outNor[j++] = nor.x;
                 outNor[j++] = nor.y;
                 outNor[j++] = nor.z;
 
                 // uv
-                outUv[k++] = (float) (chunk * row + r) / height.getSize();
-                outUv[k++] = (float) (chunk * col + c) / height.getSize();
+                outUv[k++] = (float) (chunk * row + r) / height.getLength();
+                outUv[k++] = (float) (chunk * col + c) / height.getLength();
             }
         }
     }
@@ -167,7 +197,10 @@ public class Terrain {
      */
     public TerrainField createField (String name) {
         int size = height.getSize();
-        return fields.put(name, new TerrainField(size));
+        int length = height.getLength();
+        TerrainField field = new TerrainField(size, length);
+        fields.put(name, field);
+        return field;
     }
 
     /**
